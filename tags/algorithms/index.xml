@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Algorithms on Isaac Changhau</title>
+    <link>https://isaacchanghau.github.io/tags/algorithms/</link>
+    <description>Recent content in Algorithms on Isaac Changhau</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017-2018</copyright>
+    <lastBuildDate>Sat, 19 Aug 2017 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://isaacchanghau.github.io/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Autoencoder and Sparsity</title>
+      <link>https://isaacchanghau.github.io/post/autoencoder_and_sparsity/</link>
+      <pubDate>Sat, 19 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/autoencoder_and_sparsity/</guid>
+      <description>The article is excerpted from Andrew Ng&amp;rsquo;s CS294A Lecture notes: Sparse Autoencoder with some personal understanding. Before going through this article, you would better get some information from the Backpropagation Algorithm.
+Suppose we have only unlabeled training examples set $\{x^{(1)},x^{(2)},x^{(3)},\dots\}$, where $x^{(i)}\in\mathbb{R}^{n}$. An autoencoder neural network is an unsupervised learning algorithm that applies backpropagation, setting the target values to be equal to the inputs. i.e., it uses $y^{(i)}=x^{(i)}$. Below is an autoencoder: The autoencoder tries to learn a function $h_{W,b}(x)\approx x$.</description>
+    </item>
+    
+    <item>
+      <title>Backpropagation in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/backpropagation/</link>
+      <pubDate>Thu, 17 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/backpropagation/</guid>
+      <description>The article is excerpted from Andrew Ng&amp;rsquo;s CS294A Lecture notes: Sparse Autoencoder, then I add some personal understanding.
+In this article, we will let $n_{l}$ denote the number of layers in our network, label $l$ as $L_{l}$, so layer $L_{1}$ is the input layer, and layer $L_{n_{l}}$ the output layer. Neural network has parameters $(W,b)=(W^{(1)},b^{(1)},\dots,W^{(n_{l}-1)},b^{(n_{l}-1)})$, where we write $W_{ij}^{(l)}$ to denote the parameter (or weight) associated with the connection between unit $j$ in layer $l$ and unit $i$ in layer $l+1$.</description>
+    </item>
+    
+    <item>
+      <title>Mathematical Derivation of Covariance Matrix</title>
+      <link>https://isaacchanghau.github.io/post/covariance_derivation/</link>
+      <pubDate>Sat, 17 Jun 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/covariance_derivation/</guid>
+      <description>In probability theory and statistics, covariance is a measure of the joint variability of two random variables. If the greater values of one variable mainly correspond with the greater values of the other variable, and the same holds for the lesser values, i.e., the variables tend to show similar behavior, the covariance is positive. In the opposite case, when the greater values of one variable mainly correspond to the lesser values of the other, i.</description>
+    </item>
+    
+    <item>
+      <title>Skiing In Singapore</title>
+      <link>https://isaacchanghau.github.io/post/skiing_in_singapore/</link>
+      <pubDate>Thu, 30 Mar 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/skiing_in_singapore/</guid>
+      <description>It is an online test provided by RedMart, who asks to solve a problem by using DFS algorithm. More details you can find here.
+Discription Sometimes it&amp;rsquo;s nice to take a break and code up a solution to a small, fun problem. Here is one some of our engineers enjoyed recently called Skiing In Singapore. Well you can’t really ski in Singapore. But let’s say you hopped on a flight to the Niseko ski resort in Japan.</description>
+    </item>
+    
+  </channel>
+</rss>

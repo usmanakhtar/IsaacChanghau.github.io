@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Autoencoder on Isaac Changhau</title>
+    <link>https://isaacchanghau.github.io/tags/autoencoder/</link>
+    <description>Recent content in Autoencoder on Isaac Changhau</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017-2018</copyright>
+    <lastBuildDate>Sat, 19 Aug 2017 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://isaacchanghau.github.io/tags/autoencoder/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Autoencoder and Sparsity</title>
+      <link>https://isaacchanghau.github.io/post/autoencoder_and_sparsity/</link>
+      <pubDate>Sat, 19 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/autoencoder_and_sparsity/</guid>
+      <description>The article is excerpted from Andrew Ng&amp;rsquo;s CS294A Lecture notes: Sparse Autoencoder with some personal understanding. Before going through this article, you would better get some information from the Backpropagation Algorithm.
+Suppose we have only unlabeled training examples set $\{x^{(1)},x^{(2)},x^{(3)},\dots\}$, where $x^{(i)}\in\mathbb{R}^{n}$. An autoencoder neural network is an unsupervised learning algorithm that applies backpropagation, setting the target values to be equal to the inputs. i.e., it uses $y^{(i)}=x^{(i)}$. Below is an autoencoder: The autoencoder tries to learn a function $h_{W,b}(x)\approx x$.</description>
+    </item>
+    
+  </channel>
+</rss>

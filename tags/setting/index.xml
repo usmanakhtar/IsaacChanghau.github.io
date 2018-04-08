@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Setting on Isaac Changhau</title>
+    <link>https://isaacchanghau.github.io/tags/setting/</link>
+    <description>Recent content in Setting on Isaac Changhau</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017-2018</copyright>
+    <lastBuildDate>Sun, 28 Jan 2018 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://isaacchanghau.github.io/tags/setting/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Useful Tricks for Operating Mac OS and Linux (Ubuntu)</title>
+      <link>https://isaacchanghau.github.io/post/useful_commands/</link>
+      <pubDate>Sun, 28 Jan 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/useful_commands/</guid>
+      <description>Useful commands and tricks to raise efficiency under Mac OS and Linux, keep updating!
+Mac OS Tricks Terminal Themes and VIM Follow this GitHub repository to build your own powerful and colorful Terminal: [color-theme-link], [vimrc-link]
+Generate New SSH-Key and Add to GitHub Please refer the link (based on Mac OS platform):
+ Generating a new SSH key and adding it to the ssh-agent. Working with SSH key passphrases. Adding a new SSH key to your GitHub account.</description>
+    </item>
+    
+    <item>
+      <title>Spark Installation on Mac OS X</title>
+      <link>https://isaacchanghau.github.io/post/install_spark_mac/</link>
+      <pubDate>Wed, 28 Jun 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/install_spark_mac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hadoop Installation on Mac OS X</title>
+      <link>https://isaacchanghau.github.io/post/install_hadoop_mac/</link>
+      <pubDate>Tue, 27 Jun 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/install_hadoop_mac/</guid>
+      <description>It is an introduction of Hadoop installation under pseudo-distributed model. The difference among single node, pseudo-distributed and distributed is introduced here: link.
+Install Homebrew and Cask Homebrew is a free and open-source software package management system that simplifies the installation of software on Apple&amp;rsquo;s macOS operating system. Originally written by Max Howell, the package manager has gained popularity in the Ruby on Rails community and earned praise for its extensibility.</description>
+    </item>
+    
+    <item>
+      <title>Install XGBoost on Mac OS X</title>
+      <link>https://isaacchanghau.github.io/post/install_xgboost_mac/</link>
+      <pubDate>Tue, 20 Jun 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/install_xgboost_mac/</guid>
+      <description>Generally, installing XGBoost on Mac is not a cumbersome task, but I still suffered some errors while dealing with it. So I make a note here to record the overall process to make it works.
+XGBoost is an optimized distributed gradient boosting library designed to be highly efficient, flexible and portable. It implements machine learning algorithms under the Gradient Boosting framework. Um&amp;hellip; those words are directly copy from XGBoost GitHub page.</description>
+    </item>
+    
+    <item>
+      <title>Installation of OpenCV for Java</title>
+      <link>https://isaacchanghau.github.io/post/install_opencv_java/</link>
+      <pubDate>Mon, 10 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/install_opencv_java/</guid>
+      <description>As of OpenCV 2.4.4, OpenCV supports desktop Java development. Note that this post is transported from OpenCV Java Tutorials. This tutorial will help you install OpenCV on your desktop operating system.
+Install the latest Java version Download the latest Java JDK from the Oracle website. Now you should be able to install the last Java JDK by open the file just downloaded.
+Install the latest Eclipse version Download the latest Eclipse version at the Eclipse Download page choosing the Eclipse IDE for Java Developers version (suggested).</description>
+    </item>
+    
+    <item>
+      <title>MacOS Dictionary Application Extension</title>
+      <link>https://isaacchanghau.github.io/post/mac_dict_extension/</link>
+      <pubDate>Mon, 03 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/mac_dict_extension/</guid>
+      <description>Here are two ways to build your MacOS Discionary to make it powerful.
+Use DictUnifier Toolkit Dictionary Conversion Tool Download DictUnifier through this link, uncompressing it after downloeded, since it is a .app software, so we can use it on Mac directly. The Dictionary packages are available here.
+Convert Dict After downloaded your preferred dictionary sources, we need to convert them to the format can be recognized by MacOS Dictionary Application.</description>
+    </item>
+    
+    <item>
+      <title>Configure BitBucket Git Repository in Eclipse</title>
+      <link>https://isaacchanghau.github.io/post/config_git_eclipse/</link>
+      <pubDate>Sat, 01 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/config_git_eclipse/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

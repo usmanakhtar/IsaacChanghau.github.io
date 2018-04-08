@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Covariance on Isaac Changhau</title>
+    <link>https://isaacchanghau.github.io/tags/covariance/</link>
+    <description>Recent content in Covariance on Isaac Changhau</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017-2018</copyright>
+    <lastBuildDate>Sat, 17 Jun 2017 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://isaacchanghau.github.io/tags/covariance/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mathematical Derivation of Covariance Matrix</title>
+      <link>https://isaacchanghau.github.io/post/covariance_derivation/</link>
+      <pubDate>Sat, 17 Jun 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/covariance_derivation/</guid>
+      <description>In probability theory and statistics, covariance is a measure of the joint variability of two random variables. If the greater values of one variable mainly correspond with the greater values of the other variable, and the same holds for the lesser values, i.e., the variables tend to show similar behavior, the covariance is positive. In the opposite case, when the greater values of one variable mainly correspond to the lesser values of the other, i.</description>
+    </item>
+    
+  </channel>
+</rss>

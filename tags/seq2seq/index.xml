@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Seq2seq on Isaac Changhau</title>
+    <link>https://isaacchanghau.github.io/tags/seq2seq/</link>
+    <description>Recent content in Seq2seq on Isaac Changhau</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017-2018</copyright>
+    <lastBuildDate>Thu, 10 Aug 2017 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://isaacchanghau.github.io/tags/seq2seq/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Beam Search Algorithms in Sequence to Sequence</title>
+      <link>https://isaacchanghau.github.io/post/beam_search/</link>
+      <pubDate>Thu, 10 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/beam_search/</guid>
+      <description>摘自知乎专栏·机器学习算法与自然语言处理的seq2seq中的beam search算法过程。
+在 Sequence2Sequence 模型中，beam search 的方法只用在测试的情况，因为在训练过程中，每一个 decoder 的输出是有正确答案的，也就不需要 beam search 去加大输出的准确率。假设现在我们用机器翻译作为例子来说明，我们需要翻译：
+ 我是中国人 &amp;mdash;&amp;gt; I am Chinese
+ 假设我们的词表大小只有三个单词就是I am Chinese。那么如果我们的beam size为2的话，我们现在来解释。
+如下图所示，我们在 decoder 的过程中，有了beam search 方法后，在第一次的输出，我们选取概率最大的I和am 两个单词，而不是只挑选一个概率最大的单词。 然后接下来我们要做的就是，把 I&amp;quot;单词作为下一个 decoder 的输入算一遍得到 $y_{2}$ 的输出概率分布，把 &amp;ldquo;am&amp;rdquo; 单词作为下一个 decoder 的输入算一遍也得到 $y_{2}$ 的输出概率分布。
+比如将I单词作为下一个 decoder 的输入算一遍得到 $y_{2}$ 的输出概率分布如下： 比如将am单词作为下一个 decoder 的输入算一遍得到 $y_{2}$ 的输出概率分布如下： 那么此时我们由于我们的beam size为2，也就是我们只能保留概率最大的两个序列，此时我们可以计算所有的序列概率： $$ \begin{aligned} \textrm{&amp;ldquo;I I&amp;rdquo;} &amp;amp; =0.4\times 0.3 &amp;amp; =0.12,\newline \textrm{&amp;ldquo;I am&amp;rdquo;} &amp;amp; =0.4\times 0.6 &amp;amp; =0.24,\newline \textrm{&amp;ldquo;I Chinese&amp;rdquo;} &amp;amp; =0.</description>
+    </item>
+    
+    <item>
+      <title>Seq2Seq Learning and Neural Conversational Model</title>
+      <link>https://isaacchanghau.github.io/post/seq2seq_conversation/</link>
+      <pubDate>Wed, 02 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/seq2seq_conversation/</guid>
+      <description>It is a summary of two papers: Sequence to Sequence Learning with Neural Networks and A Neural Conversational Model, as well as the implementation of Neural Conversation Model via Java with deeplearning4j package.
+Sequence to Sequence Model In this paper, the author presents a general end-to-end approach to sequence learning that makes minimal assumptions on the sequence structure. The method uses a multilayered Long Short-Term Memory (LSTM) to map the input sequence to a vector of a fixed dimensionality, and then another deep LSTM to decode the target sequence from the vector.</description>
+    </item>
+    
+    <item>
+      <title>Neural Responding Machine for Short-Text Conversation -- Summary</title>
+      <link>https://isaacchanghau.github.io/post/neural_responding_machine/</link>
+      <pubDate>Wed, 19 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/neural_responding_machine/</guid>
+      <description>The paper, Neural Responding Machine for Short-Text Conversation, published by L Shang et. al. in 2015, introduces Neural Responding Machine (NRM), a neural network-based response generator for short-text conversation. The NRM takes the general encoder-decoder framework, which formalizes the generation of response as a decoding process based on the latent representation of the input text, while both encoding and decoding are realized with recurrent neural networks (RNN). In this paper, the author demonstrates that the proposed encoder-decoder-based neural network overperform the traditional Retrivial-based methods and Statistical Machine Translation (SMT) based methods.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on Isaac Changhau</title>
+    <link>https://isaacchanghau.github.io/project/</link>
+    <description>Recent content in Projects on Isaac Changhau</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017-2018</copyright>
+    <lastBuildDate>Wed, 28 Mar 2018 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://isaacchanghau.github.io/project/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Punctuation Restoration and Sentence Boundary Detection</title>
+      <link>https://isaacchanghau.github.io/project/punctuation/</link>
+      <pubDate>Wed, 28 Mar 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/project/punctuation/</guid>
+      <description>Date: Jan. 2018 - Apr. 2018
+ Collaborators: Hao Zhang, Gangeshwar Krishnamurthy
+Automatic Speech Recognition (ASR) systems generally produce unpunctuated text which is difficult to read for humans and degrades the performance of many downstream machine processing tasks such as machine translation, question answering, sentiment analysis and so on. Restoring the punctuation greatly improves the readability of transcripts and increases the effectiveness of subsequent processing.
+Punctuation restoration and a related task of segmentation or sentence boundary detection have been extensively studied.</description>
+    </item>
+    
+    <item>
+      <title>Neural Sequence Labeling</title>
+      <link>https://isaacchanghau.github.io/project/neural_seq_labeling/</link>
+      <pubDate>Tue, 20 Feb 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/project/neural_seq_labeling/</guid>
+      <description>Date: Nov. 2017 - Feb. 2018
+ Collaborators: Hao Zhang
+TODO
+Source codes for this project: IsaacChanghau/neural_sequence_labeling.</description>
+    </item>
+    
+    <item>
+      <title>WordNet Troponymy and Action Hierarchy Extraction</title>
+      <link>https://isaacchanghau.github.io/project/action_hierarchy/</link>
+      <pubDate>Sun, 07 Jan 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/project/action_hierarchy/</guid>
+      <description>Date: Oct. 2017 - Jan. 2018
+ Collaborators: Huminski Aliaksandr, Hao Zhang
+This project is part of exploration of PrimeNet. The PrimeNet is one of the projects I am involved in, which aims to build a comprehensive and accurate commonsense knowledge graph database to encode and link the concepts, relations and knowledge of the real-world as much as possibale and help machines to understand the world easier and better.</description>
+    </item>
+    
+    <item>
+      <title>PrimeNet: Human-inspired Framework for Commonsense Knowledge Representation and Reasoning</title>
+      <link>https://isaacchanghau.github.io/project/primenet/</link>
+      <pubDate>Mon, 28 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/project/primenet/</guid>
+      <description>Date: Dec. 2016 - Present (Ongoing)
+ Collaborators: Kenneth Kwok, Huminski Aliaksandr, Yi Chen, Hao Zhang and etc. Commonsense knowledge bases (KBs) are needed for inference in AI, in contexts such as natural language understanding, image and visual scene understanding, decision-making, etc. For tasks involving real-time interaction and decision-making, especially, the speed of such inference can be critical.
+The goal of PrimeNet is to set out a framework for a commonsense KB that allows for efficient processing, in order to meet the demands of commonsense reasoning and, hence, support intelligent machine performance in real-world tasks.</description>
+    </item>
+    
+    <item>
+      <title>Removing Backscatter to Enhance the Visibility of Underwater Object</title>
+      <link>https://isaacchanghau.github.io/project/backscatter/</link>
+      <pubDate>Tue, 16 Aug 2016 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/project/backscatter/</guid>
+      <description>Date: Sep. 2015 - Apr. 2016
+ Collaborators: Hao Zhang, Lap Pui Chau
+Underwater vision enhancement via backscatter removing is widely used in ocean engineering. However, due to the existence of dust-like particles and light attenuation, underwater images and videos always suffer from the problems of low contrast and color distortion.
+In this project, we investigated the underwater light propagation process from a physical standpoint, studied the state-of-the-art methods of sloving the problem and finally proposed a novel and effective method based on underwater optical model and fusion technique to overcome the backscatter problem.</description>
+    </item>
+    
+    <item>
+      <title>Image Enhancement based on Retinex Theory and Dual-tree Complex Wavelet Transform</title>
+      <link>https://isaacchanghau.github.io/project/retinex/</link>
+      <pubDate>Fri, 01 May 2015 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/project/retinex/</guid>
+      <description>Date: Nov. 2014 - May. 2015
+ Collaborators: Hao Zhang, Hongyu Wang
+The task of image enhancement is focus on restoring and clarifying the corrupted images to improve their quality, and image enhancement methods has been widely applied to numerous image analysis techniques including pattern recognition, image fusion, image segmentation, image compression and so forth. Among variety of image enhancement methods, algorithms based on Retinex theory have received more and more attentions and have been commonly used in many applications.</description>
+    </item>
+    
+  </channel>
+</rss>

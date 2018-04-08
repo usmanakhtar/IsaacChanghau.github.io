@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machine-learning on Isaac Changhau</title>
+    <link>https://isaacchanghau.github.io/tags/machine-learning/</link>
+    <description>Recent content in Machine-learning on Isaac Changhau</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017-2018</copyright>
+    <lastBuildDate>Sat, 19 Aug 2017 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://isaacchanghau.github.io/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Autoencoder and Sparsity</title>
+      <link>https://isaacchanghau.github.io/post/autoencoder_and_sparsity/</link>
+      <pubDate>Sat, 19 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/autoencoder_and_sparsity/</guid>
+      <description>The article is excerpted from Andrew Ng&amp;rsquo;s CS294A Lecture notes: Sparse Autoencoder with some personal understanding. Before going through this article, you would better get some information from the Backpropagation Algorithm.
+Suppose we have only unlabeled training examples set $\{x^{(1)},x^{(2)},x^{(3)},\dots\}$, where $x^{(i)}\in\mathbb{R}^{n}$. An autoencoder neural network is an unsupervised learning algorithm that applies backpropagation, setting the target values to be equal to the inputs. i.e., it uses $y^{(i)}=x^{(i)}$. Below is an autoencoder: The autoencoder tries to learn a function $h_{W,b}(x)\approx x$.</description>
+    </item>
+    
+    <item>
+      <title>Backpropagation in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/backpropagation/</link>
+      <pubDate>Thu, 17 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/backpropagation/</guid>
+      <description>The article is excerpted from Andrew Ng&amp;rsquo;s CS294A Lecture notes: Sparse Autoencoder, then I add some personal understanding.
+In this article, we will let $n_{l}$ denote the number of layers in our network, label $l$ as $L_{l}$, so layer $L_{1}$ is the input layer, and layer $L_{n_{l}}$ the output layer. Neural network has parameters $(W,b)=(W^{(1)},b^{(1)},\dots,W^{(n_{l}-1)},b^{(n_{l}-1)})$, where we write $W_{ij}^{(l)}$ to denote the parameter (or weight) associated with the connection between unit $j$ in layer $l$ and unit $i$ in layer $l+1$.</description>
+    </item>
+    
+    <item>
+      <title>Plain Stock Price Prediction via LSTM</title>
+      <link>https://isaacchanghau.github.io/post/stock_price_predict/</link>
+      <pubDate>Wed, 26 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/stock_price_predict/</guid>
+      <description>This is a practice of using LSTM to do the one day ahead prediction of the stock close price. The dataset I used here is the New York Stock Exchange from Kaggle, which consists of following files:
+ prices.csv: raw, as-is daily prices. Most of data spans from 2010 to the end 2016, for companies new on stock market date range is shorter. There have been approx. 140 stock splits in that time, this set doesn&amp;rsquo;t account for that.</description>
+    </item>
+    
+    <item>
+      <title>LSTM and GRU -- Formula Summary</title>
+      <link>https://isaacchanghau.github.io/post/lstm-gru-formula/</link>
+      <pubDate>Sat, 22 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/lstm-gru-formula/</guid>
+      <description>Introduction Long Short-Term Memory (LSTM) unit and Gated Recurrent Unit (GRU) RNNs are among the most widely used models in Deep Learning for NLP today. Both LSTM (1997) and GRU (2014) are designed to combat the vanishing gradient problem prevents standard RNNs from learning long-term dependencies through gating mechanism.
+Note that, this article heavily rely on the following to articles, Understanding LSTM Networks and Recurrent Neural Network Tutorial, I summary the formula definition and explanation from them to enhance my understanding of LSTM and GRU as well as their similarity and difference.</description>
+    </item>
+    
+    <item>
+      <title>House Prices Advanced Regression Techniques -- Modeling and Prediction</title>
+      <link>https://isaacchanghau.github.io/post/house_price_modeling/</link>
+      <pubDate>Mon, 10 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/house_price_modeling/</guid>
+      <description>After cleaning and transforming processes in House Prices Advanced Regression Techniques &amp;ndash; Data Analysis. Here we continue to build machine learning model to train the dataset and make a prediction based on the trained model. We use Elastic Net and Gradient Boosting models to train the dataset and make predictions separately, then average the results of the two models to generate the final output.
+Elastic Net Regression In statistics and, in particular, in the fitting of linear or logistic regression models, the elastic net is a regularized regression method that linearly combines the L1 and L2 penalties of the lasso and ridge methods.</description>
+    </item>
+    
+    <item>
+      <title>House Prices Advanced Regression Techniques -- Data Analysis</title>
+      <link>https://isaacchanghau.github.io/post/house_price_data_analysis/</link>
+      <pubDate>Sat, 08 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/house_price_data_analysis/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.kaggle.com/c/house-prices-advanced-regression-techniques&#34; target=&#34;_blank&#34;&gt;House Prices: Advanced Regression Techniques&lt;/a&gt; is a &lt;a href=&#34;https://www.kaggle.com/&#34; target=&#34;_blank&#34;&gt;kaggle&lt;/a&gt; competition to predict the house prices, which aims to practice feature engineering, RFs, and gradient boosting. After exploring and referring others&amp;rsquo; methods, I decide to do it by myself to improve my python skill in data science and data analysis ability.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Understanding LSTM Networks</title>
+      <link>https://isaacchanghau.github.io/post/understand_lstm/</link>
+      <pubDate>Tue, 13 Jun 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/understand_lstm/</guid>
+      <description>Declaration: This blog article is totaly not my original article. I just reproduce it from colah&amp;rsquo;s blog &amp;ndash; Understanding LSTM Networks, since it is really an excellent article of explanation of LSTM and I am afraid that I may lose the link of this article or the author may change her blog address. So I put this article into my own blog&amp;hellip; Moreover, the Chinese version of this article, translated by Not_GOD, are available here.</description>
+    </item>
+    
+    <item>
+      <title>Loss Functions in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/loss_functions/</link>
+      <pubDate>Wed, 07 Jun 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/loss_functions/</guid>
+      <description>Loss function is an important part in artificial neural networks, which is used to measure the inconsistency between predicted value ($\hat{y}$) and actual label ($y$). It is a non-negative value, where the robustness of model increases along with the decrease of the value of loss function. Loss function is the hard core of empirical risk function as well as a significant component of structural risk function. Generally, the structural risk function of a model is consist of empirical risk term and regularization term, which can be represented as $$ \begin{aligned} \boldsymbol{\theta}^{*} &amp;amp; =\arg\min_{\boldsymbol{\theta}}\boldsymbol{\mathcal{L}}(\boldsymbol{\theta})+\lambda\cdot\Phi(\boldsymbol{\theta})\newline &amp;amp; =\arg\min_{\boldsymbol{\theta}}\frac{1}{n}\sum_{i=1}^{n}L\big(y^{(i)},\hat{y}^{(i)}\big)+\lambda\cdot\Phi(\boldsymbol{\theta})\newline &amp;amp; =\arg\min_{\boldsymbol{\theta}}\frac{1}{n}\sum_{i=1}^{n}L\big(y^{(i)},f(\mathbf{x}^{(i)},\boldsymbol{\theta})\big)+\lambda\cdot\Phi(\boldsymbol{\theta}) \end{aligned} $$ where $\Phi(\boldsymbol{\theta})$ is the regularization term or penalty term, $\boldsymbol{\theta}$ is the parameters of model to be learned, $f(\cdot)$ represents the activation function and $\mathbf{x}^{(i)}=\{x_{1}^{(i)},x_{2}^{(i)},\dots ,x_{m}^{(i)}\}\in\mathbb{R}^{m}$ denotes the a training sample.</description>
+    </item>
+    
+    <item>
+      <title>Parameter Update Methods in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/parameters_update/</link>
+      <pubDate>Mon, 29 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/parameters_update/</guid>
+      <description>Gradient descent optimization algorithms are very popular to perform optimization and by far the most common way to optimize neural networks. However, there are also many other algorithms, like Hessian Free, Conjugate Gradient, BFGS, L-BFGS and etc., are proposed to deal with optimization tasks, here we only take those gradient descent methods into account. And we will discuss the drawbacks among those gradient algorithms and the methods to solve these blemishes.</description>
+    </item>
+    
+    <item>
+      <title>Weight Initialization Methods in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/weight_initialization/</link>
+      <pubDate>Wed, 24 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/weight_initialization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Activation Functions in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/activation_functions/</link>
+      <pubDate>Mon, 22 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/activation_functions/</guid>
+      <description>By definition, activation function is a function used to transform the activation level of a unit (neuron) into an output signal. Typically, activation function has a &amp;ldquo;squashing&amp;rdquo; effect. An activation function serves as a threshold, alternatively called classification or a partition. Bengio et al. refers to this as &amp;ldquo;Space Folding&amp;rdquo;. It essentially divides the original space into typically two partitions. Activation functions are usually introduced as requiring to be a non-linear function, that is, the role of activation function is made neural networks non-linear.</description>
+    </item>
+    
+    <item>
+      <title>Machine Learning Note (4): Ensemble Learning</title>
+      <link>https://isaacchanghau.github.io/post/ml_zzh_note_4/</link>
+      <pubDate>Thu, 18 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ml_zzh_note_4/</guid>
+      <description>摘自周志华《机器学习》第八章-集成学习。
+个体与集成 集成学习 (ensemble learning) 通过构建并结合多个学习器来完成学习任务，也被称为多分类器系统 (multi-classifier system)、基于委员会的学习 (committee-based learning) 等。 下图展示了集成学习的一般结构：先产生一组“个体学习器” (individual learner)，再用某种策略将它们结合。若集成中只包含同种类型的个体学习器，这样的集成是“同质的” (homogeneous)，同质集成中的个体学习器称为“基学习器” (base learner)，相应的学习算法称为“基学习算法” (base learning algorithm)。集成也可以包含不同类型的个体学习器，即“异质的” (heterogenous)。异质集成中的个体学习器由不同的学习算法生成，此时不再有基学习算法，而个体学习器也常称为“组件学习器” (component learner)。 集成学习通过将多个学习器进行结合，通常可以获得比单一学习器显著优越的泛化性能。这对“弱学习器” (weak learner) 尤为明显。实际中，要获得好的集成，个体学习器通常应该“好二不同”，即个体学习器要有一定的“准确性”，并且要有“多样性”，即学习器间具有差异。如下图所示 举个例子，考虑二分类问题 $y\in\{-1,+1\}$ 和真实函数 $\boldsymbol{f}$，假设基分类器的错误率为 $\epsilon$，即对每个基分类器 $h_{i}$ 有 $$ P(h_{i}(\boldsymbol{x})\neq\boldsymbol{f}(\boldsymbol{x}))=\epsilon\tag{1} $$ 假设集成通过简单投票法结合 $T$ 个基分类器，若有超过半数的基分类器正确，则集成分类就正确： $$ H(\boldsymbol{x})=sign\bigg(\sum_{i=1}^{T}h_{i}(\boldsymbol{x})\bigg)\tag{2} $$ 假设基分类器的错误率相互独立，则由 Hoeffding 不等式可知，集成的错误率为 $$ P(H(\boldsymbol{x})\neq\boldsymbol{f}(\boldsymbol{x}))=\sum_{k=0}^{\lfloor T/2\rfloor}{T\choose k}(1-\epsilon)^{k}\epsilon^{T-k}\leq\exp\big(-\frac{1}{2}T(1-2\epsilon)^{2}\big)\tag{3} $$ 由上式可得，随着个体集成中个体分类器数目 $T$ 的增大，集成的错误率将指数级下降，最终趋向于零。上面的分析有一个关键假设：基学习器的误差相互独立。实际上，个体学习器是为解决同一个问题训练出来的，显然不能相互独立。而“准确性”和“多样性”本身就存在冲突，当准确性很高之后，增加多样性就需要牺牲准确性。
+根据个体学习器的生成方式，集成学习大致分为两类：
+ 个体学习器间存在强依赖关系、必须串行生成的序列化方法，如 Boosting。 个体学习器不存在强依赖关系、可同时生成的并行化方法，如 Bagging 和“随即森林” (Random Forest)。  Boosting Boosting 是一族可将弱学习器提升为强学习器的算法，其工作机制类似：先从初始训练集训练出一个基学习器，再根据基学习器的表现对训练样本进行调整，使得先前基学习器做错的训练样本在后续受到更多的关注，然后基于调整后的样本训练下一个基学习器，如此重复进行，直至基学习器达到事先指定的值 $T$，最终将这 $T$ 个基学习器进行加权结合。如 AdaBoost 算法，</description>
+    </item>
+    
+    <item>
+      <title>Machine Learning Note (3): Support Vector Machine</title>
+      <link>https://isaacchanghau.github.io/post/ml_zzh_note_3/</link>
+      <pubDate>Tue, 16 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ml_zzh_note_3/</guid>
+      <description>摘自周志华《机器学习》第六章–支持向量机。
+间隔与支持向量 给定数据集$D=\{(\boldsymbol{x}_{1},y_{1}),\dots,(\boldsymbol{x}_{m},y_{m})\}$，$y_{i}\in\{-1,+1\}$，分类学习最基本的思想是基于训练集$D$在样本空间中找到一个划分超平面，将不同类别的样本分开。但能将训练样本粉来的划分超平面可能有很多，直观上，应该去找两类训练样本“正中间”的划分超平面，即下图中粗线表示的划分超平面，因为该划分对训练样本局部扰动的*“容忍性”*最好。 在样本空间中，划分超平面由下述线性方程表示： $$ \boldsymbol{w}^{T}\boldsymbol{x}+b=0\tag{1} $$ 其中$\boldsymbol{w}=(w_{1},\dots,w_{d})$为法向量，决定了超平面的方向，$b$为位移项，决定了超平面与原点之间的距离。记超平面为$(\boldsymbol{w},b)$，样本空间中任意点$\boldsymbol{x}$到超平面$(\boldsymbol{w},b)$的距离可写为 $$ r=\frac{\vert\boldsymbol{w}^{T}\boldsymbol{x}+b\vert}{\Vert\boldsymbol{w}\Vert}\tag{2} $$ 假设$(\boldsymbol{w},b)$能将训练样本正确分类，即对于$(\boldsymbol{x}_{i},y_{i})\in D$，若$y_{i}=+1$，则有$\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b&amp;gt;0$；若$y_{i}=-1$，则$\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b&amp;lt;0$。令 $$ \begin{cases} \boldsymbol{w}^{T}\boldsymbol{x}_{i}+b\geq+1,&amp;amp;y_{i}=+1;\newline \boldsymbol{w}^{T}\boldsymbol{x}_{i}+b\leq-1,&amp;amp;y_{i}=-1. \end{cases}\tag{3} $$ 如下图，距离超平面最近的几个训练样本点使公式(3)成立，它们被称为“支持向量” (support vector)，两个异类支持向量到超平面的距离之和为$$ \gamma=\frac{2}{\Vert\boldsymbol{w}\Vert}\tag{4}$$它被称为“间隔” (margin)。 求解“最大间隔” (maximum margin)的划分超平面，即找到满足公式(3)中的约束参数$\boldsymbol{w}$和$b$，使得$\gamma$最大： $$ \begin{aligned} &amp;amp; \max_{\boldsymbol{w},b}\frac{2}{\Vert\boldsymbol{w}\Vert}\newline &amp;amp; s.t.\quad y_{i}(\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b)\geq 1,\quad i=1,2,\dots,m \end{aligned}\tag{5} $$ 最大化间隔，仅需要最大化$\Vert\boldsymbol{w}\Vert^{-1}$，等价于最小化$\Vert\boldsymbol{w}\Vert^{2}$，于是有 $$ \begin{aligned} &amp;amp; \min_{\boldsymbol{w},b}\frac{1}{2}\Vert\boldsymbol{w}\Vert^{2}\newline &amp;amp; s.t.\quad y_{i}(\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b)\geq 1,\quad i=1,2,\dots,m \end{aligned}\tag{6} $$ 上式为支持向量机(Support Vector Machine，SVM)的基本型。
+对偶问题 我们希望求解式(6)来得到最大间隔划分超平面所对应的模型 $$ f(\boldsymbol{x})=\boldsymbol{w}^{T}\boldsymbol{x}+b\tag{7} $$ 公式(6)本身为一个凸二次规划 (convex quadratic programming)问题，为求解(6)式，对其使用拉格朗日乘子法可得其“对偶问题” (dual problem)： $$ L(\boldsymbol{w},b,\boldsymbol{\alpha})=\frac{1}{2}\Vert\boldsymbol{w}\Vert^{2}+ \sum_{i=1}^{m}\alpha_{i}\big(1-y_{i}(\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b)\big)\tag{8} $$ 其中$\boldsymbol{\alpha}=(\alpha_{1};\dots;\alpha_{m})$。令$L(\boldsymbol{w},b,\boldsymbol{\alpha})$对$\boldsymbol{w}$和$b$的偏导为零可得 $$ \boldsymbol{w}=\sum_{i=1}^{m}\alpha_{i}y_{i}\boldsymbol{x}_{i}\tag{9} $$ $$ 0=\sum_{i=1}^{m}\alpha_{i}y_{i}\tag{10} $$ 将(9)代入(8)，即可将$L(\boldsymbol{w},b,\boldsymbol{\alpha})$中的$\boldsymbol{w}$和$b$消去，再考虑式(10)的约束，可得到式(6)的对偶问题 $$ \begin{aligned} &amp;amp; \max_{\boldsymbol{\alpha}}\sum_{i=1}^{m}\alpha_{i}-\frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_{i}\alpha_{j}y_{i}y_{j}\boldsymbol{x}_{i}^{T}\boldsymbol{x}_{j}\newline &amp;amp; s.</description>
+    </item>
+    
+    <item>
+      <title>Machine Learning Note (2): Linear Regression</title>
+      <link>https://isaacchanghau.github.io/post/ml_zzh_note_2/</link>
+      <pubDate>Thu, 04 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ml_zzh_note_2/</guid>
+      <description>摘自周志华《机器学习》第三章&amp;ndash;线性模型。
+线性模型 给定由$d$个属性描述的示例$\mathbf{x}=(x_{1};x_{2};\dots ;x_{d})$，其中$x_{i}$是$\mathbf{x}$在第$i$个属性上的取值，线性模型(linear model)试图学的一个通过属性的线性组合来进行预测的函数，即 $$ f(\mathbf{x})=\mathbf{w}^{T}\mathbf{x}+b $$ 其中$\mathbf{w}=(w_{1};w_{2};\dots ;w_{d})$。$\mathbf{w}$和$b$学得之后，模型就可以确定。
+线性回归 给定数据集$D={(\mathbf{x}_{1},y_{1}),(\mathbf{x}_{2},y_{2}),\dots ,(\mathbf{x}_{m},y_{m})}$，其中$\mathbf{x}_{i}=(x_{i1};x_{i2};\dots ;x_{id}), y_{i}\in \mathbb{R}$。“线性回归” (linear regression)试图学得 $$ f(\mathbf{x}_{i})=\mathbf{w}^{T}\mathbf{x}_{i}+b, 使得f(\mathbf{x}_{i})\simeq y_{i} $$ 接下来的任务是确定$\mathbf{w}$和$b$，其关键在于衡量$f(x)$和$y$之间的差别，而均方误差是回归任务中最常用的性能度量，它对应了常用的“欧式距离” (Euclidean distance)，因此可以试图让均方误差最小化。均方误差最小化进行模型求解的方法称为“最小二乘法” (least square method)。在线性回归中，最小二乘法就是试图找到一条直线，使所有样本到直线上的欧式距离之和最小。这里，我们将$\mathbf{w}$和$b$吸收入向量形式$\mathbf{\hat{w}}=(b;\mathbf{w})=(b;w_{1};w_{2};\dots ;w_{d})$，相应的，将数据集$D$中的$\mathbf{x}_{i}$表示为$\mathbf{x}_{i}=(1;x_{i1};x_{i2};\dots ;x_{id})$，因此数据集$D$可以表示为一个$m\times (d+1)$的矩阵$\mathbf{X}=(\mathbf{x}_{1};\mathbf{x}_{2};\dots ;\mathbf{x}_{m})^{T}$，再把标记也写成向量形式$\mathbf{y}=(y_{1};y_{2};\dots ;y_{m})$。于是有 $$ f(\mathbf{X})=\mathbf{X}\mathbf{\hat{w}}, 使得f(\mathbf{X})\simeq\mathbf{y} $$ 最小化均方误差，有 $$ \mathbf{\hat{w}}^{*}=\arg\min_{\mathbf{\hat{w}}}(f(\mathbf{X})-\mathbf{y})^{2}=\arg\min_{\mathbf{\hat{w}}}(\mathbf{y}-\mathbf{X}\mathbf{\hat{w}})^{T}(\mathbf{y}-\mathbf{X}\mathbf{\hat{w}}) $$ 令$E_{\mathbf{\hat{w}}}=(\mathbf{y}-\mathbf{X}\mathbf{\hat{w}})^{T}(\mathbf{y}-\mathbf{X}\mathbf{\hat{w}})$，对$\mathbf{\hat{w}}$求导得到 $$\frac{\partial E_{\mathbf{\hat{w}}}}{\partial \mathbf{\hat{w}}}=2\mathbf{X}^{T}(\mathbf{X}\mathbf{\hat{w}}-\mathbf{y}) $$ 令上式为零可得$\mathbf{\hat{w}}$最优解的封闭式。当$\mathbf{X}^{T}\mathbf{X}$为满秩矩阵 (full-rank matrix)或正定矩阵 (positive definite matrix)时，可得到 $$ \mathbf{\hat{w}}^{*}=(\mathbf{X}^{T}\mathbf{X})^{-1}\mathbf{X}^{T}\mathbf{y} $$ 其中$(\mathbf{X}^{T}\mathbf{X})^{-1}$是$\mathbf{X}^{T}\mathbf{X}$的逆矩阵。然而现实任务中，$\mathbf{X}^{T}\mathbf{X}$往往不是满秩矩阵，此时可解出多个$\mathbf{\hat{w}}$，都能使均方误差最小化，而选择哪一个解作为输出将由算法的归纳偏好决定，常见的做法是引入正则化(regularization)项。
+线性模型预测值不仅可以逼近$y$，也可以使其逼近$y$的衍生物。比如，可将输出标记的对数作为线性模型逼近的目标，即“对数线性回归” (log-linear regression) $$ \ln y=\mathbf{w}^{T}\mathbf{x}+b $$ 它实际上是让$e^{\mathbf{w}^{T}\mathbf{x}+b}$逼近$y$，形式上它仍是线性回归，但实质上已是在求取输入空间到输出空间的非线性函数映射，如图 更一般地，考虑单调可微函数$g(\cdot)$，令$$y=g^{-1}(\mathbf{w}^{T}\mathbf{x}+b)$$这样得到的模型称为“广义线性模型” (generalized linear model)，其中函数$g(\cdot)$称为“联系函数” (link function)。对数线性回归是广义线性模型在$g(\cdot)=\ln (\cdot)$时的特例。</description>
+    </item>
+    
+    <item>
+      <title>Machine Learning Note (1): Model Evaluation and Selection</title>
+      <link>https://isaacchanghau.github.io/post/ml_zzh_note_1/</link>
+      <pubDate>Fri, 28 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ml_zzh_note_1/</guid>
+      <description>摘自周志华《机器学习》第二章&amp;ndash;模型评估与选择。
+根据训练数据是否拥有标记信息，学习任务可大致分为两大类: “监督学习” (supervised learning) 和“无监督学习” (unsupervised learning)，分类 (classification) 和回归 (regression) 是前者的代表，而聚类 (clustering) 是后者的代表。 机器学习的目标是使学得的模型能很好的适用于“新样本”，而不是仅仅在训练样本上工作得很好；即便对聚类这样的无监督学习任务，我们也希望学得的簇划分能适用于没在训练集中出现的样本。学得模型适用于新样本的能力，称为泛化 (generalization) 能力。具有强泛化能力的模型能很好的适用于整个样本空间。
+经验误差与过拟合 错误率 (error rate): 为分类错误的样本数占样本总数的比例，即在$m$个样本中有$a$个样本分类错误，则错误率$E=\frac{a}{m}$，相应的$1-\frac{a}{m}$称为精度 (accuracy)，即“精度=1-错误率”。
+误差 (error): 学习器实际预测输出与样本的真实输出之间的差异。
+训练误差 (training error)或“经验误差”(empirical error): 学习器在训练集上的误差。
+泛化误差 (generalization error): 学习器在新样本上的误差。 过拟合 (overfitting): 指在拟合一个统计模型时，使用过多参数。对比于可获取的数据总量来说，一个荒谬的模型只要足够复杂，是可以完美地适应数据。过拟合一般可以视为违反奥卡姆剃刀原则。当可选择的参数的自由度超过数据所包含信息内容时，这会导致最后（拟合后）模型使用任意的参数，这会减少或破坏模型一般化的能力更甚于适应数据。过拟合的可能性不只取决于参数个数和数据，也跟模型架构与数据的一致性有关。此外对比于数据中预期的噪声或错误数量，跟模型错误的数量也有关。
+欠拟合 (underfitting): 指模型没有很好地捕捉到数据特征，不能够很好地拟合数据，与过拟合相反。
+评估方法 留出法 (hold-out): 直接将数据集D划分为两个互斥的集合，其中一个集合作为训练集$S$，另一个作为测试集$T$，即$D=S\cup T$，$S\cap T=\varnothing$。在$S$上训练出模型后，用$T$来评估器测试误差，作为泛化误差的估计。拆分数据集$D$一般采用“分层采样” (stratified sampling)。
+交叉验证法 (cross validation): 先将数据集$D$划分为$k$个大小相似的互斥子集，即$D=D_{1}\cup D_{2} \cup &amp;hellip;\cup D_{k}$，$D_{i}\cap D_{j}=\varnothing (i\neq j)$。每个子集$D_{i}$都尽可能保持数据分布的一致性，即从$D$中通过分层采样得到。然后，每次用k-1个子集的并集作为训练集，余下的那个子集作为测试集，这样就可以获得k组训练/测试集，从而可进行k次训练和测试，最终返回k次测试结果的均值。这种方法的稳定性 (stability) 和保真性 (fidelity) 很大程度上取决于k的取值，通常这种方法又称为“k折交叉验证” (k-fold cross validation)。通常k的取值为10。
+自助法 (bootstrapping): 以自助采样 (bootstrap sampling) 为基础，给定包含$m$个样本的数据集$D$，对它进行采样产生数据集$D&amp;rsquo;$，每次随机从$D$中挑选一个样本，将其拷贝到$D&amp;rsquo;$，然后再将该样本放回初始数据集$D$中，使得该样本在下次采样时仍有可能被采到；这个过程重复执行$m$次后，就得到包含$m$个样本的数据集$D&amp;rsquo;$，这就是自助采样的结果。显然$D$中有一部分样本会在$D&amp;rsquo;$中多次出现，而另一部分样本不出现。粗略估计，样本在$m$次采样中始终不被采到的概率是$(1-\frac{1}{m})^{m}$，取极限得到 $$ \lim_{m \to \infty}(1-\frac{1}{m})^{m}\longmapsto\frac{1}{e}\approx0.</description>
+    </item>
+    
+  </channel>
+</rss>

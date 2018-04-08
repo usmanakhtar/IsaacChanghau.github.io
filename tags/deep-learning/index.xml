@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Deep-learning on Isaac Changhau</title>
+    <link>https://isaacchanghau.github.io/tags/deep-learning/</link>
+    <description>Recent content in Deep-learning on Isaac Changhau</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017-2018</copyright>
+    <lastBuildDate>Wed, 28 Mar 2018 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://isaacchanghau.github.io/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Punctuation Restoration and Sentence Boundary Detection</title>
+      <link>https://isaacchanghau.github.io/project/punctuation/</link>
+      <pubDate>Wed, 28 Mar 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/project/punctuation/</guid>
+      <description>Date: Jan. 2018 - Apr. 2018
+ Collaborators: Hao Zhang, Gangeshwar Krishnamurthy
+Automatic Speech Recognition (ASR) systems generally produce unpunctuated text which is difficult to read for humans and degrades the performance of many downstream machine processing tasks such as machine translation, question answering, sentiment analysis and so on. Restoring the punctuation greatly improves the readability of transcripts and increases the effectiveness of subsequent processing.
+Punctuation restoration and a related task of segmentation or sentence boundary detection have been extensively studied.</description>
+    </item>
+    
+    <item>
+      <title>Neural Sequence Labeling</title>
+      <link>https://isaacchanghau.github.io/project/neural_seq_labeling/</link>
+      <pubDate>Tue, 20 Feb 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/project/neural_seq_labeling/</guid>
+      <description>Date: Nov. 2017 - Feb. 2018
+ Collaborators: Hao Zhang
+TODO
+Source codes for this project: IsaacChanghau/neural_sequence_labeling.</description>
+    </item>
+    
+    <item>
+      <title>PTransE -- Modeling Relation Paths for Representation Learning of Knowledge Bases</title>
+      <link>https://isaacchanghau.github.io/post/ptranse/</link>
+      <pubDate>Tue, 19 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ptranse/</guid>
+      <description>It is a summary of the paper Modeling Relation Paths for Representation Learning of Knowledge Bases (PTransE). PTransE is a novel extension of TransE, which is a path-based representation learning model, to model relation paths for representation learning of knowledge bases. The authors argue that multiple-step relation paths also contain rich inference patterns between entities, thus, PTransE also considers relation paths as translations between entities for representation learning, and addresses two key challenges:</description>
+    </item>
+    
+    <item>
+      <title>TransX: Embedding Entities and Relationships of Multi-relational Data</title>
+      <link>https://isaacchanghau.github.io/post/transx/</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/transx/</guid>
+      <description>It is a summary of several papers about embedding entities and relationships of multi-relational knowledge database, while each paper contains one kind of specific method. Generally, the set of methods are called TransX. Here, I only describe the general idea and mathematical process of each method, for more information about those methods in parameters setting, experiment results and discussion, you can directly read the original papers through the links I provide.</description>
+    </item>
+    
+    <item>
+      <title>Autoencoder and Sparsity</title>
+      <link>https://isaacchanghau.github.io/post/autoencoder_and_sparsity/</link>
+      <pubDate>Sat, 19 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/autoencoder_and_sparsity/</guid>
+      <description>The article is excerpted from Andrew Ng&amp;rsquo;s CS294A Lecture notes: Sparse Autoencoder with some personal understanding. Before going through this article, you would better get some information from the Backpropagation Algorithm.
+Suppose we have only unlabeled training examples set $\{x^{(1)},x^{(2)},x^{(3)},\dots\}$, where $x^{(i)}\in\mathbb{R}^{n}$. An autoencoder neural network is an unsupervised learning algorithm that applies backpropagation, setting the target values to be equal to the inputs. i.e., it uses $y^{(i)}=x^{(i)}$. Below is an autoencoder: The autoencoder tries to learn a function $h_{W,b}(x)\approx x$.</description>
+    </item>
+    
+    <item>
+      <title>Backpropagation in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/backpropagation/</link>
+      <pubDate>Thu, 17 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/backpropagation/</guid>
+      <description>The article is excerpted from Andrew Ng&amp;rsquo;s CS294A Lecture notes: Sparse Autoencoder, then I add some personal understanding.
+In this article, we will let $n_{l}$ denote the number of layers in our network, label $l$ as $L_{l}$, so layer $L_{1}$ is the input layer, and layer $L_{n_{l}}$ the output layer. Neural network has parameters $(W,b)=(W^{(1)},b^{(1)},\dots,W^{(n_{l}-1)},b^{(n_{l}-1)})$, where we write $W_{ij}^{(l)}$ to denote the parameter (or weight) associated with the connection between unit $j$ in layer $l$ and unit $i$ in layer $l+1$.</description>
+    </item>
+    
+    <item>
+      <title>Beam Search Algorithms in Sequence to Sequence</title>
+      <link>https://isaacchanghau.github.io/post/beam_search/</link>
+      <pubDate>Thu, 10 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/beam_search/</guid>
+      <description>摘自知乎专栏·机器学习算法与自然语言处理的seq2seq中的beam search算法过程。
+在 Sequence2Sequence 模型中，beam search 的方法只用在测试的情况，因为在训练过程中，每一个 decoder 的输出是有正确答案的，也就不需要 beam search 去加大输出的准确率。假设现在我们用机器翻译作为例子来说明，我们需要翻译：
+ 我是中国人 &amp;mdash;&amp;gt; I am Chinese
+ 假设我们的词表大小只有三个单词就是I am Chinese。那么如果我们的beam size为2的话，我们现在来解释。
+如下图所示，我们在 decoder 的过程中，有了beam search 方法后，在第一次的输出，我们选取概率最大的I和am 两个单词，而不是只挑选一个概率最大的单词。 然后接下来我们要做的就是，把 I&amp;quot;单词作为下一个 decoder 的输入算一遍得到 $y_{2}$ 的输出概率分布，把 &amp;ldquo;am&amp;rdquo; 单词作为下一个 decoder 的输入算一遍也得到 $y_{2}$ 的输出概率分布。
+比如将I单词作为下一个 decoder 的输入算一遍得到 $y_{2}$ 的输出概率分布如下： 比如将am单词作为下一个 decoder 的输入算一遍得到 $y_{2}$ 的输出概率分布如下： 那么此时我们由于我们的beam size为2，也就是我们只能保留概率最大的两个序列，此时我们可以计算所有的序列概率： $$ \begin{aligned} \textrm{&amp;ldquo;I I&amp;rdquo;} &amp;amp; =0.4\times 0.3 &amp;amp; =0.12,\newline \textrm{&amp;ldquo;I am&amp;rdquo;} &amp;amp; =0.4\times 0.6 &amp;amp; =0.24,\newline \textrm{&amp;ldquo;I Chinese&amp;rdquo;} &amp;amp; =0.</description>
+    </item>
+    
+    <item>
+      <title>Seq2Seq Learning and Neural Conversational Model</title>
+      <link>https://isaacchanghau.github.io/post/seq2seq_conversation/</link>
+      <pubDate>Wed, 02 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/seq2seq_conversation/</guid>
+      <description>It is a summary of two papers: Sequence to Sequence Learning with Neural Networks and A Neural Conversational Model, as well as the implementation of Neural Conversation Model via Java with deeplearning4j package.
+Sequence to Sequence Model In this paper, the author presents a general end-to-end approach to sequence learning that makes minimal assumptions on the sequence structure. The method uses a multilayered Long Short-Term Memory (LSTM) to map the input sequence to a vector of a fixed dimensionality, and then another deep LSTM to decode the target sequence from the vector.</description>
+    </item>
+    
+    <item>
+      <title>Plain Stock Price Prediction via LSTM</title>
+      <link>https://isaacchanghau.github.io/post/stock_price_predict/</link>
+      <pubDate>Wed, 26 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/stock_price_predict/</guid>
+      <description>This is a practice of using LSTM to do the one day ahead prediction of the stock close price. The dataset I used here is the New York Stock Exchange from Kaggle, which consists of following files:
+ prices.csv: raw, as-is daily prices. Most of data spans from 2010 to the end 2016, for companies new on stock market date range is shorter. There have been approx. 140 stock splits in that time, this set doesn&amp;rsquo;t account for that.</description>
+    </item>
+    
+    <item>
+      <title>LSTM and GRU -- Formula Summary</title>
+      <link>https://isaacchanghau.github.io/post/lstm-gru-formula/</link>
+      <pubDate>Sat, 22 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/lstm-gru-formula/</guid>
+      <description>Introduction Long Short-Term Memory (LSTM) unit and Gated Recurrent Unit (GRU) RNNs are among the most widely used models in Deep Learning for NLP today. Both LSTM (1997) and GRU (2014) are designed to combat the vanishing gradient problem prevents standard RNNs from learning long-term dependencies through gating mechanism.
+Note that, this article heavily rely on the following to articles, Understanding LSTM Networks and Recurrent Neural Network Tutorial, I summary the formula definition and explanation from them to enhance my understanding of LSTM and GRU as well as their similarity and difference.</description>
+    </item>
+    
+    <item>
+      <title>Neural Responding Machine for Short-Text Conversation -- Summary</title>
+      <link>https://isaacchanghau.github.io/post/neural_responding_machine/</link>
+      <pubDate>Wed, 19 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/neural_responding_machine/</guid>
+      <description>The paper, Neural Responding Machine for Short-Text Conversation, published by L Shang et. al. in 2015, introduces Neural Responding Machine (NRM), a neural network-based response generator for short-text conversation. The NRM takes the general encoder-decoder framework, which formalizes the generation of response as a decoding process based on the latent representation of the input text, while both encoding and decoding are realized with recurrent neural networks (RNN). In this paper, the author demonstrates that the proposed encoder-decoder-based neural network overperform the traditional Retrivial-based methods and Statistical Machine Translation (SMT) based methods.</description>
+    </item>
+    
+    <item>
+      <title>Understanding LSTM Networks</title>
+      <link>https://isaacchanghau.github.io/post/understand_lstm/</link>
+      <pubDate>Tue, 13 Jun 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/understand_lstm/</guid>
+      <description>Declaration: This blog article is totaly not my original article. I just reproduce it from colah&amp;rsquo;s blog &amp;ndash; Understanding LSTM Networks, since it is really an excellent article of explanation of LSTM and I am afraid that I may lose the link of this article or the author may change her blog address. So I put this article into my own blog&amp;hellip; Moreover, the Chinese version of this article, translated by Not_GOD, are available here.</description>
+    </item>
+    
+    <item>
+      <title>Loss Functions in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/loss_functions/</link>
+      <pubDate>Wed, 07 Jun 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/loss_functions/</guid>
+      <description>Loss function is an important part in artificial neural networks, which is used to measure the inconsistency between predicted value ($\hat{y}$) and actual label ($y$). It is a non-negative value, where the robustness of model increases along with the decrease of the value of loss function. Loss function is the hard core of empirical risk function as well as a significant component of structural risk function. Generally, the structural risk function of a model is consist of empirical risk term and regularization term, which can be represented as $$ \begin{aligned} \boldsymbol{\theta}^{*} &amp;amp; =\arg\min_{\boldsymbol{\theta}}\boldsymbol{\mathcal{L}}(\boldsymbol{\theta})+\lambda\cdot\Phi(\boldsymbol{\theta})\newline &amp;amp; =\arg\min_{\boldsymbol{\theta}}\frac{1}{n}\sum_{i=1}^{n}L\big(y^{(i)},\hat{y}^{(i)}\big)+\lambda\cdot\Phi(\boldsymbol{\theta})\newline &amp;amp; =\arg\min_{\boldsymbol{\theta}}\frac{1}{n}\sum_{i=1}^{n}L\big(y^{(i)},f(\mathbf{x}^{(i)},\boldsymbol{\theta})\big)+\lambda\cdot\Phi(\boldsymbol{\theta}) \end{aligned} $$ where $\Phi(\boldsymbol{\theta})$ is the regularization term or penalty term, $\boldsymbol{\theta}$ is the parameters of model to be learned, $f(\cdot)$ represents the activation function and $\mathbf{x}^{(i)}=\{x_{1}^{(i)},x_{2}^{(i)},\dots ,x_{m}^{(i)}\}\in\mathbb{R}^{m}$ denotes the a training sample.</description>
+    </item>
+    
+    <item>
+      <title>Parameter Update Methods in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/parameters_update/</link>
+      <pubDate>Mon, 29 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/parameters_update/</guid>
+      <description>Gradient descent optimization algorithms are very popular to perform optimization and by far the most common way to optimize neural networks. However, there are also many other algorithms, like Hessian Free, Conjugate Gradient, BFGS, L-BFGS and etc., are proposed to deal with optimization tasks, here we only take those gradient descent methods into account. And we will discuss the drawbacks among those gradient algorithms and the methods to solve these blemishes.</description>
+    </item>
+    
+    <item>
+      <title>Weight Initialization Methods in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/weight_initialization/</link>
+      <pubDate>Wed, 24 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/weight_initialization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Activation Functions in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/activation_functions/</link>
+      <pubDate>Mon, 22 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/activation_functions/</guid>
+      <description>By definition, activation function is a function used to transform the activation level of a unit (neuron) into an output signal. Typically, activation function has a &amp;ldquo;squashing&amp;rdquo; effect. An activation function serves as a threshold, alternatively called classification or a partition. Bengio et al. refers to this as &amp;ldquo;Space Folding&amp;rdquo;. It essentially divides the original space into typically two partitions. Activation functions are usually introduced as requiring to be a non-linear function, that is, the role of activation function is made neural networks non-linear.</description>
+    </item>
+    
+    <item>
+      <title>Word2Vecf -- Dependency-Based Word Embeddings and Lexical Substitute</title>
+      <link>https://isaacchanghau.github.io/post/word2vecf/</link>
+      <pubDate>Thu, 18 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/word2vecf/</guid>
+      <description>It is a summary of Dependency-based Word Embeddings and A Simple Word Embedding Model for Lexical Substitution proposed by Omer Levy on ACL 2014 and VSM 2015 respectively. After studying the two papers, I implement the methods intorduced in the two papers with Java to enhance my comprehension and deal with some practical tasks.
+Introduction The method proposed in &amp;ldquo;Dependency-based Word Embeddings&amp;rdquo; is a generalized skip-gram model with negative sampling, which is capable of dealing with the arbitrary contexts, and its generated embeddings are less topical and exhibit more functional similarity than the original skip-gram embeddings in Word2Vec.</description>
+    </item>
+    
+    <item>
+      <title>Word2Vec -- Mathematical Principles and Java Implementation</title>
+      <link>https://isaacchanghau.github.io/post/word2vec/</link>
+      <pubDate>Sat, 13 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/word2vec/</guid>
+      <description>I began to get to know the natural language process area when I started to work as a research engineer around one year ago, and the first technique I was asked to learn is the Word2Vec. Since the Word2Vec was proposed amost four years ago, there are already amount of research reports, papers, tutorials and even applications are available online. In order to understand this technique well, I explored and studied many of those online resources at that time.</description>
+    </item>
+    
+  </channel>
+</rss>

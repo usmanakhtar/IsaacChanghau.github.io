@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tensorflow on Isaac Changhau</title>
+    <link>https://isaacchanghau.github.io/tags/tensorflow/</link>
+    <description>Recent content in Tensorflow on Isaac Changhau</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017-2018</copyright>
+    <lastBuildDate>Wed, 21 Feb 2018 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://isaacchanghau.github.io/tags/tensorflow/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Introduction of TensorFlow Dataset API</title>
+      <link>https://isaacchanghau.github.io/post/tensorflow_dataset_api/</link>
+      <pubDate>Wed, 21 Feb 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/tensorflow_dataset_api/</guid>
+      <description>Reprinted from Francesco Zuppichini·How to use Dataset in TensorFlow.
+Based on TensorFlow 1.6
+As you should know, feed-dict is the slowest possible way to pass information to TensorFlow and it must be avoided. The correct way to feed data into your models is to use an input pipeline to ensure that the GPU has never to wait for new stuff to come in.
+Fortunately, TensorFlow has a built-in API, called Dataset to make it easier to accomplish this task.</description>
+    </item>
+    
+    <item>
+      <title>TensorFlow Updates Multiple Tensors Using Scan</title>
+      <link>https://isaacchanghau.github.io/post/tensorflow_scan/</link>
+      <pubDate>Tue, 20 Feb 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/tensorflow_scan/</guid>
+      <description>This post is reprinted from Wilka Carvalho · How to update multiple tensors using a single value with tf.scan.
+Corresponding Jupyter Notebook
+I assume that you have a set of Tensors that you want to update with a sequence iteratively. E.g. you have a neural network that you’d like to update with a point at time t in a sequence and values from the network at time t-1. If you want to see this in full-fledged use, look at my jupyter notebook where I recreate the Variational Recurrent Neural Network!</description>
+    </item>
+    
+  </channel>
+</rss>

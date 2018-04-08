@@ -1,0 +1,1994 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Isaac Changhau on Isaac Changhau</title>
+    <link>https://isaacchanghau.github.io/</link>
+    <description>Recent content in Isaac Changhau on Isaac Changhau</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017-2018</copyright>
+    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Punctuation Restoration and Sentence Boundary Detection</title>
+      <link>https://isaacchanghau.github.io/project/punctuation/</link>
+      <pubDate>Wed, 28 Mar 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/project/punctuation/</guid>
+      <description>&lt;p&gt;&lt;i class=&#34;fa fa-calendar&#34;&gt;&lt;/i&gt; &lt;strong&gt;Date&lt;/strong&gt;: Jan. 2018 - Apr. 2018&lt;br&gt;&lt;i class=&#34;fa fa-user&#34;&gt;&lt;/i&gt; &lt;strong&gt;Collaborators&lt;/strong&gt;: Hao Zhang, Gangeshwar Krishnamurthy&lt;/p&gt;
+
+&lt;p&gt;Automatic Speech Recognition (ASR) systems generally produce unpunctuated text which is difficult to read for humans and degrades the performance of many downstream machine processing tasks such as machine translation, question answering, sentiment analysis and so on. Restoring the punctuation greatly improves the readability of transcripts and increases the effectiveness of subsequent processing.&lt;/p&gt;
+
+&lt;p&gt;Punctuation restoration and a related task of segmentation or sentence boundary detection have been extensively studied. To solve this issue, various methods have been used such as n-gram models, transition-based dependency parsing, deep and convolutional neural networks as well as recurrent neural networks. Even some have treated the punctuation restoration as a machine translation task, translating from unpunctuated text to punctuated text.&lt;/p&gt;
+
+&lt;p&gt;In this project, we investigated an approach of using recurrent neural network and attention mechanism to punctuate a sequence of unpunctuated text from the ASR systems. The goal of this work is to preserve the contextual meaning of a sequence of text which might be a spoken paragraph from ASR. Although, this direction has already been explored several times in previous works, it still needs to be studied more. Towards the goal, we continue investigated the use of rnn+attention models and tried to produce some novel things. The further experiment results show that our proposed approach beat the state-of-the-arts in some fields.&lt;/p&gt;
+
+&lt;p&gt;We used two different datasets, one is TED talks transcripts from &lt;a href=&#34;http://hltc.cs.ust.hk/iwslt/index.php/evaluation-campaign/ted-task.html#MTtrack&#34; target=&#34;_blank&#34;&gt;IWSLT&lt;/a&gt; dataset, where training and development set consist of &lt;code&gt;2.1M&lt;/code&gt; and &lt;code&gt;296K&lt;/code&gt; words
+respectively, the reference and ASR test set are used for testing and contain about &lt;code&gt;13K&lt;/code&gt; words each. Another is Estonian dataset with a &lt;code&gt;334M&lt;/code&gt; word out-of-domain written text corpus, the development and test set consist of &lt;code&gt;27K&lt;/code&gt; and &lt;code&gt;30K&lt;/code&gt; words
+respectively. Some preprocesses are made on those datasets such as cleanup error tokens, convert all letter to lowcase, build vocabularies and so on.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/surface/punctuation.png&#34; alt=&#34;model&#34; /&gt;
+In general, our model is consist of four parts:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Input Layer&lt;/strong&gt;: here we use both words and chars of a sequence of text as the inputs. The words and chars are first transferred to vectors, then char vectors are fed into &lt;a href=&#34;https://arxiv.org/pdf/1511.08308.pdf&#34; target=&#34;_blank&#34;&gt;convolutional neural network&lt;/a&gt; to extract char-level features, finally, a 2-layer &lt;a href=&#34;https://arxiv.org/pdf/1505.00387.pdf&#34; target=&#34;_blank&#34;&gt;highway networks&lt;/a&gt; is used to merge word vectors and char-level features to derive more affluent word representations.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Encode Layer&lt;/strong&gt;: this part is built by a 4-layer &lt;a href=&#34;https://github.com/IsaacChanghau/Dense_BiLSTM&#34; target=&#34;_blank&#34;&gt;densely conntected bidirectional LSTM&lt;/a&gt; network, which aims to learn and encode as much information as possiable for each word from the sequence.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Attention Layer&lt;/strong&gt;: this part is a unidirectional LSTM layer with attention mechanism + late fusion, which is inspired by the &lt;a href=&#34;https://arxiv.org/pdf/1409.0473.pdf&#34; target=&#34;_blank&#34;&gt;Bahdanau attention mechanism&lt;/a&gt; used in machine translation tasks.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Output Layer&lt;/strong&gt;: considered that this task is a bit similar to the sequence labeling tasks, hence we use the &lt;a href=&#34;http://blog.echen.me/2012/01/03/introduction-to-conditional-random-fields/&#34; target=&#34;_blank&#34;&gt;Conditional Random Field (CRF)&lt;/a&gt; method to decode the output, which has been demonstrated as mature and effective method.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;With hyperparameters tuning and configuration modifying, the proposed model outperforms the state-of-the-arts in some fields. As shown below, our model improves almost &lt;code&gt;5%&lt;/code&gt; on &lt;code&gt;F1&lt;/code&gt; and &lt;code&gt;SER&lt;/code&gt; for reference set, which is a great improvement, but the results on ASR set is not good, which is slightly worse than the state-of-the-art. We suspect that the different performance on Reference and ASR test set may casued by the different distribution of punctuations or others, and more experiments are to be done to find out the issue, then to fix the problem.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/surface/punc_table.png&#34; alt=&#34;sample&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Source codes for this project&lt;/strong&gt;: &lt;a href=&#34;https://github.com/IsaacChanghau/Punctuators&#34; target=&#34;_blank&#34;&gt;IsaacChanghau/Punctuators&lt;/a&gt;. &lt;em&gt;(Private repository now, will be released soon)&lt;/em&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introduction of TensorFlow Dataset API</title>
+      <link>https://isaacchanghau.github.io/post/tensorflow_dataset_api/</link>
+      <pubDate>Wed, 21 Feb 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/tensorflow_dataset_api/</guid>
+      <description>
+
+&lt;p&gt;Reprinted from &lt;a href=&#34;https://towardsdatascience.com/how-to-use-dataset-in-tensorflow-c758ef9e4428&#34; target=&#34;_blank&#34;&gt;Francesco Zuppichini·How to use Dataset in TensorFlow&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Based on TensorFlow 1.6&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;As you should know, &lt;code&gt;feed-dict&lt;/code&gt; is the slowest possible way to pass information to TensorFlow and it must be avoided. The correct way to feed data into your models is to use an input pipeline to ensure that the GPU has never to wait for new stuff to come in.&lt;/p&gt;
+
+&lt;p&gt;Fortunately, TensorFlow has a built-in API, called &lt;a href=&#34;https://www.tensorflow.org/programmers_guide/datasets&#34; target=&#34;_blank&#34;&gt;Dataset&lt;/a&gt; to make it easier to accomplish this task. In this tutorial, we are going to see how we can create an input pipeline using it and how to feed the data into the model efficiently.&lt;/p&gt;
+
+&lt;p&gt;This article will explain the basic mechanics of the Dataset, covering the most common use cases. You can found all the code as a jupyter notebook here: &lt;a href=&#34;https://github.com/FrancescoSaverioZuppichini/Tensorflow-Dataset-Tutorial/blob/master/dataset_tutorial.ipynb&#34; target=&#34;_blank&#34;&gt;[link]&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;generic-overview&#34;&gt;Generic Overview&lt;/h3&gt;
+
+&lt;p&gt;In order to use a Dataset we need three steps:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Importing Data&lt;/strong&gt;. Create a Dataset instance from some data&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Create an Iterator&lt;/strong&gt;. By using the created dataset to make an Iterator instance to iterate thought the dataset&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Consuming Data&lt;/strong&gt;. By using the created iterator we can get the elements from the dataset to feed the model&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;importing-data&#34;&gt;Importing Data&lt;/h3&gt;
+
+&lt;p&gt;We first need some data to put inside our dataset&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;From &lt;code&gt;Numpy&lt;/code&gt;&lt;/strong&gt;：This is the common case, we have a numpy array and we want to pass it to tensorflow.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# create a random vector of shape (100,2)
+x = np.random.sample((100,2))
+# make a dataset from a numpy array
+dataset = tf.data.Dataset.from_tensor_slices(x)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can also pass more than one &lt;code&gt;numpy&lt;/code&gt; array, one classic example is when we have a couple of data divided into features and labels&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;features, labels = (np.random.sample((100,2)), np.random.sample((100,1)))
+dataset = tf.data.Dataset.from_tensor_slices((features,labels))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;From &lt;code&gt;tensors&lt;/code&gt;&lt;/strong&gt;: We can, of course, initialise our dataset with some tensor&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# using a tensor
+dataset = tf.data.Dataset.from_tensor_slices(tf.random_uniform([100, 2]))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;From a &lt;code&gt;placeholder&lt;/code&gt;&lt;/strong&gt;: This is useful when we want to dynamic change the data inside the Dataset, we will se later how.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;x = tf.placeholder(tf.float32, shape=[None,2])
+dataset = tf.data.Dataset.from_tensor_slices(x)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;From &lt;code&gt;generator&lt;/code&gt;&lt;/strong&gt;: We can also initialise a Dataset from a &lt;code&gt;generator&lt;/code&gt;, this is useful when we have an array of different elements lenght (e.g a sequence):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;sequence = np.array([[1],[2,3],[3,4]])
+
+
+def generator():
+    for el in sequence:
+        yield el
+
+
+dataset = tf.data.Dataset().from_generator(generator, output_types=tf.float32, output_shapes=[tf.float32])
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this case you also need specify the types and the shapes of your data that will be used to create the correct &lt;code&gt;tensors&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;create-an-iterator&#34;&gt;Create an Iterator&lt;/h3&gt;
+
+&lt;p&gt;We have seen how to create a dataset, but how to get our data back? We have to use an &lt;code&gt;Iterator&lt;/code&gt;, that will give us the ability to iterate through the dataset and retrieve the real values of the data. There exist four types of iterators.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;One shot Iterator&lt;/strong&gt;: This is the easiest iterator. Using the first example&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;x = np.random.sample((100,2))
+# make a dataset from a numpy array
+dataset = tf.data.Dataset.from_tensor_slices(x)
+# create the iterator
+iter = dataset.make_one_shot_iterator()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then you need to call &lt;code&gt;get_next()&lt;/code&gt; to get the tensor that will contain your data&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;...
+# create the iterator
+iter = dataset.make_one_shot_iterator()
+el = iter.get_next()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can run &lt;code&gt;el&lt;/code&gt; in order to see its value.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;with tf.Session() as sess:
+    print(sess.run(el)) # output: [ 0.42116176  0.40666069]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Initializable Iterator&lt;/strong&gt;: In case we want to build a dynamic dataset in which we can change the data sourceat runtime, we can create a dataset with a &lt;code&gt;placeholder&lt;/code&gt;. Then we can initialize the &lt;code&gt;placeholder&lt;/code&gt; using the common &lt;code&gt;feed-dict&lt;/code&gt; mechanism. This is done with an initializable iterator. Using example three from last section&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# using a placeholder
+x = tf.placeholder(tf.float32, shape=[None,2])
+dataset = tf.data.Dataset.from_tensor_slices(x)
+data = np.random.sample((100,2))
+iter = dataset.make_initializable_iterator() # create the iterator
+el = iter.get_next()
+with tf.Session() as sess:
+    # feed the placeholder with data
+    sess.run(iter.initializer, feed_dict={ x: data }) 
+    print(sess.run(el)) # output [ 0.52374458  0.71968478]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This time we call &lt;code&gt;make_initializable_iterator&lt;/code&gt;. Then, inside the &lt;code&gt;sess&lt;/code&gt; scope, we run the initializer operation in order to pass our data, in this case a random &lt;code&gt;numpy&lt;/code&gt; array.&lt;/p&gt;
+
+&lt;p&gt;Imagine that now we have a train set and a test set, a real common scenario:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;train_data = (np.random.sample((100,2)), np.random.sample((100,1)))
+test_data = (np.array([[1,2]]), np.array([[0]]))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then we would like to train the model and then evaluate it on the test dataset, this can be done by initialising the iterator again after training&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# initializable iterator to switch between dataset
+EPOCHS = 10
+x, y = tf.placeholder(tf.float32, shape=[None,2]), tf.placeholder(tf.float32, shape=[None,1])
+dataset = tf.data.Dataset.from_tensor_slices((x, y))
+train_data = (np.random.sample((100,2)), np.random.sample((100,1)))
+test_data = (np.array([[1,2]]), np.array([[0]]))
+iter = dataset.make_initializable_iterator()
+features, labels = iter.get_next()
+with tf.Session() as sess:
+    # initialise iterator with train data
+    sess.run(iter.initializer, feed_dict={ x: train_data[0], y: train_data[1]})
+    for _ in range(EPOCHS):
+        sess.run([features, labels])
+    # switch to test data
+    sess.run(iter.initializer, feed_dict={ x: test_data[0], y: test_data[1]})
+    print(sess.run([features, labels]))
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Reinitializable Iterator&lt;/strong&gt;: The concept is similar to before, we want to dynamic switch between data. But instead of feed new data to the same dataset, we switch dataset. As before, we want to have a train dataset and a test dataset&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# making fake data using numpy
+train_data = (np.random.sample((100,2)), np.random.sample((100,1)))
+test_data = (np.random.sample((10,2)), np.random.sample((10,1)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can create two Datasets&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# create two datasets, one for training and one for test
+train_dataset = tf.data.Dataset.from_tensor_slices(train_data)
+test_dataset = tf.data.Dataset.from_tensor_slices(test_data)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now this is the trick, we create a generic &lt;code&gt;Iterator&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# create a iterator of the correct shape and type
+iter = tf.data.Iterator.from_structure(train_dataset.output_types, train_dataset.output_shapes)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and then two initialisation operations:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# create the initialisation operations
+train_init_op = iter.make_initializer(train_dataset)
+test_init_op = iter.make_initializer(test_dataset)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We get the next element as before&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;features, labels = iter.get_next()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, we can directly run the two initialisation operation using our &lt;code&gt;session&lt;/code&gt;. Putting all together we get:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# Reinitializable iterator to switch between Datasets
+EPOCHS = 10
+# making fake data using numpy
+train_data = (np.random.sample((100,2)), np.random.sample((100,1)))
+test_data = (np.random.sample((10,2)), np.random.sample((10,1)))
+# create two datasets, one for training and one for test
+train_dataset = tf.data.Dataset.from_tensor_slices(train_data)
+test_dataset = tf.data.Dataset.from_tensor_slices(test_data)
+# create a iterator of the correct shape and type
+iter = tf.data.Iterator.from_structure(train_dataset.output_types, train_dataset.output_shapes)
+features, labels = iter.get_next()
+# create the initialisation operations
+train_init_op = iter.make_initializer(train_dataset)
+test_init_op = iter.make_initializer(test_dataset)
+with tf.Session() as sess:
+    sess.run(train_init_op) # switch to train dataset
+    for _ in range(EPOCHS):
+        sess.run([features, labels])
+    sess.run(test_init_op) # switch to val dataset
+    print(sess.run([features, labels]))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Feedable Iterator&lt;/strong&gt;: Honestly, I don’t think they are useful. Basically instead of switch between datasets they switch between iterators so you can have, for example, one iterator from &lt;code&gt;make_one_shot_iterator()&lt;/code&gt; and one from &lt;code&gt;make_initializable_iterator()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;consuming-data&#34;&gt;Consuming data&lt;/h3&gt;
+
+&lt;p&gt;In the previous example we have used the &lt;code&gt;session&lt;/code&gt; to print the value of the &lt;code&gt;next&lt;/code&gt; element in the Dataset.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;...
+next_el = iter.get_next()
+...
+print(sess.run(next_el)) # will output the current element
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In order to pass the data to a model we have to just pass the tensors generated from &lt;code&gt;get_next()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In the following snippet we have a Dataset that contains two numpy arrays, using the same example from the first section. Notice that we need to wrap the &lt;code&gt;.random.sample&lt;/code&gt; in another numpy array to add a dimension that we is needed to batch the data&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# using two numpy arrays
+features, labels = (np.array([np.random.sample((100,2))]), np.array([np.random.sample((100,1))]))
+dataset = tf.data.Dataset.from_tensor_slices((features,labels)).repeat().batch(BATCH_SIZE)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then as always we create an iterator&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;iter = dataset.make_one_shot_iterator()
+x, y = iter.get_next()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We make a model, a simple neural network&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# make a simple model
+net = tf.layers.dense(x, 8) # pass the first value from iter.get_next() as input
+net = tf.layers.dense(net, 8)
+prediction = tf.layers.dense(net, 1)
+loss = tf.losses.mean_squared_error(prediction, y) # pass the second value from iter.get_net() as label
+train_op = tf.train.AdamOptimizer().minimize(loss)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We &lt;strong&gt;directly&lt;/strong&gt; use the Tensors from &lt;code&gt;iter.get_next()&lt;/code&gt; as input to the first layer and as labels for the loss function. Wrapping all together:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;EPOCHS = 10
+BATCH_SIZE = 16
+# using two numpy arrays
+features, labels = (np.array([np.random.sample((100,2))]), 
+                    np.array([np.random.sample((100,1))]))
+dataset = tf.data.Dataset.from_tensor_slices((features,labels)).repeat().batch(BATCH_SIZE)
+iter = dataset.make_one_shot_iterator()
+x, y = iter.get_next()
+# make a simple model
+net = tf.layers.dense(x, 8, activation=tf.tanh) # pass the first value from iter.get_next() as input
+net = tf.layers.dense(net, 8, activation=tf.tanh)
+prediction = tf.layers.dense(net, 1, activation=tf.tanh)
+loss = tf.losses.mean_squared_error(prediction, y) # pass the second value from iter.get_net() as label
+train_op = tf.train.AdamOptimizer().minimize(loss)
+with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())
+    for i in range(EPOCHS):
+        _, loss_value = sess.run([train_op, loss])
+        print(&amp;quot;Iter: {}, Loss: {:.4f}&amp;quot;.format(i, loss_value))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;Iter: 0, Loss: 0.1328 
+Iter: 1, Loss: 0.1312 
+Iter: 2, Loss: 0.1296 
+Iter: 3, Loss: 0.1281 
+Iter: 4, Loss: 0.1267 
+Iter: 5, Loss: 0.1254 
+Iter: 6, Loss: 0.1242 
+Iter: 7, Loss: 0.1231 
+Iter: 8, Loss: 0.1220 
+Iter: 9, Loss: 0.1210
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;useful-stuff&#34;&gt;Useful Stuff&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Batch&lt;/strong&gt;: Usually batching data is a pain in the ass, with the Dataset API we can use the method &lt;code&gt;batch(BATCH_SIZE)&lt;/code&gt; that automatically batches the dataset with the provided size. The default value is one. In the following example, we use a batch size of 4&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# BATCHING
+BATCH_SIZE = 4
+x = np.random.sample((100,2))
+# make a dataset from a numpy array
+dataset = tf.data.Dataset.from_tensor_slices(x).batch(BATCH_SIZE)
+iter = dataset.make_one_shot_iterator()
+el = iter.get_next()
+with tf.Session() as sess:
+    print(sess.run(el)) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[[ 0.65686128  0.99373963]
+ [ 0.69690451  0.32446826]
+ [ 0.57148422  0.68688242]
+ [ 0.20335116  0.82473219]]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Repeat&lt;/strong&gt;: Using &lt;code&gt;.repeat()&lt;/code&gt; we can specify the number of times we want the dataset to be iterated. If no parameter is passed it will loop forever, usually is good to just loop forever and directly control the number of epochs with a standard loop.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Shuffle&lt;/strong&gt;: We can shuffle the Dataset by using the method &lt;code&gt;shuffle()&lt;/code&gt; that shuffles the dataset by default every epoch.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Remember: shuffle the dataset is very important to avoid overfitting.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;We can also set the parameter &lt;code&gt;buffer_size&lt;/code&gt;, a fixed size buffer from which the next element will be uniformly chosen from. Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# BATCHING
+BATCH_SIZE = 4
+x = np.array([[1],[2],[3],[4]])
+# make a dataset from a numpy array
+dataset = tf.data.Dataset.from_tensor_slices(x)
+dataset = dataset.shuffle(buffer_size=100)
+dataset = dataset.batch(BATCH_SIZE)
+iter = dataset.make_one_shot_iterator()
+el = iter.get_next()
+with tf.Session() as sess:
+    print(sess.run(el))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;First run output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[[4]
+ [2]
+ [3]
+ [1]]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Second run output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[[3]
+ [1]
+ [2]
+ [4]]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Yep. It was shuffled. If you want, you can also set the &lt;code&gt;seed&lt;/code&gt; parameter.&lt;/p&gt;
+
+&lt;h3 id=&#34;mapping&#34;&gt;Mapping&lt;/h3&gt;
+
+&lt;p&gt;You can apply a custom function to each member of a dataset using the &lt;code&gt;map()&lt;/code&gt; method. In the following example we multiply each element by two:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# MAP
+x = np.array([[1],[2],[3],[4]])
+# make a dataset from a numpy array
+dataset = tf.data.Dataset.from_tensor_slices(x)
+dataset = dataset.map(lambda x: x*2)
+iter = dataset.make_one_shot_iterator()
+el = iter.get_next()
+with tf.Session() as sess:
+    # this will run forever
+    for _ in range(len(x)):
+        print(sess.run(el))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[2]
+[4]
+[6]
+[8]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;full-example&#34;&gt;Full example&lt;/h3&gt;
+
+&lt;p&gt;In the example below we train a simple model using batching and we switch between train and test dataset&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# Wrapping all together -&amp;gt; Switch between train and test set
+EPOCHS = 10
+BATCH_SIZE = 16
+x, y = tf.placeholder(tf.float32, shape=[None,2]), tf.placeholder(tf.float32, shape=[None,1])
+dataset = tf.data.Dataset.from_tensor_slices((x, y)).batch(BATCH_SIZE).repeat()
+# using two numpy arrays
+train_data = (np.random.sample((100,2)), np.random.sample((100,1)))
+test_data = (np.random.sample((20,2)), np.random.sample((20,1)))
+n_batches = len(train_data[0]) // BATCH_SIZE
+iter = dataset.make_initializable_iterator()
+features, labels = iter.get_next()
+
+# make a simple model
+net = tf.layers.dense(features, 8, activation=tf.tanh) # pass the first value from iter.get_next() as input
+net = tf.layers.dense(net, 8, activation=tf.tanh)
+prediction = tf.layers.dense(net, 1, activation=tf.tanh)
+loss = tf.losses.mean_squared_error(prediction, labels) # pass the second value from iter.get_net() as label
+train_op = tf.train.AdamOptimizer().minimize(loss)
+with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())
+    # initialise iterator with train data
+    sess.run(iter.initializer, feed_dict={ x: train_data[0], y: train_data[1]})
+    print(&#39;Training...&#39;)
+    for i in range(EPOCHS):
+        tot_loss = 0
+        for _ in range(n_batches):
+            _, loss_value = sess.run([train_op, loss])
+            tot_loss += loss_value
+        print(&amp;quot;Iter: {}, Loss: {:.4f}&amp;quot;.format(i, tot_loss / n_batches))
+    # initialise iterator with test data
+    sess.run(iter.initializer, feed_dict={ x: test_data[0], y: test_data[1]})
+    print(&#39;Test Loss: {:4f}&#39;.format(sess.run(loss)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;Training...
+Iter: 0, Loss: 0.5199
+Iter: 1, Loss: 0.4504
+Iter: 2, Loss: 0.3418
+Iter: 3, Loss: 0.2889
+Iter: 4, Loss: 0.2352
+Iter: 5, Loss: 0.1722
+Iter: 6, Loss: 0.1605
+Iter: 7, Loss: 0.1234
+Iter: 8, Loss: 0.1192
+Iter: 9, Loss: 0.0968
+Test Loss: 0.115165
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;other-resources&#34;&gt;Other resources&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;TensorFlow dataset tutorial: &lt;a href=&#34;https://www.tensorflow.org/programmers_guide/datasets&#34; target=&#34;_blank&#34;&gt;[link]&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Dataset docs: &lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/data/Dataset&#34; target=&#34;_blank&#34;&gt;[link]&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;The Dataset API gives us a fast and robust way to create optimized input pipeline to train, evaluate and test our models. In this article, we have seen most of the common operation we can do with them.&lt;/p&gt;
+
+&lt;p&gt;Chinese version：&lt;a href=&#34;http://mp.weixin.qq.com/s/KSCvRRu9Bb4_p_12Xa2rNA&#34; target=&#34;_blank&#34;&gt;AI科技大本营·如何使用TensorFlow中的Dataset API (使用内置输入管道，告别&lt;code&gt;feed-dict&lt;/code&gt;)&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Neural Sequence Labeling</title>
+      <link>https://isaacchanghau.github.io/project/neural_seq_labeling/</link>
+      <pubDate>Tue, 20 Feb 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/project/neural_seq_labeling/</guid>
+      <description>&lt;p&gt;&lt;i class=&#34;fa fa-calendar&#34;&gt;&lt;/i&gt; &lt;strong&gt;Date&lt;/strong&gt;: Nov. 2017 - Feb. 2018&lt;br&gt;&lt;i class=&#34;fa fa-user&#34;&gt;&lt;/i&gt; &lt;strong&gt;Collaborators&lt;/strong&gt;: Hao Zhang&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;TODO&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Source codes for this project&lt;/strong&gt;: &lt;a href=&#34;https://github.com/IsaacChanghau/neural_sequence_labeling&#34; target=&#34;_blank&#34;&gt;IsaacChanghau/neural_sequence_labeling&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TensorFlow Updates Multiple Tensors Using Scan</title>
+      <link>https://isaacchanghau.github.io/post/tensorflow_scan/</link>
+      <pubDate>Tue, 20 Feb 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/tensorflow_scan/</guid>
+      <description>&lt;p&gt;This post is reprinted from &lt;a href=&#34;https://wcarvalho.github.io/tutorial/2017/06/30/tf_scan/&#34; target=&#34;_blank&#34;&gt;Wilka Carvalho · How to update multiple tensors using a single value with tf.scan&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/wcarvalho/jupyter_notebooks/blob/master/tf.scan/Tensorflow%20Scan.ipynb&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;Corresponding Jupyter Notebook&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I assume that you have a set of Tensors that you want to update with a sequence iteratively. E.g. you have a neural network that you’d like to update with a point at time &lt;code&gt;t&lt;/code&gt; in a sequence and values from the network at time &lt;code&gt;t-1&lt;/code&gt;. If you want to see this in full-fledged use, look at my jupyter notebook where I recreate the Variational Recurrent Neural Network!&lt;/p&gt;
+
+&lt;p&gt;This is &lt;a href=&#34;https://www.tensorflow.org/api_docs/python/tf/scan&#34; target=&#34;_blank&#34;&gt;the definition of scan&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;tf.scan(
+    fn,
+    elems,
+    initializer=None,
+    parallel_iterations=10,
+    back_prop=True,
+    swap_memory=False,
+    infer_shape=True,
+    name=None
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;fn&lt;/code&gt; should follow the form &lt;code&gt;fn(parameter_that_changes,parameter_you_change_with)&lt;/code&gt;. This means that you can assume that your input from elem will always go to parameter_you_change_with, and that what you return should be &lt;code&gt;parameter_that_changes&lt;/code&gt;. Writing it like a function looks something like the following&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;def fn(x, elem):
+    return new_x
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;where &lt;code&gt;new_x&lt;/code&gt; will be &lt;code&gt;x&lt;/code&gt; the next time &lt;code&gt;fn&lt;/code&gt; is called. That took me some time to figure out.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import tensorflow as tf
+import numpy as np
+
+
+# Super Simple scan example as per: https://stackoverflow.com/questions/43841782/scan-function-in-theano-and-tensorflow
+def f(x, ys):
+  (y1, y2) = ys
+  return x + y1 * y2
+
+
+a = tf.constant([1, 2, 3, 4, 5])
+b = tf.constant([2, 3, 2, 2, 1])
+c = tf.scan(f, (a, b), initializer=0)
+with tf.Session() as sess:
+      print(sess.run(c))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;output:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[ 2  8 14 22 27]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Another example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# updating 3 tensors with a single sequence
+a1 = tf.Variable([0,0])
+a2 = tf.Variable([1,1])
+a3 = tf.Variable([2,2])
+
+sequence = tf.Variable([1,2,3])
+
+
+# using tf.multiply istead of &#39;*&#39;, e.g. tf.multiply(x,2) instead of 2*x was key to this compiling...
+def replace_one(old, x):
+    a1, a2, a3 = old
+    a1 = tf.add(a1,tf.multiply(x,1))
+    a2 = tf.add(a2,tf.multiply(x,2))
+    a3 = tf.add(a3,tf.multiply(x,3))
+
+    return [a1,a2,a3]
+
+
+# key things that worked: initializer needed to match output. 
+# dumb mistake I can see tripping up many people
+update = tf.scan(replace_one, sequence, initializer=[a1, a2, a3])
+
+a1 = a1.assign(a2)
+with tf.Session() as sess:
+    sess.run(tf.global_variables_initializer())
+    print(sess.run(update))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;outputs:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;[array([[1, 1],
+       [3, 3],
+       [6, 6]], dtype=int32), array([[ 3,  3],
+       [ 7,  7],
+       [13, 13]], dtype=int32), array([[ 5,  5],
+       [11, 11],
+       [20, 20]], dtype=int32)]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;A few notes&lt;/strong&gt;
+So this ws more difficult to implement than I expected. I had to get all the ingredients perfectly right.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;While I can assign outside of scan, for some reason the tensors &lt;code&gt;a1, a2, a3&lt;/code&gt; couldn’t be assigned, i.e. &lt;code&gt;a1.assign(tf.add(a1,tf.multiply(x,1)))&lt;/code&gt;, inside of scan&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;You can have all your values inside a single tensor for the initializer and update them via indexing. This also doesn’t work. i.e. with &lt;code&gt;T=tf.concat([a1,a2,a3])&lt;/code&gt;, you can’t do &lt;code&gt;T[0]=x&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;I spent a long time trying to manually concatonate the values so that I could track them in the future only to learn that scan does this by default!! E.g., for &lt;code&gt;a1&lt;/code&gt;, the corresponding output vector is &lt;code&gt;[a1+1, a1+1+2, a1+1+2+3]&lt;/code&gt; since the elements were &lt;code&gt;[1,2,3]&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Examples of Using &lt;code&gt;tf.scan&lt;/code&gt;&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://gist.github.com/JonathanRaiman/04f59b5141bea6b767dca6af25cfebf5&#34; target=&#34;_blank&#34;&gt;[JonathanRaiman/awesome_scan.py]&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/suriyadeepan/rnn-from-scratch&#34; target=&#34;_blank&#34;&gt;[suriyadeepan/rnn-from-scratch]&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Useful Tricks for Operating Mac OS and Linux (Ubuntu)</title>
+      <link>https://isaacchanghau.github.io/post/useful_commands/</link>
+      <pubDate>Sun, 28 Jan 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/useful_commands/</guid>
+      <description>
+
+&lt;p&gt;&lt;strong&gt;Useful commands and tricks to raise efficiency under Mac OS and Linux&lt;/strong&gt;, &lt;strong&gt;&lt;em&gt;keep updating!&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;mac-os-tricks&#34;&gt;Mac OS Tricks&lt;/h2&gt;
+
+&lt;h3 id=&#34;terminal-themes-and-vim&#34;&gt;Terminal Themes and VIM&lt;/h3&gt;
+
+&lt;p&gt;Follow this GitHub repository to build your own powerful and colorful Terminal: &lt;a href=&#34;https://github.com/lysyi3m/osx-terminal-themes&#34; target=&#34;_blank&#34;&gt;[color-theme-link]&lt;/a&gt;, &lt;a href=&#34;https://github.com/amix/vimrc&#34; target=&#34;_blank&#34;&gt;[vimrc-link]&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;generate-new-ssh-key-and-add-to-github&#34;&gt;Generate New SSH-Key and Add to GitHub&lt;/h3&gt;
+
+&lt;p&gt;Please refer the link (based on Mac OS platform):&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#platform-mac&#34; target=&#34;_blank&#34;&gt;Generating a new SSH key and adding it to the ssh-agent&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://help.github.com/articles/working-with-ssh-key-passphrases/#platform-mac&#34; target=&#34;_blank&#34;&gt;Working with SSH key passphrases&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/#platform-mac&#34; target=&#34;_blank&#34;&gt;Adding a new SSH key to your GitHub account&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&#34;shut-down-and-turn-on-local-backup&#34;&gt;Shut Down and Turn on Local Backup&lt;/h3&gt;
+
+&lt;p&gt;shut down:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo tmutil disablelocal
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;trun on:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo tmutil enablelocal
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;modify-launchpad-icon-size&#34;&gt;Modify Launchpad Icon Size&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ defaults write com.apple.dock springboard-rows -int 7 # change the size by modifying the number
+$ defaults write com.apple.dock springboard-columns -int 6 # change the size by modifying the number
+$ killall Dock
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Reset:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ defaults write com.apple.dock ResetLaunchPad -bool TRUE
+$ killall Dock
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;change-source-bash-profile-to-source-profile&#34;&gt;Change Source &amp;lsquo;.bash_profile&amp;rsquo; to Source &amp;lsquo;.profile&amp;rsquo;&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ cat .bash_profile &amp;gt;&amp;gt; .profile
+$ rm .bash_profile (optional)
+$ echo &amp;quot;source ~/.profile&amp;quot; &amp;gt;&amp;gt; .bash_profile
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;open-port-22&#34;&gt;Open Port 22&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: most information is borrowed from &lt;a href=&#34;https://stackoverflow.com/questions/6313929/how-do-i-open-port-22-in-os-x-10-6-7&#34; target=&#34;_blank&#34;&gt;[How do I open port 22 in OS X 10.6.7]&lt;/a&gt;.&lt;br /&gt;
+Handling the problem of:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ ssh localhost
+ssh: connect to host localhost port 22: Connection refused
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above problem happens since the remote login is closed in Mac OS X&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo systemsetup -getremotelogin
+Remote Login: off
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here is the solution:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo systemsetup -setremotelogin on
+$ ssh localhost
+Last login: ......
+$ _
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;uninstall-mysql-using-terminal-completely&#34;&gt;Uninstall MySQL using Terminal Completely&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ cd ~/
+$ sudo rm /usr/local/mysql
+$ sudo rm -rf /usr/local/var/mysql
+$ sudo rm -rf /usr/local/mysql*
+$ sudo rm -rf /Library/StartupItems/MySQLCOM
+$ sudo rm -rf /Library/PreferencePanes/My*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then open hostconfig:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ vim /etc/hostconfig
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and removed the line: &lt;code&gt;MYSQLCOM=-YES-rm -rf ~/Library/PreferencePanes/My*&lt;/code&gt;, after that, removing following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;$ sudo rm -rf /Library/Receipts/mysql*
+$ sudo rm -rf /Library/Receipts/MySQL*
+$ sudo rm -rf /var/db/receipts/com.mysql.*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;terminal-cheatsheet&#34;&gt;Terminal Cheatsheet&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Information from &lt;a href=&#34;https://github.com/0nn0/terminal-mac-cheatsheet&#34; target=&#34;_blank&#34;&gt;[0nn0/terminal-mac-cheatsheet]&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Letters are shown capitalized for readability only.&lt;/em&gt;  &lt;em&gt;Capslock should be off.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Contains: &lt;strong&gt;SHORTCUTS&lt;/strong&gt;, &lt;strong&gt;CORE COMMANDS&lt;/strong&gt;, &lt;strong&gt;CHAINING COMMANDS&lt;/strong&gt;, &lt;strong&gt;PIPING COMMANDS&lt;/strong&gt;, &lt;strong&gt;COMMAND HISTORY&lt;/strong&gt;, &lt;strong&gt;FILE MANAGEMENT&lt;/strong&gt;, &lt;strong&gt;DIRECTORY MANAGEMENT&lt;/strong&gt;, &lt;strong&gt;SEARCH&lt;/strong&gt;, &lt;strong&gt;HELP&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;linux-ubuntu-tricks&#34;&gt;Linux (Ubuntu) Tricks&lt;/h2&gt;
+
+&lt;h3 id=&#34;format-usb-flash-drive&#34;&gt;Format USB Flash Drive&lt;/h3&gt;
+
+&lt;p&gt;Please refer the link: &lt;a href=&#34;https://www.wikihow.com/Format-a-USB-Flash-Drive-in-Ubuntu&#34; target=&#34;_blank&#34;&gt;wikiHow · How to Format a USB Flash Drive in Ubuntu&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>WordNet Troponymy and Extraction of Manner-Result Relations</title>
+      <link>https://isaacchanghau.github.io/publication/wordnet/</link>
+      <pubDate>Mon, 08 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/publication/wordnet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>WordNet Troponymy and Action Hierarchy Extraction</title>
+      <link>https://isaacchanghau.github.io/project/action_hierarchy/</link>
+      <pubDate>Sun, 07 Jan 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/project/action_hierarchy/</guid>
+      <description>&lt;p&gt;&lt;i class=&#34;fa fa-calendar&#34;&gt;&lt;/i&gt; &lt;strong&gt;Date&lt;/strong&gt;: Oct. 2017 - Jan. 2018&lt;br&gt;&lt;i class=&#34;fa fa-user&#34;&gt;&lt;/i&gt; &lt;strong&gt;Collaborators&lt;/strong&gt;: &lt;a href=&#34;https://www.a-star.edu.sg/ihpc/People/tid/390&#34; target=&#34;_blank&#34;&gt;Huminski Aliaksandr&lt;/a&gt;, Hao Zhang&lt;/p&gt;
+
+&lt;p&gt;This project is part of exploration of &lt;a href=&#34;https://isaacchanghau.github.io/project/primenet&#34;&gt;&lt;strong&gt;&lt;em&gt;PrimeNet&lt;/em&gt;&lt;/strong&gt;&lt;/a&gt;. The PrimeNet is one of the projects I am involved in, which aims to build a comprehensive and accurate commonsense knowledge graph database to encode and link the concepts, relations and knowledge of the real-world as much as possibale and help machines to understand the world easier and better.&lt;/p&gt;
+
+&lt;p&gt;Commonsense knowledge bases need to have relations that allow to predict the consequences of specific actions (say, &lt;em&gt;if John stabbed Peter, Peter might be killed&lt;/em&gt;) and to unfold the possible actions for the specific results (&lt;em&gt;Peter was killed. It could happen because of poisoning, stabbing, shooting, etc.&lt;/em&gt;) This kind of causal relations are established between manner verbs and result verbs: manner-result relations.&lt;/p&gt;
+
+&lt;p&gt;Modeling action as an important topic in robotics and human-computer communication assumes by default examining a large set of actions as described by natural language.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://isaacchanghau.github.io/img/surface/wordnet.png&#34; alt=&#34;sample&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this project, we use &lt;a href=&#34;https://wordnet.princeton.edu/&#34; target=&#34;_blank&#34;&gt;WordNet&lt;/a&gt; as resources, investigate its structure and the natural relations among actions, then offer a procedure for how to extract manner-result relations through the analysis of the troponym glosses and for how to extract actions from WordNet.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A Letter to the Past October</title>
+      <link>https://isaacchanghau.github.io/post/letter_october/</link>
+      <pubDate>Wed, 15 Nov 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/letter_october/</guid>
+      <description>&lt;p&gt;任何一种环境或一个人，初次见面就预感到离别的隐痛时，你必定是爱上TA了&amp;hellip;&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;过去的十月，很漫长，发生了太多。&lt;/p&gt;
+
+&lt;p&gt;一段三年的感情走到尽头，所有的经历，所有的回忆，顷刻间，化为乌有&amp;hellip;
+&lt;img src=&#34;https://isaacchanghau.github.io/img/life/huizi.png&#34; alt=&#34;huizi&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;养了快一年的乔巴宝贝，一场车祸&amp;hellip; 可能是上帝觉得它太可爱了，所以起了私心，想在天堂里让它作伴，希望你能在新的“家里”也过得好&amp;hellip;
+&lt;img src=&#34;https://isaacchanghau.github.io/img/life/choper.png&#34; alt=&#34;Choper&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;也是十月，我的生命中出现了一个意外，不！更诚实，更具体的说，那是一场命中注定&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;如果&amp;hellip;把心掏给你是我的错&amp;hellip;我会一点一点把它赎回来&amp;hellip;剩下的、赎不回来的，就放在你那儿吧，反正它本来也属于你，就让它慢慢失去温度、冰冷、然后死去&amp;hellip;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;In the end, I struggled, ran out of my enthusiasm, lost my own pain at your lips, a touch of sweet, it&amp;rsquo;s just a laniated miracle.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;你出现了，像光那样，从一颗星到达另外一颗星。后来，你又离开了。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>PTransE -- Modeling Relation Paths for Representation Learning of Knowledge Bases</title>
+      <link>https://isaacchanghau.github.io/post/ptranse/</link>
+      <pubDate>Tue, 19 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ptranse/</guid>
+      <description>&lt;p&gt;It is a summary of the paper &lt;strong&gt;Modeling Relation Paths for Representation Learning of Knowledge Bases&lt;/strong&gt; (&lt;a href=&#34;https://arxiv.org/pdf/1506.00379.pdf&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;PTransE&lt;/strong&gt;&lt;/a&gt;). PTransE is a novel extension of &lt;a href=&#34;https://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf&#34; target=&#34;_blank&#34;&gt;TransE&lt;/a&gt;, which is a path-based representation learning model, to model relation paths for representation learning of knowledge bases. The authors argue that multiple-step relation paths also contain rich inference patterns between entities, thus, PTransE also considers relation paths as translations between entities for representation learning, and addresses two key challenges:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Since not all relation paths are reliable, so a &lt;strong&gt;path-constraint resource allocation&lt;/strong&gt; (PCRA) algorithm is designed to measure the reliability of relation paths.&lt;/li&gt;
+&lt;li&gt;Relation paths is represented via semantic composition of relation embeddings.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Despite the success of &lt;a href=&#34;https://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf&#34; target=&#34;_blank&#34;&gt;TransE&lt;/a&gt;, &lt;a href=&#34;http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.486.2800&amp;amp;rep=rep1&amp;amp;type=pdf&#34; target=&#34;_blank&#34;&gt;TransH&lt;/a&gt;, &lt;a href=&#34;https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/view/9571/9523&#34; target=&#34;_blank&#34;&gt;TransR&lt;/a&gt; and &lt;a href=&#34;http://www.aclweb.org/anthology/P15-1067&#34; target=&#34;_blank&#34;&gt;TransD&lt;/a&gt; in modeling relational facts, these methods only take direct relations between entities into consideration. Actually, there are also substantial multiple-step relation paths between entities indicating their semantic relationships. For instance:
+$$
+\mathbf{h}\xrightarrow{BornInCity}\mathbf{e}_{1}\xrightarrow{CityInState}\mathbf{e}_{2}\xrightarrow{StateInCountry}\mathbf{t}
+$$
+which indicates the relation &lt;code&gt;Nationality&lt;/code&gt; between $\mathbf{h}$ and $\mathbf{t}$, i.e., $(\mathbf{h},\textrm{Nationality},\mathbf{t})$. However, in PTransE, in addition to direct connected relational facts, the authors also build triples from knowledge bases using entity pairs connected with relation paths. As shown below
+&lt;img src=&#34;https://isaacchanghau.github.io/img/nlp/transx/ptranse-graph.png&#34; alt=&#34;PTransE Graph&#34; /&gt;
+TransE only considers direct relations between entities and optimizes the objective $h+r\approx t$, while PTransE generalizes TransE by regarding multiple-step relation paths as connections between entities, where $\circ$ is an operation to join the relations $r_{1}$ and $r_{2}$ together into a unified relation path representation.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;PTransE&lt;/strong&gt;:&lt;br /&gt;
+Define entity set $\mathbf{E}$ and relation set $\mathbf{R}$ are in $\mathbb{R}^{k}$, $S=\{(h,r,t)\}$ represents a set of triples. For each triple $(h,r,t)$, the energy of TransE is computed by
+$$
+E(h,r,t)=\Vert h+r-t\Vert\tag{1}
+$$
+Since TransE only consider the direct relations, PTransE also considers the relation paths for representation. Suppose the multiple relation paths $P(h,t)=\{p_{1},\dots,p_{N}\}$ connecting two entities $h$ and $t$, where relation path $p=\{r_{1},\dots,r_{l}\}$ indicates $h\xrightarrow{r_{1}}\dots\xrightarrow{r_{l}}t$. For each triple $(h,r,t)$, the energy function of PTransE is defined as
+$$
+G(h,r,t)=E(h,r,t)+E(h,P,t)\tag{2}
+$$
+where $E(h,r,t)$ models correlations between relations and entities with direct relation triples, $E(h,P,t)$ models the inference correlations between relations with multiple-step relation path triples:
+$$
+E(h,P,t)=\frac{1}{Z}\sum_{p\in P(h,t)}R(p|h,t)E(h,p,t)\tag{3}
+$$
+where $R(p|h,t)$ indicates the reliability of relation path $p$ given entity pair $(h,t)$, $Z=\sum_{p\in P(h,t)}R(p|h,t)$ is a normalization factor, and $E(h,p,t)$ is the energy function of the triple $(h,p,t)$. The component $R(p|h,t)$ concerns about relation path reliability, and $E(h,p,t)$ concerns about relation path representation.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Relation Path Reliability&lt;/strong&gt;:&lt;br /&gt;
+Since not all relation paths are meaningful and reliable for learning. the authors propose a &lt;strong&gt;path-constraint resource allocation&lt;/strong&gt; (PCRA) algorithm to measure the reliability of relation paths and only the reliable relation paths are selected. The basic idea is that a certain amount of resource is associated with the head entity $h$, and will flow following the given path $p$. Using the resource amount that eventually flows to the tail entity $t$ to measure the reliability of the path $p$ as a meaningful connection between $h$ and $t$.&lt;/p&gt;
+
+&lt;p&gt;For a triple $(h,p,t)$, the resource amount flowing from $h$ to $t$ is computed as follows. The flowing path is writen as $S_{0}\xrightarrow{r_{1}}S_{1}\xrightarrow{r_{2}}\dots\xrightarrow{r_{l}}S_{l}$, where $S_{0}=h$ and $t\in S_{l}$. For any entity $m\in S_{i}$, denote its direct predecessors along relation $r_{i}$ in $S_{i-1}$ as $S_{i-1}(\cdot,m)$. The resource flowing to m is defined as
+$$
+R_{p}(m)=\sum_{n\in S_{i-1}(\cdot,m)}\frac{1}{\vert S_{i}(n,\cdot)\vert}R_{p}(n)\tag{4}
+$$
+where $S_{i}(n,\cdot)$ is the direct successors of $n\in S_{i-1}$ following the relation $r_{i}$, and $R_{p}(n)$ is the resource obtained from the entity $n$. For each relation path $p$, we set the initial resource in $h$ as $R_{p}(h)=1$. By performing resource allocation recursively from $h$ through $p$, tail entity $t$ eventually obtains the resource $R_{p}(t)$ which indicates how much information of head entity $h$ can be well translated, thus, using $R_{p}(t)$ to measure the reliability of the path $p$ given $(h,t)$, i.e., $R(p\vert h,t)=R_{p}(t)$.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Relation Path Representation&lt;/strong&gt;:&lt;br /&gt;
+For &lt;strong&gt;relation path representation&lt;/strong&gt;, the authors argue that the semantic meaning of a relation path depends on all relations in this path, thus, given a relation path $p=(r_{1},\dots,r_{l})$, they define and learn a binary (composition) operation function ($\circ$) to obtain the path embedding $p$ by recursively composing multiple relations. Formally, for a path $p=(r_{1},\dots,r_{l})$, the path embeddingas is obtained by $p=r_{1}\circ\cdot\cdot\cdot\circ r_{l}$. As shown below
+&lt;img src=&#34;https://isaacchanghau.github.io/img/nlp/transx/path-relation.png&#34; alt=&#34;Relation Path&#34; /&gt;
+The authors propose three types of composition operation:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Addition (ADD)&lt;/strong&gt;: The addition operation obtains the vector of a path by summing up the vectors of all relations
+$$
+p=r_{1}+\dots+r_{l}\tag{5}
+$$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multiplication (MUL)&lt;/strong&gt;: The multiplication operation obtains the vector of a path as the cumulative product of the vectors of all relations
+$$
+p=r_{1}\times\dots\times r_{l}\tag{6}
+$$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Recurrent Neural Network (RNN)&lt;/strong&gt;: RNN is a recent neural-based model for semantic composition. The composition operation is realized using a matrix $\mathbf{W}$:
+$$
+c_{i}=f(\mathbf{W}[c_{i-1};r_{i}])\tag{7}
+$$
+where $f$ is a non-linearity or identical function, and $[a;b]$ represents the concatenation of two vectors. By setting $c_{1}=r_{1}$ and recursively performing RNN following the relation path, finally get $p=c_{n}$.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Since $E(h,p,t)=\Vert h+p-t\Vert$, and $\Vert h+r-t\Vert$ has minimized with the direct relation triple $(h,r,t)$ to make sure $r\approx t-h$. So we can derive
+$$
+E(h,p,t)=\Vert h+p-t\Vert=\Vert p-(t-h)\Vert\approx\Vert p-r\Vert=E(p,r)\tag{8}
+$$
+&lt;strong&gt;Objective Formalization&lt;/strong&gt;:&lt;br /&gt;
+The objective of PTransE is given as
+$$
+\mathcal{L}(S)=\sum_{(h,r,t)\in S}\big[L(h,r,t)+\frac{1}{Z}\sum_{p\in P(h,t)}R(p\vert h,t)L(p,r)\big]\tag{9}
+$$
+Here the $L(\cdot)$ is the margin-based loss functions
+$$
+\begin{aligned}
+L(h,r,t)&amp;amp;=\sum_{(h&amp;rsquo;,r&amp;rsquo;,t&amp;rsquo;)\in S^{-}}[\gamma+E(h,r,t)-E(h&amp;rsquo;,r&amp;rsquo;,t&amp;rsquo;)]_{+}\newline
+L(p,r)&amp;amp;=\sum_{(h,r&amp;rsquo;,t)\in S^{-}}[\gamma+E(p,r)-E(p,r&amp;rsquo;)]_{+}
+\end{aligned}
+$$
+where $[x]_{+}=\max(0,x)$ returns the maximum between $0$ and $x$, $\gamma$ is the margin, $S$ is the set of valid triples, and $S^{-}$ is the set of invalid triples derived by
+$$
+S^{-}=\{(h&amp;rsquo;,r,t)\}\cup\{(h,r&amp;rsquo;,t)\}\cup\{(h,r,t&amp;rsquo;)\}\tag{10}
+$$
+The objective function is also under the constraints that $\forall h,r,t$, $\Vert h\Vert_{2}\leq 1$, $\Vert r\Vert_{2}\leq 1$, $\Vert t\Vert_{2}\leq 1$.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Reverse Relation Addition&lt;/strong&gt;:&lt;br /&gt;
+Besides, the authors only consider the relation paths following one direction, so in order to solve the cases, like $e_{1}\xrightarrow{BornInCity}e_{2}\xleftarrow{CityOfCountry}e_{3}$, they add reverse relations for each relation, say, for each triple $(h,r,t)$, build another $(t,r^{-1},h)$, thus, the above-mentioned path can be set as $e_{1}\xrightarrow{BornInCity}e_{2}\xrightarrow{CityOfCountry^{-1}}e_{3}$.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Path Selection Limitation&lt;/strong&gt;:&lt;br /&gt;
+This process normally depends on the scale of knowledge database, generally, 3-steps are quiet enough for most cases.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Resources&lt;/strong&gt;:&lt;br /&gt;
+&lt;a href=&#34;https://github.com/thunlp/Fast-TransX&#34; target=&#34;_blank&#34;&gt;Fast-TransX&lt;/a&gt;, &lt;a href=&#34;https://github.com/thunlp/KB2E&#34; target=&#34;_blank&#34;&gt;KB2E&lt;/a&gt; from Natural Language Processing Lab at Tsinghua University (&lt;a href=&#34;https://github.com/thunlp&#34; target=&#34;_blank&#34;&gt;THUNLP&lt;/a&gt;).&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>TransX: Embedding Entities and Relationships of Multi-relational Data</title>
+      <link>https://isaacchanghau.github.io/post/transx/</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/transx/</guid>
+      <description>
+
+&lt;p&gt;It is a summary of several papers about embedding entities and relationships of multi-relational knowledge database, while each paper contains one kind of specific method. Generally, the set of methods are called TransX. Here, I only describe the general idea and mathematical process of each method, for more information about those methods in parameters setting, experiment results and discussion, you can directly read the original papers through the links I provide.&lt;/p&gt;
+
+&lt;h1 id=&#34;multi-relational-data-overview&#34;&gt;Multi-relational Data Overview&lt;/h1&gt;
+
+&lt;p&gt;There are a lot of relational knowledge database available nowadays, like:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://conceptnet.io&#34; target=&#34;_blank&#34;&gt;ConceptNet&lt;/a&gt;, which is a freely-available semantic network, designed to help computers understand the meanings of words that people use.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://wordnet.princeton.edu&#34; target=&#34;_blank&#34;&gt;WordNet&lt;/a&gt;, which is a large lexical database of English. Nouns, verbs, adjectives and adverbs are grouped into sets of cognitive synonyms (synsets), each expressing a distinct concept. WordNet&amp;rsquo;s structure makes it a useful tool for computational linguistics and natural language processing.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://verbs.colorado.edu/verbnet/&#34; target=&#34;_blank&#34;&gt;VerbNet&lt;/a&gt;, which is the largest on-line verb lexicon currently available for English. It is a hierarchical domain-independent, broad-coverage verb lexicon with mappings to other lexical resources such as WordNet, &lt;a href=&#34;http://www.cis.upenn.edu/~xtag/&#34; target=&#34;_blank&#34;&gt;Xtag&lt;/a&gt; and &lt;a href=&#34;https://framenet.icsi.berkeley.edu/fndrupal/&#34; target=&#34;_blank&#34;&gt;FrameNet&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Freebase&#34; target=&#34;_blank&#34;&gt;FreeBase&lt;/a&gt;, which is a large collaborative knowledge base consisting of data composed mainly by its community members. It was an online collection of structured data harvested from many sources, including individual, user-submitted wiki contributions. Freebase aimed to create a global resource that allowed people (and machines) to access common information more effectively.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.mpi-inf.mpg.de/departments/databases-and-information-systems/research/yago-naga/yago/&#34; target=&#34;_blank&#34;&gt;YaGo&lt;/a&gt;, which is a huge semantic knowledge base, derived from Wikipedia, WordNet and GeoNames. It has knowledge of more than 10 million entities and contains more than 120 million facts about these entities.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Actually, there are still a lot of different relational knowledge database exist, here we only show some representative databases above. Before we discuss those algorithms, let&amp;rsquo;s see some examples of multi-relational knowledge database to get the idea about how the database looks like.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/nlp/transx/conceptnet-wordnet.png&#34; alt=&#34;conceptnet and wordnet&#34; /&gt;
+In the graph above, I show an example of two knowledge DB. For ConceptNet, each entity (or, node) is a concept, and entities are connected to each other through some specific relations, like, &lt;code&gt;oven--UsedFor--&amp;gt;cook&lt;/code&gt;, &lt;code&gt;cake--IsA--&amp;gt;dessert&lt;/code&gt;, here &lt;code&gt;oven&lt;/code&gt;, &lt;code&gt;cook&lt;/code&gt;, &lt;code&gt;cake&lt;/code&gt; and &lt;code&gt;dessert&lt;/code&gt; are entities, while &lt;code&gt;UsedFor&lt;/code&gt; and &lt;code&gt;IsA&lt;/code&gt; are relations. For WordNet, there are two different entities, one is called Synset (blue node), another is Word (green one). Each synset in WordNet is connected with other synsets through &lt;strong&gt;hypernym&lt;/strong&gt; and &lt;strong&gt;hyponym&lt;/strong&gt; relations, while Word only connect to its own synset and has some links with other words in the same synset, but never connected to words outside.&lt;/p&gt;
+
+&lt;p&gt;Although there are amount of relations and connections within a knowledge database, generally, all of the relations are in the several certain forms, like &lt;strong&gt;one-to-many relation&lt;/strong&gt;, &lt;strong&gt;many-to-one relation&lt;/strong&gt;, &lt;strong&gt;one-to-one relation&lt;/strong&gt;, &lt;strong&gt;co-relation&lt;/strong&gt;, &lt;strong&gt;reflexive relation&lt;/strong&gt; and so on.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/nlp/transx/relation-forms.png&#34; alt=&#34;relation-forms&#34; /&gt;
+For example, one-to-many relation, which means one entity with one relation, links to several different entities, say, &lt;code&gt;apple--is_a--&amp;gt;fruit&lt;/code&gt;, &lt;code&gt;apple--is_a--&amp;gt;computer_brand&lt;/code&gt;, &lt;code&gt;apple--is_a--&amp;gt;computer_manufacturer&lt;/code&gt; and so on. For many-to-one relation, it is similar. However, the reflexive relation is unique, since two entities connect to each other with same relation, like &lt;code&gt;plate--is_a-&amp;gt;dish&lt;/code&gt;, while &lt;code&gt;dish--is_a--&amp;gt;plate&lt;/code&gt; too.&lt;/p&gt;
+
+&lt;p&gt;Dispite the scale of relational knowledge databases and how many different relation forms they have, all of them are able to be decomposed to the &lt;strong&gt;basic component&lt;/strong&gt; (triple), i.e., an entity connect to another entity with a certain relation, as shown below
+&lt;img src=&#34;https://isaacchanghau.github.io/img/nlp/transx/basic-component.png&#34; alt=&#34;basic-component&#34; /&gt;
+In order to convert those relational data into embeddings, which are convenient and easy to access via statistical approach, researchers proposed several methods to handle this issue, like &lt;a href=&#34;http://machinelearning.wustl.edu/mlpapers/paper_files/ICML2011Nickel_438.pdf&#34; target=&#34;_blank&#34;&gt;RESCAL&lt;/a&gt;, &lt;a href=&#34;https://pdfs.semanticscholar.org/057a/c29c84084a576da56247bdfd63bf17b5a891.pdf&#34; target=&#34;_blank&#34;&gt;SE&lt;/a&gt;, &lt;a href=&#34;http://www.thespermwhale.com/jaseweston/papers/ebrm_mlj.pdf&#34; target=&#34;_blank&#34;&gt;SME(linear)&lt;/a&gt;, &lt;a href=&#34;http://www.thespermwhale.com/jaseweston/papers/ebrm_mlj.pdf&#34; target=&#34;_blank&#34;&gt;SME(bilinear)&lt;/a&gt;, &lt;a href=&#34;https://hal.inria.fr/hal-00776335/document&#34; target=&#34;_blank&#34;&gt;LFM&lt;/a&gt;, &lt;a href=&#34;https://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf&#34; target=&#34;_blank&#34;&gt;TransE&lt;/a&gt;, &lt;a href=&#34;http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.486.2800&amp;amp;rep=rep1&amp;amp;type=pdf&#34; target=&#34;_blank&#34;&gt;TransH&lt;/a&gt;, &lt;a href=&#34;https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/view/9571/9523&#34; target=&#34;_blank&#34;&gt;TransR&lt;/a&gt;, &lt;a href=&#34;http://www.aclweb.org/anthology/P15-1067&#34; target=&#34;_blank&#34;&gt;TransD&lt;/a&gt; and so on, while the TransE, TransH, TransR, TransD are a group of similar methods, thus, we put them together and named as &lt;strong&gt;TransX&lt;/strong&gt;. So, TransX is a set of methods to create embeddings for entities and relations while remembering their connection information.&lt;/p&gt;
+
+&lt;h1 id=&#34;transe&#34;&gt;TransE&lt;/h1&gt;
+
+&lt;p&gt;TransE &amp;ndash; &lt;a href=&#34;https://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf&#34; target=&#34;_blank&#34;&gt;Translating Embeddings for Modeling Multi-relational Data&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This paper considers the problem of embedding entities and relationships of multi-relational data in low-dimensional vector spaces, its objective is to propose a canonical model which is easy to train, contains a reduced number of parameters and can scale up to very large databases. So the TransE is proposed, which models relationships by interpreting them as translations operating on the low-dimensional embeddings of the entities.&lt;/p&gt;
+
+&lt;p&gt;TransE, an energy-based model for learning low-dimensional embeddings of entities.  In TransE, relationships are represented as translations in the embedding space:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;if $(h,r,t)$ holds, then the embedding of the tail entity $t$ should be &lt;strong&gt;close to&lt;/strong&gt; the embedding of the head entity $h$ &lt;strong&gt;plus&lt;/strong&gt; some vector that depends on the relationship $r$, while it is also the general idea of the training process of TransE.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The main motivation behind this translation-based parameterization is that hierarchical relationships are extremely common in KBs and translations are the natural transformations for representing them. Another motivation comes from &lt;a href=&#34;https://arxiv.org/abs/1310.4546&#34; target=&#34;_blank&#34;&gt;Distributed Representations of Words and Phrases and Their Compositionality&lt;/a&gt;, in which the authors learn word embeddings from free text, and some &lt;em&gt;1-to-1&lt;/em&gt; relationships between entities of different types are (coincidentally rather than willingly) represented by the model as translations in the embedding space. This suggests that there may exist embedding spaces in which &lt;em&gt;1-to-1&lt;/em&gt; relationships between entities of different types may, as well, be represented by translations.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Translation-based model&lt;/strong&gt;:
+Given a training set $S$ of triplets $(h,r,t)$ composed of two entities $h,t\in E$ (the set of entities) and a relationship $r\in R$ (the set of relationships), TransE learns vector embeddings of the entities and the relationships. The embeddings take values in $\mathbb{R}^{k}$ ($k$ is a model hyperparameter) and are denoted with the same letters, in boldface characters.&lt;/p&gt;
+
+&lt;p&gt;The basic idea behind the model is that the functional relation induced by the $r$-labeled edges corresponds to a translation of the embeddings, i.e. &lt;strong&gt;$h+r\approx t$ when $(h,r,t)$ holds ($t$ should be a nearest neighbor of $h+r$), while $h+r$ should be far away from $t$ otherwise&lt;/strong&gt;, as the graph below shows. Following an energy-based framework, the energy of a triplet is equal to $d(h+r,t)$ for some dissimilarity measure $d$, which we take to be either the $L_{1}$ or the $L_{2}$-norm.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/nlp/transx/transe-translation-graph.png&#34; alt=&#34;TransE Translation&#34; /&gt;
+To learn such embeddings, we minimize a margin-based ranking criterion over the training set:
+$$
+\mathcal{L}=\sum_{(h,r,t)\in S}\sum_{(h&amp;rsquo;,r,t&amp;rsquo;)\in S&amp;rsquo;_{(h,r,t)}}\big[\gamma+d(h+r,t)-d(h&amp;rsquo;+r,t&amp;rsquo;)\big]_{+}\tag{1}
+$$
+where $[x]_{+}$ denotes the positive part of $x$, $\gamma&amp;gt;0$ is a margin hyperparameter, and the dissimilarity measure $d$ is the squared euclidean distance, which computed by
+$$
+d(h+r,t)=\lVert h\rVert^{2}_{2}+\lVert r\rVert^{2}_{2}+\lVert t\rVert^{2}_{2}-2\big(h^{T}t+r^{T}(t-h)\big)\tag{2}
+$$
+with the norm constraints that $\lVert h\rVert^{2}_{2}=\lVert t\rVert^{2}_{2}=1$, and the set of corrupted triplets, constructed according to the equation (3) below, is composed of training triplets with either the head or tail replaced by a random entity (but not both at the same time)
+$$
+S&amp;rsquo;_{(h,r,t)}=\big\{(h&amp;rsquo;,r,t)\vert h&amp;rsquo;\in E\big\}\bigcup\big\{(h,r,t&amp;rsquo;)\vert t&amp;rsquo;\in E\big\}\tag{3}
+$$
+The loss function (1) favors lower values of the energy for training triplets than for corrupted triplets, and is thus a natural implementation of the intended criterion.&lt;/p&gt;
+
+&lt;p&gt;The optimization is carried out by stochastic gradient descent (in minibatch mode), over the possible $h$, $r$, and $t$, with the additional constraints that the $L_{2}$-norm of the embeddings of the entities is 1 (no regularization or norm constraints are given to the label embeddings $r$). This constraint is important, because it prevents the training process to trivially minimize $\mathcal{L}$ by artificially increasing entity embeddings norms. The detailed optimization procedure is described in the graph below.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/nlp/transx/process.png&#34; alt=&#34;Process Graph&#34; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;transh&#34;&gt;TransH&lt;/h1&gt;
+
+&lt;p&gt;TransH &amp;ndash; &lt;a href=&#34;http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.486.2800&amp;amp;rep=rep1&amp;amp;type=pdf&#34; target=&#34;_blank&#34;&gt;Knowledge Graph Embedding by Translating on Hyperplanes&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Before talking about TransH, let&amp;rsquo;s see some problems that TransE holds. TransE models a relation $r$ as a translation vector $r\in\mathbb{R}^{k}$, and assumes the error $\Vert h+r-t\Vert_{l_{1}/l_{2}}$ is low if $(h,r,t)$ is a golden triple. It applies well to irreflexive and one-to-one relations but has problems when dealing with reflexive or many-to-one, one-to-many, many-to-many relations. Considering the ideal case of no-error embedding where $h+r-t=0$, if $(h,r,t)\in\Delta$, we can get the following consequences directly from TransE model.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;If $(h,r,t)\in\Delta$ and $(t,r,h)\in\Delta$, i.e., $r$ is a reflexive map, then $r=0$ and $h=t$.&lt;/li&gt;
+&lt;li&gt;If $\forall i\in\{0,1,\dots,m\}$, $(h_{i},r,t)\in\Delta$, i.e., $r$ is a many-to-one map, then $h_{0}=\dots=h_{m}$. Similarly, if $(h,r,t_{i})\in\Delta$, i.e., $r$ is a one-to-many map, then $t_{0}=\dots=t_{m}$.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The reason leading to the above consequences is, in TransE, the representation of an entity is the same when involved in any relations, ignoring &lt;em&gt;distributed representations of entities when involved in different relations&lt;/em&gt;. Hence, TransH is proposed to handle the problems of TransE in modeling reflexive, one-to-many, many-to-one and many-to-many relations. The general idea of TransH is shown below, which introduces a &lt;strong&gt;relation-specific hyperplane&lt;/strong&gt; to project the entities to the hyperplane, and the translation process is done in such hyperplane too. For a relation $r$, the authors position the relation-specific translation vector $d_{r}$ in the relation-specific hyperplane $w_{r}$ (the normal vector) rather than in the same space of entity embeddings.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/nlp/transx/transh-graph.png&#34; alt=&#34;TransH Graph&#34; /&gt;
+Specifically, for a triplet $(h,r,t)$, the embedding $h$ and $t$ are first projected to the hyperplane $w_{r}$. The projections are denoted as $h_{\bot}$ and $t_{\bot}$, respectively, while
+$$
+\begin{aligned}
+h_{\bot} &amp;amp;=h-w_{r}^{T}hw_{r}\newline
+t_{\bot} &amp;amp;=t-w_{r}^{T}tw_{r}
+\end{aligned}
+$$
+The authors expect $h_{\bot}$ and $t_{\bot}$ can be connected by a translation vector $d_{r}$ on the hyperplane with low error if $(h,r,t)$ is a golden triplet. And the graph below shows how the TransH sloves the problems in TransE.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/nlp/transx/transh-solve-problem.png&#34; alt=&#34;TransH Solve Problems&#34; /&gt;
+Thus, in TransH, by introducing the mechanism of projecting to the relation-specific hyperplane, it enables different roles of an entity in different relations/triplets. Generally, the training process of TransH is similar to TransE, its cost function is also a margin-based ranking loss
+$$
+\mathcal{L}=\sum_{(h,r,t)\in S}\sum_{(h&amp;rsquo;,r,t&amp;rsquo;)\in S&amp;rsquo;_{(h,r,t)}}\big[f_{r}(h,t)+\gamma-f_{r&amp;rsquo;}(h&amp;rsquo;,t&amp;rsquo;)\big]_{+}\tag{4}
+$$
+where $[x]_{+}=\max(0,x)$, $S$ is a set of golden triples, $S&amp;rsquo;_{(h,r,t)}$ denotes the set of negative triplets constructed by corrupting $(h,r,t)$, $\gamma$ is the margin separating positive and negative triplets, and $f_{r}(h,t)$ is a score function and derived by
+$$
+f_{r}(h,t)=\Vert h_{\bot}+d_{r}-t_{\bot}\Vert_{2}^{2}=\Vert(h-w_{r}^{T}hw_{r})+d_{r}-(t-w_{r}^{T}tw_{r})\Vert_{2}^{2}\tag{5}
+$$
+When minimizing the loss $\mathcal{L}$, the following constraints are considered:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;$\forall e\in E$, $\Vert e\Vert_{2}\leq 1$&lt;/li&gt;
+&lt;li&gt;$\forall r\in R$, $\vert w_{r}^{T}d_{r}\vert/\Vert d_{r}\Vert_{2}\leq\epsilon$&lt;/li&gt;
+&lt;li&gt;$\forall r\in R$, $\Vert w_{r}\Vert_{2}=1$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Reducing False Negative Labels&lt;/strong&gt;:
+Here shows a new method to sample the corrupted triples to reduce the false.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Give more chance to replacing the head entity if the relation is one-to-many and give more chance to replacing the tail entity if the relation is many-to-one.&lt;/li&gt;
+&lt;li&gt;Among all the triplets of a relation r, we first get the following two statistics:
+
+&lt;ol&gt;
+&lt;li&gt;the average number of tail entities per head entity, denoted as $tph$&lt;/li&gt;
+&lt;li&gt;the average number of head entities per tail entity, denoted as $hpt$&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Then defining a Bernoulli distribution with parameter $\frac{thp}{thp+hpt}$ for sampling: given a golden triplet $(h,r,t)$ of the relation $r$, with probability $\frac{thp}{thp+hpt}$ to corrupt the triplet by replacing the head, and with probability $\frac{pht}{thp+hpt}$ to corrupt the triplet by replacing the tail.&lt;/p&gt;
+
+&lt;h1 id=&#34;transr-and-ctransr&#34;&gt;TransR and CTransR&lt;/h1&gt;
+
+&lt;p&gt;TransR &amp;ndash; &lt;a href=&#34;https://www.aaai.org/ocs/index.php/AAAI/AAAI15/paper/view/9571/9523&#34; target=&#34;_blank&#34;&gt;Learning Entity and Relation Embeddings for Knowledge Graph Completion&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;TransR is proposed since the authors realize that TransH still have some limitations, since both TransE and TransH assume embeddings of entities and relations being in the same space. However, an entity may have multiple aspects, and various relations focus on different aspects of entities. Hence, it is intuitive that some entities are similar and thus close to each other in the entity space, but are &lt;strong&gt;comparably different in some specific aspects&lt;/strong&gt; and thus &lt;strong&gt;far away from each other in the corresponding relation spaces&lt;/strong&gt;.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/nlp/transx/limitation-transh.png&#34; alt=&#34;TransH Limitations&#34; /&gt;
+Thus, TransR models entities and relations in distinct spaces, i.e., entity space and multiple relation spaces (i.e., relation-specific entity spaces), and performs translation in the corresponding relation space. In TransR, for each triple $(h,r,t)$, entities embeddings are set as $h,t\in\mathbb{R}^{k}$, and relation embedding is set as $r\in\mathbb{R}^{d}$, while the dimensions of entity embeddings and relation embeddings are not necessarily identical. For each relation $r$, set a projection matrix $M_{r}\in\mathbb{R}^{k\times d}$ maps entities from entity space to relation space.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/nlp/transx/transr.png&#34; alt=&#34;TransR Limitations&#34; /&gt;
+With the mapping matrix, the projected vectors of entities are computed by
+$$
+h_{r}=hM_{r},\quad t_{r}=tM_{r}
+$$
+And the score function is correspondingly defined as
+$$
+f_{r}(h,t)=\Vert h_{r}+r-t_{r}\Vert_{2}^{2}\tag{6}
+$$
+with the constraints that $\forall h,r,t$, $\Vert h\Vert_{2}\leq 1$, $\Vert r\Vert_{2}\leq 1$, $\Vert t\Vert_{2}\leq 1$, $\Vert hM_{r}\Vert_{2}\leq 1$, $\Vert tM_{r}\Vert_{2}\leq 1$. And the following margin-based score function as objective for training:
+$$
+\mathcal{L}=\sum_{(h,r,t)\in S}\sum_{(h&amp;rsquo;,r,t&amp;rsquo;)\in S&amp;rsquo;_{(h,r,t)}}\max\big[0, f_{r}(h,t)+\gamma-f_{r}(h&amp;rsquo;,t&amp;rsquo;)\big]\tag{7}
+$$
+where $\max(x, y)$ aims to get the maximum between $x$ and $y$, $\gamma$ is the margin, $S$ is the set of correct triples and $S&amp;rsquo;$ is the set of incorrect triples.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cluster-based TransR (CTransR)&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;p&gt;The above mentioned models, including TransE, TransH and TransR, learn a unique vector for each relation, which may be under-representative to fit all entity pairs under this relation, because these relations are usually rather diverse. In order to better model these relations, the authors incorporate the idea of piecewise linear regression to extend TransR.&lt;/p&gt;
+
+&lt;p&gt;The basic idea is that first segment input instances into several groups. Formally, for a specific relation $r$, all entity pairs $(h,t)$ in the training data are clustered into multiple groups, and entity pairs in each group are expected to exhibit similar $r$ relation. All entity pairs $(h,t)$ are represented with their vector offsets $(h−t)$ for clustering, where $h$ and $t$ are obtained with TransE. Afterwards, learn a separate relation vector $r_{c}$ for each cluster and matrix $M_{r}$ for each relation, respectively. The authors define the projected vectors of entities as $h_{r,c}=hM_{r}$, $t_{r,c}=tM_{r}$ and the score function is defined as
+$$
+f_{r}(h,t)=\Vert h_{r,c}+r_{c}-t_{r,c}\Vert_{2}^{2}+\alpha\Vert r_{c}-r\Vert_{2}^{2}\tag{8}
+$$
+where $\Vert r_{c}-r\Vert_{2}^{2}$ aims to ensure cluster-specific relation vector $r_{c}$ not too far away from the original relation vector $r$, and $\alpha$ controls the effect of this constraint. Besides, same to TransR, CTransR also enforce constraints on norm of embeddings $h$, $r$, $t$ and mapping matrices.&lt;/p&gt;
+
+&lt;h1 id=&#34;transd&#34;&gt;TransD&lt;/h1&gt;
+
+&lt;p&gt;TransD &amp;ndash; &lt;a href=&#34;http://www.aclweb.org/anthology/P15-1067&#34; target=&#34;_blank&#34;&gt;Knowledge Graph Embedding via Dynamic Mapping Matrix&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Despite that TransR/CTransR has significant improvements compared with previous state-of-the-art models. However, it also has several flaws:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;For a typical relation $r$, all entities share the same mapping matrix $M_{r}$. However, the entities linked by a relation always contains various types and attributes.&lt;/li&gt;
+&lt;li&gt;The projection operation is an interactive process between an entity and a relation, it is unreasonable that the mapping matrices are determined only by relations.&lt;/li&gt;
+&lt;li&gt;Matrix-vector multiplication makes it has large amount of calculation, and when relation number is large, it also has much more parameters than TransE and TransH.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;To solve these flaws, TransD is proposed and its basic idea is shown in the graph below. In TransD, &lt;strong&gt;two vectors&lt;/strong&gt; are defined for each entity and relation. The first vector represents the meaning of an entity or a relation, the other one (called &lt;strong&gt;projection vector&lt;/strong&gt;) represents the way that how to project a entity embedding into a relation vector space and it will be used to construct mapping matrices. Therefore, every entity-relation pair has an unique mapping matrix. In addition, TransD has no matrix-by-vector operations which can be replaced by vectors operations.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/nlp/transx/transd-graph.png&#34; alt=&#34;TransD Graph&#34; /&gt;
+In the graph above, each shape represents an entity pair appearing in a triplet of relation $r$. $M_{rh}$ and $M_{rt}$ are mapping matrices of $h$ and $t$, respectively. $h_{ip}$, $t_{ip}$ ($i=1,2,3$) and $r_{p}$ are projection vectors. $h_{i\bot}$ and $t_{i\bot}$ ($i=1,2,3$) are projected vectors of entities. The projected vectors satisfy $h_{i\bot}+r\approx t_{i\bot}$ ($i=1,2,3$).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;TransD Model&lt;/strong&gt;: each named symbol object (entities and relations) is represented by &lt;em&gt;two&lt;/em&gt; vectors. The first one captures the meaning of entity (relation), the other one is used to construct mapping matrices. For example, given a triplet $(h,r,t)$, its vectors are $h$, $h_{p}$, $r$, $r_{p}$, $t$, $t_{p}$, where subscript $p$ marks the projection vectors, $h,h_{p},t,t_{p}\in\mathbb{R}^{n}$ and $r,r_{p}\in\mathbb{R}^{m}$. For each triplet $(h,r,t)$ the authors set two mapping matrices $M_{rh},M_{rt}\in\mathbb{R}^{m\times n}$ to project entities from entity space to relation space:
+$$
+\begin{aligned}
+M_{rh}&amp;amp;=r_{p}h_{p}^{T}+I^{m\times n}\newline
+M_{rt}&amp;amp;=r_{p}t_{p}^{T}+I^{m\times n}
+\end{aligned}\tag{9}
+$$
+Therefore, the mapping matrices are determined by both entities and relations, and this kind of operation makes the two projection vectors interact sufficiently because each element of them can meet every entry comes from another vector. As the authors initialize each mapping matrix with an identity matrix, thus, the $I^{m\times n}$ is added to $M_{rh}$ and $M_{rt}$. With the mapping matrices, the projected vectors are defined as follows:
+$$
+\begin{aligned}
+h_{\bot}&amp;amp;=M_{rh}h\newline
+t_{\bot}&amp;amp;=M_{rt}t
+\end{aligned}\tag{10}
+$$
+and the score function is set as
+$$
+f_{r}(h,t)=-\Vert h_{\bot}+r-t_{\bot}\Vert_{2}^{2}\tag{11}
+$$
+with the constraints that $\Vert h\Vert_{2}\leq 1$, $\Vert t\Vert_{2}\leq 1$, $\Vert r\Vert_{2}\leq 1$, $\Vert h_{\bot}\Vert_{2}\leq 1$ and $\Vert t_{\bot}\Vert_{2}\leq 1$.&lt;/p&gt;
+
+&lt;p&gt;For training process, the authors first denote that $S=\{(h_{i},r_{i},t_{i})\vert y_{i}=1\}$ as the golden triples, and $S&amp;rsquo;=\{(h_{i},r_{i},t_{i})\vert y_{i}=0\}$ as the negative triples, and the negative triples is derived by
+$$
+S&amp;rsquo;=\{(h_{l},r_{k},t_{k})\vert h_{l}\neq h_{k}\land y_{k}=1\}\cup\{(h_{k},r_{k},t_{l})\vert t_{l}\neq t_{k}\land y_{k}=1\}
+$$
+while the authors also use two strategies &amp;ldquo;unif&amp;rdquo; and &amp;ldquo;bern&amp;rdquo; described in TransH to replace the head or tail entity. using $\xi$ and $\xi&amp;rsquo;$ to denote a golden triplet and a corresponding negative triplet, respectively. The training objective is
+$$
+\mathcal{L}=\sum_{\xi\in S}\sum_{\xi&amp;rsquo;\in S&amp;rsquo;}\big[\gamma+f_{r}(\xi&amp;rsquo;)-f_{r}(\xi)\big]_{+}\tag{12}
+$$
+&lt;strong&gt;Connections with TransE/H/R and CTransR&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;TransE is a special case of TransD when the dimension of vectors satisfies $m=n$ and all projection vectors are set zero.&lt;/li&gt;
+&lt;li&gt;TransH is related to TransD when we set $m=n$. Under the setting, projected vectors of entities can be rewritten as follows:
+$$\begin{aligned}
+h_{\bot}&amp;amp;=M_{rh}h=h+h_{p}^{T}hr_{p}\newline
+t_{\bot}&amp;amp;=M_{rt}t=t+t_{p}^{T}tr_{p}
+\end{aligned}
+$$
+Hence, when $m = n$, the difference between TransD and TransH is that projection vectors are determinded only by relations in TransH, but TransD’s projection vectors are determinded by both entities and relations.&lt;/li&gt;
+&lt;li&gt;As to TransR/CTransR, TransD is an improvement of it. TransR/CTransR directly defines a mapping matrix for each relation, TransD consturcts two mapping matrices dynamically for each triplet by setting a projection vector for each entity and relation. In addition, TransD has no matrix-vector multiplication operation which can be replaced by vector operations. Without loss of generality, assuming $m\geq n$, the projected vectors can be computed as follows:
+$$
+\begin{aligned}
+h_{\bot}&amp;amp;=M_{rh}h=h_{p}^{T}hr_{p}+\big[h^{T},0^{T}\big]^{T}\newline
+t_{\bot}&amp;amp;=M_{rt}t=t_{p}^{T}tr_{p}+\big[t^{T},0^{T}\big]^{T}
+\end{aligned}
+$$
+Therefore, TransD has less calculation than TransR/CTransR, which makes it train faster and can be applied on large-scale knowledge graphs.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;source-codes&#34;&gt;Source Codes&lt;/h1&gt;
+
+&lt;p&gt;The Python and C++ codes of the methods above are available in the GitHub page of Natural Language Processing Lab at Tsinghua University (&lt;a href=&#34;https://github.com/thunlp&#34; target=&#34;_blank&#34;&gt;THUNLP&lt;/a&gt;).&lt;br /&gt;
+Python version: &lt;a href=&#34;https://github.com/thunlp/TensorFlow-TransX&#34; target=&#34;_blank&#34;&gt;TensorFlow-TransX&lt;/a&gt;.&lt;br /&gt;
+Converted TensorFlow-TransX for Python 2 and Tensorflow 0.12.0: &lt;a href=&#34;https://github.com/IsaacChanghau/AmusingPythonCodes/tree/master/transx&#34; target=&#34;_blank&#34;&gt;link&lt;/a&gt;.&lt;br /&gt;
+C++ version: &lt;a href=&#34;https://github.com/thunlp/Fast-TransX&#34; target=&#34;_blank&#34;&gt;Fast-TransX&lt;/a&gt;, &lt;a href=&#34;https://github.com/thunlp/KB2E&#34; target=&#34;_blank&#34;&gt;KB2E&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Analyzing Wolf Warrior II Movie Comments using Python</title>
+      <link>https://isaacchanghau.github.io/post/wolf_warrior/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/wolf_warrior/</guid>
+      <description>&lt;p&gt;想要分析“战狼II”的影评数据，首先需要获取这些数据，这里使用 Python 的 &lt;code&gt;requests&lt;/code&gt; 包进行网页请求，并使用正则表达式匹配出我们需要的数据。首先使用Chrome打开豆瓣影评·战狼II的网页 (&lt;a href=&#34;https://movie.douban.com/subject/26363254/comments?start=0&#34; target=&#34;_blank&#34;&gt;https://movie.douban.com/subject/26363254/comments?start=0&lt;/a&gt;)，使用 Developer Tools 对当前页面做一个简单的了解和分析，如下图：
+&lt;img src=&#34;https://isaacchanghau.github.io/img/python/wolf_warrior/comment-chrome.png&#34; alt=&#34;Comment Loc&#34; /&gt;
+我们发现页面的所有评论、评论者、投票、评价等级等信息均存储在 &lt;code&gt;&amp;lt;div class=&amp;quot;comment-item&amp;quot; ...&amp;gt;&lt;/code&gt; 标签下。而转向下一页面的链接信息存储在 &lt;code&gt;&amp;lt;div id=&amp;quot;paginator&amp;quot;&amp;gt;&lt;/code&gt; 标签的 &lt;code&gt;&amp;lt;a href=&amp;quot;?start=26&amp;amp;amp;limit=20&amp;amp;amp;sort=new_score&amp;amp;amp;status=P&amp;quot; ... class=&amp;quot;next&amp;quot;&amp;gt;...&lt;/code&gt; 中。因此，可以针对这部分 HTML 标签创建相应的正则表达式来获取数据。简易的爬虫代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import requests 
+import re
+import pandas as pd
+url_first = &#39;https://movie.douban.com/subject/26363254/comments?start=0&#39;  # start page
+head = {&#39;User-Agent&#39;:&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36&#39;}
+cookies = {&#39;cookie&#39;:&#39;you own cookies}  #cookie of your account
+html = requests.get(url_first, headers=head, cookies=cookies)  # get first page
+re_page = re.compile(r&#39;&amp;lt;a href=&amp;quot;(.*?)&amp;amp;amp;.*?class=&amp;quot;next&amp;quot;&amp;gt;&#39;) # next page
+re_content = re.compile(r&#39;&amp;lt;span class=&amp;quot;votes&amp;quot;&amp;gt;(.*?)&amp;lt;/span&amp;gt;.*?comment&amp;quot;&amp;gt;(.*?)&amp;lt;/a&amp;gt;.*?&amp;lt;/span&amp;gt;.*?&amp;lt;span.*?class=&amp;quot;&amp;quot;&amp;gt;(.*?)&amp;lt;/a&amp;gt;.*?&amp;lt;span&amp;gt;(.*?)&amp;lt;/span&amp;gt;.*?title=&amp;quot;(.*?)&amp;quot;&amp;gt;&amp;lt;/span&amp;gt;.*?title=&amp;quot;(.*?)&amp;quot;&amp;gt;.*?class=&amp;quot;&amp;quot;&amp;gt; (.*?)\n&#39;, re.S)
+while html.status_code==200:
+    url_next = &#39;https://movie.douban.com/subject/26363254/comments&#39; + re.findall(re_page, html.text)[0]
+    data = re.findall(re_content, html.text)
+    print(url_next)
+    frame = pd.DataFrame(data)
+    frame.to_csv(&#39;./data/comments.csv&#39;, header=False, index=False, mode=&#39;a+&#39;, encoding=&#39;utf-8&#39;)
+    frame = []
+    data = []
+    html = requests.get(url_next, cookies=cookies, headers=head)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里需要设置自己的 &lt;code&gt;User-Agent&lt;/code&gt; 和 &lt;code&gt;cookie&lt;/code&gt;，如果使用的是Chrome，可以直接进入 Developer Tools，在 &lt;code&gt;Network&lt;/code&gt; 中找到当前页面，便能获得这些信息。以上，代码没有考虑豆瓣的验证码问题，因此爬取大概20000～30000条数据时便会报出 &lt;code&gt;443 Error&lt;/code&gt;，由于验证码机器识别问题涉及到一些其他的领域，这里喔直接忽略这个问题，因为数据量不是很大，所以每次保存停止，只需要重新启动程序即可。这里爬取的数据为7类：&lt;strong&gt;赞同数&lt;/strong&gt;，&lt;strong&gt;是否有用&lt;/strong&gt;，&lt;strong&gt;用户名&lt;/strong&gt;，&lt;strong&gt;是否看过&lt;/strong&gt;，&lt;strong&gt;评分&lt;/strong&gt;，&lt;strong&gt;日期&lt;/strong&gt;以及&lt;strong&gt;评论内容&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;完成19万+条数据爬取之后，由于存在一些格式错误等脏数据，仍需要做一些简单的数据清理，清理后的数据量为18万+。代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import re
+import pandas as pd
+reg_correct = re.compile(r&#39;(.*),(.*),(.*),(.*),(.*),(.*),(.*)&#39;)
+reg_dirty = re.compile(r&#39;.*这条短评跟影片无关.*&amp;lt;span class=&amp;quot;&amp;quot;votes&amp;quot;&amp;quot;&amp;gt;(.*?)&amp;lt;/span&amp;gt;.*?class=&amp;quot;&amp;quot;j a_vote_comment&amp;quot;&amp;quot;&amp;gt;(.*?)&amp;lt;/a&amp;gt;.*?class=&amp;quot;&amp;quot;&amp;quot;&amp;quot;&amp;gt;(.*?)&amp;lt;/a&amp;gt;&amp;lt;span&amp;gt;(.*?)&amp;lt;/span&amp;gt;.*?title=&amp;quot;&amp;quot;(.*?)&amp;quot;,(.*),(.*)&#39;)
+data = []  # 格式化数据
+with open(&#39;./data/comments.csv&#39;) as file:
+    dirty_data = []  # 错误格式数据
+    dirty_lines = &#39;&#39;
+    flag = 0
+    # load and clean data
+    for line in file:
+        arr = re.findall(reg_correct, line)
+        if len(arr) == 0:
+            dirty_lines = &#39;&#39;.join([dirty_lines, line.strip()])
+            flag = 1
+        else:
+            value = (arr[0][0].replace(&#39;&amp;quot;&#39;, &#39;&#39;), arr[0][1].replace(&#39;&amp;quot;&#39;, &#39;&#39;), arr[0][2].replace(&#39;&amp;quot;&#39;, &#39;&#39;), arr[0][3].replace(&#39;&amp;quot;&#39;, &#39;&#39;), arr[0][4].replace(&#39;&amp;quot;&#39;, &#39;&#39;), arr[0][5].replace(&#39;&amp;quot;&#39;, &#39;&#39;), &#39;`&#39; + arr[0][6].replace(&#39;&amp;quot;&#39;, &#39;&#39;) + &#39;`&#39;)
+            data.append(value)
+            if flag == 1:
+                flag = 0
+                dirty_data.append(dirty_lines)
+                dirty_lines = &#39;&#39;
+    # add cleaned data to data array
+    for line in dirty_data:
+        arr = re.findall(reg_dirty, line)
+        if len(arr) != 0:
+            value = (arr[0][0].replace(&#39;&amp;quot;&#39;, &#39;&#39;), arr[0][1].replace(&#39;&amp;quot;&#39;, &#39;&#39;), arr[0][2].replace(&#39;&amp;quot;&#39;, &#39;&#39;), arr[0][3].replace(&#39;&amp;quot;&#39;, &#39;&#39;), arr[0][4].replace(&#39;&amp;quot;&#39;, &#39;&#39;), arr[0][5].replace(&#39;&amp;quot;&#39;, &#39;&#39;), &#39;`&#39; + arr[0][6].replace(&#39;&amp;quot;&#39;, &#39;&#39;) + &#39;`&#39;)
+            data.append(value)
+path = &#39;./data/comments_clean.csv&#39;
+pd.DataFrame(data).to_csv(path, header=False, index=False, encoding=&#39;utf-8&#39;)
+print(&#39;Done...&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;将数据保存为 &lt;code&gt;.csv&lt;/code&gt; 文件，前5行数据如下：
+&lt;img src=&#34;https://isaacchanghau.github.io/img/python/wolf_warrior/head.png&#34; alt=&#34;Head&#34; /&gt;
+之后便是进行数据分析，在数据处理过程中发现，经过清理的数据中仍然有一些数据的格式错误，由于这部分数据量很小，所以直接将这部分数据删除：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import pandas as pd
+# load data
+column_names = [&#39;Votes&#39;, &#39;Useful&#39;, &#39;User&#39;, &#39;Watched&#39;, &#39;Score&#39;, &#39;Date&#39;, &#39;Comment&#39;]
+data = pd.read_csv(&#39;./data/comments_clean.csv&#39;, header=None, names=column_names, skipinitialspace = True, quotechar = &#39;`&#39;)
+# set value as string
+data[&#39;Votes&#39;] = data[&#39;Votes&#39;].astype(str)
+data[&#39;Useful&#39;] = data[&#39;Useful&#39;].astype(str)
+data[&#39;User&#39;] = data[&#39;User&#39;].astype(str)
+data[&#39;Watched&#39;] = data[&#39;Watched&#39;].astype(str)
+data[&#39;Score&#39;] = data[&#39;Score&#39;].astype(str)
+data[&#39;Date&#39;] = data[&#39;Date&#39;].astype(str)
+data[&#39;Comment&#39;] = data[&#39;Comment&#39;].astype(str)
+# clean up the data with error format
+data = data[data[&#39;Score&#39;].map(len) == 6]
+data = data[data[&#39;Score&#39;] != &#39;看过&#39;]
+data = data[data[&#39;Date&#39;].map(len) == 19]
+print(&#39;rows:&#39;, data.shape[0], &#39;, columns: &#39;, data.shape[1]) # count rows of total dataset
+# out: (&#39;rows:&#39;, 176875, &#39;, columns: &#39;, 7)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后我们对不同评分的人数做一个简单的统计并作图：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import matplotlib.pyplot as plt
+import numpy as np
+print(data[&#39;Score&#39;].value_counts())
+index = np.arange(5)
+score_counts = data[&#39;Score&#39;].value_counts()
+values = (score_counts[0], score_counts[1], score_counts[2], score_counts[4], score_counts[3])
+bar_width = 0.35
+plt.figure(figsize=(20, 10))
+plt.bar(index, values, bar_width, alpha=0.6, color=&#39;rgbym&#39;)
+plt.xlabel(&#39;Score&#39;, fontsize=16)  
+plt.ylabel(&#39;Counts&#39;, fontsize=16)
+plt.title(&#39;Comments Level&#39;, fontsize=18)  
+plt.xticks(index, (&#39;5-star&#39;, &#39;4-star&#39;, &#39;3-star&#39;, &#39;2-star&#39;, &#39;1-star&#39;), fontsize=14, rotation=20)
+plt.ylim(0, 90000)
+plt.grid()
+for idx, value in zip(index, values):
+    plt.text(idx, value + 0.1, &#39;%d&#39; % value, ha=&#39;center&#39;, va=&#39;bottom&#39;, fontsize=14, color=&#39;black&#39;)
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;力荐    79361
+推荐    47724
+还行    29337
+很差    10774
+较差     9679
+Name: Score, dtype: int64
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://isaacchanghau.github.io/img/python/wolf_warrior/stars.png&#34; alt=&#34;Stars&#34; /&gt;
+从输出数据和上图中可以很明显的发现，对这部电影持好评 (推荐、力荐) 的人占大多数，部分人觉得还行，少数人评价差。&lt;/p&gt;
+
+&lt;p&gt;最后，我们对所有的评论内容进行云图展示，首先定义两个函数，一个用于对评论内容进行清理和分词，另一个进行云图生成。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;评论内容清理和分词&lt;/strong&gt;：&lt;br /&gt;
+这里同样使用&lt;a href=&#34;https://github.com/fxsjy/jieba&#34; target=&#34;_blank&#34;&gt;结巴分词&lt;/a&gt;进行中文分词操作和 Python 内置正则表达式进行数据清洗操作。(注释掉的部分是移除中文停用词，为了加快运行速度，这里喔忽略了这个操作)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import re
+import jieba
+def segment_words(stars):
+    comments = None
+    if stars == &#39;all&#39;:
+        comments = data[&#39;Comment&#39;]
+    else:
+        comments = data[data[&#39;Score&#39;] == stars][&#39;Comment&#39;]
+    comments_list = []
+    for comment in comments:
+        comment = str(comment).strip().replace(&#39;span&#39;, &#39;&#39;).replace(&#39;class&#39;, &#39;&#39;).replace(&#39;emoji&#39;, &#39;&#39;)
+        comment = re.compile(&#39;1f\d+\w*|[&amp;lt;&amp;gt;/=]&#39;).sub(&#39;&#39;, comment)
+        if (len(comment) &amp;gt; 0):
+            comments_list.append(comment)
+    text = &#39;&#39;.join(comments_list)
+    word_list = jieba.cut(text, cut_all=True)
+    &#39;&#39;&#39;
+    stopwords_list = []
+    # load chinese stop words
+    with open(&#39;./data/中文停用词表(1208个).txt&#39;) as file:
+        for line in file:
+            stopwords_list.append(line.strip())
+    print(len(stopwords_list))
+    with open(&#39;./data/停用词表.txt&#39;) as file:
+        for line in file:
+            line = line.strip()
+            if line not in stopwords_list:
+                stopwords_list.append(line)
+    print(len(stopwords_list))
+    # remove stop words from word_list
+    word_list = [word for word in word_list if word not in stopwords_list]
+    &#39;&#39;&#39;
+    words = &#39; &#39;.join(word_list)
+    return words
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;云图生成&lt;/strong&gt;：&lt;br /&gt;
+云图生成使用 Python 的 &lt;a href=&#34;https://github.com/amueller/word_cloud&#34; target=&#34;_blank&#34;&gt;WordCloud&lt;/a&gt; 包和 &lt;a href=&#34;https://python-pillow.org&#34; target=&#34;_blank&#34;&gt;Pillow&lt;/a&gt; 图像处理包。代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from wordcloud import WordCloud, ImageColorGenerator
+import PIL.Image as Image
+def plot_word_cloud(words):
+    coloring = np.array(Image.open(&#39;./data/chinese.jpg&#39;))
+    wc = WordCloud(background_color=&#39;white&#39;, max_words=2000, mask=coloring, max_font_size=60, random_state=42, 
+                   font_path=&#39;./data/DroidSansFallbackFull.ttf&#39;, scale=2).generate(words)
+    image_color = ImageColorGenerator(coloring)
+    plt.figure(figsize=(32, 16))
+    plt.imshow(wc.recolor(color_func=image_color))
+    plt.imshow(wc)
+    plt.axis(&#39;off&#39;)
+    plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;首先我们对所有的评论内容生成云图：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;all_words = segment_words(&#39;all&#39;)
+plot_word_cloud(all_words)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://isaacchanghau.github.io/img/python/wolf_warrior/all.png&#34; alt=&#34;All&#34; /&gt;
+然后分别对力荐、推荐，以及较差、很差生成评论云图，并进行比较：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;five_start_words = segment_words(&#39;力荐&#39;)
+plot_word_cloud(five_start_words)
+four_start_words = segment_words(&#39;推荐&#39;)
+plot_word_cloud(four_start_words)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://isaacchanghau.github.io/img/python/wolf_warrior/4-5-star.png&#34; alt=&#34;4-5&#34; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;two_start_words = segment_words(&#39;较差&#39;)
+plot_word_cloud(two_start_words)
+one_start_words = segment_words(&#39;很差&#39;)
+plot_word_cloud(one_start_words)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://isaacchanghau.github.io/img/python/wolf_warrior/1-2-star.png&#34; alt=&#34;1-2&#34; /&gt;
+以上便是影评数据的简单分析和展示，进一步的可以对影评数据进行更精确的清理和分词操作等，并且根据评分等级，可以用该数据为基础搭建一个用户正负情感的机器学习模型等。以后有时间，再对这些数据进行进一步的处理。&lt;/p&gt;
+
+&lt;p&gt;代码可在我的 GitHub Repository 中找到：&lt;a href=&#34;https://github.com/IsaacChanghau/AmusingPythonCodes/tree/master/wolf_warriors_ii&#34; target=&#34;_blank&#34;&gt;AmusingPythonCodes/wolf_warriors_comments&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Reference&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/28475619&#34; target=&#34;_blank&#34;&gt;&amp;lt;&amp;lt;战狼Ⅱ&amp;gt;&amp;gt;豆瓣十二万影评浅析&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Analyzing Your Friends Information in WeChat using Python</title>
+      <link>https://isaacchanghau.github.io/post/wechat_analysis/</link>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/wechat_analysis/</guid>
+      <description>&lt;p&gt;首先需要安装 &lt;a href=&#34;http://itchat.readthedocs.io/zh/latest/&#34; target=&#34;_blank&#34;&gt;itchat&lt;/a&gt; 包：&lt;code&gt;sudo pip3 install itchat&lt;/code&gt; 或者 &lt;code&gt;sudo pip install itchat&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;成功安装 itchat 后，便可正式使用这个包来爬一爬自己的微信朋友了。这里，我先导入之后需要用到的Python 包：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import itchat  # itchat documentation -- https://itchat.readthedocs.io/zh/latest/api/
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+import pandas as pd
+import re
+from wordcloud import WordCloud, ImageColorGenerator
+import PIL.Image as Image # pillow
+import jieba  # chinese word segementation tool
+from matplotlib.font_manager import FontProperties
+# since matplotlib and pandas.plot cannot display chinese
+font = FontProperties(fname=&#39;./data/DroidSansFallbackFull.ttf&#39;, size=14)  # load chinese font
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在我们需要登录网页版微信并获取朋友信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# login, default a QR code will be generated, scan for login
+itchat.login()
+friends = itchat.get_friends(update=True)[0:]  # get all friends
+print(friends[0])  # the first one is yourself
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里&lt;code&gt;itchat.login()&lt;/code&gt;默认将生成一个二维码图片，利用手机微信扫描登录即可，之后获取所有的朋友信息，其中第一条数据是自己的信息，信息以&lt;code&gt;dict&lt;/code&gt;形式存储。打印输出如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;{&#39;UserName&#39;: u&#39;...&#39;, &#39;City&#39;: &#39;&#39;, ..., &#39;Province&#39;: &#39;&#39;, ..., &#39;Signature&#39;: u&#39;\u5982\u679c\u5fc3\u4f1a\u6210\u4e3a\u963b\u788d\n\u8ba9\u5b83\u6d88\u5931\u5c31\u597d\u4e86&#39;, ..., &#39;NickName&#39;: u&#39;Isaac Changhau&#39;, ..., &#39;Sex&#39;: 1, ...}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;分析上面的输出可以得出，城市、省份信息存储在 key 为 &lt;code&gt;City&lt;/code&gt; 和 &lt;code&gt;Province&lt;/code&gt; 的记录中，用户名信息存储在 key 为 &lt;code&gt;NickName&lt;/code&gt; 的记录中，签名信息存储在 key 为 &lt;code&gt;Signature&lt;/code&gt; 的记录中，性别信息存储在 key 为 &lt;code&gt;Sex&lt;/code&gt; 的记录中，其中 &lt;code&gt;1&lt;/code&gt; 表示男性，&lt;code&gt;2&lt;/code&gt; 表示女性，其他就是不明性别的 (通常是没有填写)。&lt;/p&gt;
+
+&lt;p&gt;所以我先对自己的微信朋友的男女分布做一个统计，首先进行数据提取和累加：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# get male-female-ratio
+def get_male_female_count(friends):
+    male = 0
+    female = 0
+    others = 0
+    for friend in friends:
+        sex = friend[&#39;Sex&#39;]
+        if sex == 1:
+            male += 1
+        elif sex == 2:
+            female += 1
+        else:
+            others += 1
+    return male, female, others
+
+male, female, others = get_male_female_count(friends[1:])
+total = len(friends[1:])
+print(&#39;Male population: {:d}, ratio: {:.4f}&#39;.format(male, male / float(total)))
+print(&#39;Female population: {:d}, ratio: {:.4f}&#39;.format(female, female / float(total)))
+print(&#39;Others: {:d}, ratio: {:.4f}&#39;.format(others, others / float(total)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;得到输出：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;Male population: 190, ratio: 0.5352
+Female population: 151, ratio: 0.4254
+Others: 14, ratio: 0.0394
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后，可视化上述信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# plot male-female-ratio
+index = np.arange(3)
+genders = (male, female, others)
+bar_width = 0.35
+plt.figure(figsize=(14, 7))
+plt.bar(index, genders, bar_width, alpha=0.6, color=&#39;rgb&#39;)
+plt.xlabel(&#39;Gender&#39;, fontsize=16)  
+plt.ylabel(&#39;Population&#39;, fontsize=16)
+plt.title(&#39;Male-Female Population&#39;, fontsize=18)  
+plt.xticks(index, (&#39;Male&#39;, &#39;Female&#39;, &#39;Others&#39;), fontsize=14, rotation=20)
+plt.ylim(0,220)
+for idx, gender in zip(index, genders):
+    plt.text(idx, gender + 0.1, &#39;%.0f&#39; % gender, ha=&#39;center&#39;, va=&#39;bottom&#39;, fontsize=14, color=&#39;black&#39;)
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://isaacchanghau.github.io/img/python/wechat/male-female.png&#34; alt=&#34;male-female-ratio&#34; /&gt;
+从上图可以直观的看到，我的男性朋友比女性朋友多！(是不是说明我还是比较正直～)。另外，我们也可以对好友的城市分布做一个简单的统计并作出统计图。同样，我先提取出了感兴趣的数据段，并储存为 &lt;code&gt;DataFrame&lt;/code&gt;：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# extract the variables: NickName, Sex, City, Province, Signature
+def get_features(friends):
+    features = []
+    for friend in friends:
+        feature = {&#39;NickName&#39;: friend[&#39;NickName&#39;], &#39;Sex&#39;: friend[&#39;Sex&#39;], &#39;City&#39;: friend[&#39;City&#39;], 
+                  &#39;Province&#39;: friend[&#39;Province&#39;], &#39;Signature&#39;: friend[&#39;Signature&#39;]}
+        features.append(feature)
+    return pd.DataFrame(features)
+features = get_features(friends[1:])
+print(features.columns)
+features.head()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出数据为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;Index([u&#39;City&#39;, u&#39;NickName&#39;, u&#39;Province&#39;, u&#39;Sex&#39;, u&#39;Signature&#39;], dtype=&#39;object&#39;)
+
+       City    NickName    Province    Sex                Signature
+0      成都         娇姐         四川     2      忧郁的娇姐，愤怒的小豪！
+1   乌鲁木齐 樱桃小兔子 ❤         新疆      2      路遥知马力，日久见人心
+2      北碚    waitings         重庆      1           做一个傻子多么好
+3              AlexShi                  1    A true procrastinator
+4      沈阳       崔智语         辽宁      1   
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;之后提取省份和城市信息 (注：部分好友在海外，因此对于省份和城市的划分和国内不同)，然后进行简单的数据清理，之后按省份和城市进行数据聚合并且统计各个城市的人数。这里我取排名前二十的省份进行堆叠直方图展示：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;locations = features.loc[:, [&#39;Province&#39;, &#39;City&#39;]]  # get location columns
+locations = locations[locations[&#39;Province&#39;] != &#39;&#39;]  # clean empty city or province records
+data = locations.groupby([&#39;Province&#39;, &#39;City&#39;]).size().unstack()  # group by and count
+count_subset = data.take(data.sum(1).argsort())[-20:]  # obtain the 20 highest data
+
+# plot
+subset_plot = count_subset.plot(kind=&#39;bar&#39;, stacked=True, figsize=(24, 24))
+
+# set fonts
+xtick_labels = subset_plot.get_xticklabels()
+for label in xtick_labels: 
+    label.set_fontproperties(font)
+legend_labels = subset_plot.legend().texts
+for label in legend_labels:
+    label.set_fontproperties(font)
+    label.set_fontsize(10)
+
+plt.xlabel(&#39;Province&#39;, fontsize=20)
+plt.ylabel(&#39;Number&#39;, fontsize=20)
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://isaacchanghau.github.io/img/python/wechat/city.png&#34; alt=&#34;male-female-ratio&#34; /&gt;
+上面这个图画得比较丑，哎，对Python画图不是太熟练，&lt;code&gt;colormap&lt;/code&gt; 也没有好好设置，不过大概意思是能表明的。&lt;/p&gt;
+
+&lt;p&gt;最后，我根据好友的个性签名生成自定义云图。这里需要用到 Python 的 &lt;a href=&#34;https://github.com/fxsjy/jieba&#34; target=&#34;_blank&#34;&gt;jieba&lt;/a&gt; 包对中文进行分词 (之前已经引入了该包)。首先提取出所有的个性签名，并组合成一个&lt;code&gt;text&lt;/code&gt;：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;sigature_list = []
+for signature in features[&#39;Signature&#39;]:
+    signature = signature.strip().replace(&#39;span&#39;, &#39;&#39;).replace(&#39;class&#39;, &#39;&#39;).replace(&#39;emoji&#39;, &#39;&#39;)
+    # re.compile(ur&#39;[^a-zA-Z0-9\u4e00-\u9fa5 ]&#39;).sub(&#39;&#39;, signature)
+    signature = re.compile(&#39;1f\d+\w*|[&amp;lt;&amp;gt;/=]&#39;).sub(&#39;&#39;, signature)
+    if (len(signature) &amp;gt; 0):
+        sigature_list.append(signature)
+
+text = &#39;&#39;.join(sigature_list)
+# print(text)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;之后，利用结巴分词，对&lt;code&gt;text&lt;/code&gt; 进行划分：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;word_list = jieba.cut(text, cut_all=True)
+words = &#39; &#39;.join(word_list)
+# print(words)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后，基于 Python 的 &lt;a href=&#34;https://github.com/amueller/word_cloud&#34; target=&#34;_blank&#34;&gt;WordCloud&lt;/a&gt; 包进行云图生成，WordCloud 可以根据自己想要的图片、形状、颜色画出相似的图形。这里喔使用我自己的头像和 Wechat logo 分别生成了词云进行展示。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;coloring = np.array(Image.open(&#39;./data/avatar.jpg&#39;))
+wc = WordCloud(background_color=&#39;white&#39;, max_words=2000, mask=coloring, max_font_size=60, random_state=42, 
+               font_path=&#39;./data/DroidSansFallbackFull.ttf&#39;, scale=2).generate(words)
+image_color = ImageColorGenerator(coloring)
+plt.figure(figsize=(32, 16))
+plt.imshow(wc.recolor(color_func=image_color))
+plt.imshow(wc)
+plt.axis(&#39;off&#39;)
+plt.show()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://isaacchanghau.github.io/img/python/wechat/avatar.png&#34; alt=&#34;male-female-ratio&#34; /&gt;
+最后的最后，当然，itchat并不是只有这些无聊的功能，它更强大的地方在于可以进行消息收发，自定义个人号机器人等等&amp;hellip;&amp;hellip; 这些都值得花时间去考究探索。&lt;/p&gt;
+
+&lt;p&gt;代码可在我的 GitHub Repository 中找到：&lt;a href=&#34;https://github.com/IsaacChanghau/AmusingPythonCodes/tree/master/wechat_exploration&#34; target=&#34;_blank&#34;&gt;AmusingPythonCodes/wechat_exploration&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Reference&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://mp.weixin.qq.com/s/UZw5nx3cX5BvZ9rg1zBNLg&#34; target=&#34;_blank&#34;&gt;“一件有趣的事：我用 Python 爬了爬自己的微信朋友”&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://itchat.readthedocs.io/zh/latest/&#34; target=&#34;_blank&#34;&gt;itchat documentation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>PrimeNet: Human-inspired Framework for Commonsense Knowledge Representation and Reasoning</title>
+      <link>https://isaacchanghau.github.io/project/primenet/</link>
+      <pubDate>Mon, 28 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/project/primenet/</guid>
+      <description>&lt;p&gt;&lt;i class=&#34;fa fa-calendar&#34;&gt;&lt;/i&gt; &lt;strong&gt;Date&lt;/strong&gt;: Dec. 2016 - Present &lt;span style=&#34;color:white;background-color:#1E90FF;&#34;&gt;(Ongoing)&lt;/span&gt;&lt;br&gt;&lt;i class=&#34;fa fa-user&#34;&gt;&lt;/i&gt; &lt;strong&gt;Collaborators&lt;/strong&gt;: &lt;a href=&#34;https://www.a-star.edu.sg/ihpc/People/tid/388&#34; target=&#34;=&#34;_blank&#34;&gt;Kenneth Kwok&lt;/a&gt;, &lt;a href=&#34;https://www.a-star.edu.sg/ihpc/People/tid/390&#34; target=&#34;_blank&#34;&gt;Huminski Aliaksandr&lt;/a&gt;, Yi Chen, Hao Zhang and etc. &lt;/p&gt;
+
+&lt;p&gt;Commonsense knowledge bases (KBs) are needed for inference in AI, in contexts such as natural language understanding, image and visual scene understanding, decision-making, etc. For tasks involving real-time interaction and decision-making, especially, the speed of such inference can be critical.&lt;/p&gt;
+
+&lt;p&gt;The goal of PrimeNet is to set out a framework for a commonsense KB that allows for efficient processing, in order to meet the demands of commonsense reasoning and, hence, support intelligent machine performance in real-world tasks. At the same time, the PrimeNet still provide access to a vast knowledge resource of concepts involving specific object instances.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;This project is ongoing currently, more details will be updated soon.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Autoencoder and Sparsity</title>
+      <link>https://isaacchanghau.github.io/post/autoencoder_and_sparsity/</link>
+      <pubDate>Sat, 19 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/autoencoder_and_sparsity/</guid>
+      <description>&lt;p&gt;The article is excerpted from Andrew Ng&amp;rsquo;s &lt;a href=&#34;https://web.stanford.edu/class/cs294a/&#34; target=&#34;_blank&#34;&gt;CS294A Lecture notes&lt;/a&gt;: &lt;a href=&#34;https://web.stanford.edu/class/cs294a/sparseAutoencoder_2011new.pdf&#34; target=&#34;_blank&#34;&gt;Sparse Autoencoder&lt;/a&gt; with some personal understanding. Before going through this article, you would better get some information from the &lt;a href=&#34;http://cs229.stanford.edu/notes/cs229-notes-deep_learning.pdf&#34; target=&#34;_blank&#34;&gt;Backpropagation Algorithm&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Suppose we have only unlabeled training examples set $\{x^{(1)},x^{(2)},x^{(3)},\dots\}$, where $x^{(i)}\in\mathbb{R}^{n}$. An &lt;strong&gt;autoencoder neural network&lt;/strong&gt; is an &lt;strong&gt;unsupervised learning algorithm&lt;/strong&gt; that applies backpropagation, setting the target values to be equal to the inputs. i.e., it uses $y^{(i)}=x^{(i)}$. Below is an autoencoder:
+&lt;img src=&#34;https://isaacchanghau.github.io/img/deeplearning/autoencoder/1.png&#34; alt=&#34;1.png&#34; /&gt;
+The &lt;strong&gt;autoencoder&lt;/strong&gt; tries to learn a function $h_{W,b}(x)\approx x$. In other words, it is trying to learn an approximation to the identity function, so as to output $\hat{x}$ that is similar to $x$. The identity function seems a particularly trivial function to be trying to learn; but &lt;strong&gt;by placing constraints on the network&lt;/strong&gt;, such as by &lt;strong&gt;limiting the number of hidden units&lt;/strong&gt;, we can &lt;strong&gt;discover interesting structure about the data&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;As a concrete example, suppose the inputs $x$ are the pixel intensity values from a $10\times 10$ image (100 pixels) so $n=100$, and there are $s_{2}=50$ hidden units in layer $L_{2}$. Note that we also have $y\in\mathbb{R}^{100}$. Since there are only 50 hidden units, the network is forced to &lt;strong&gt;learn a compressed representation of the input&lt;/strong&gt;. That is, given only the vector of hidden unit activations $a^{(2)}\in\mathbb{R}^{50}$, it must try to &lt;strong&gt;reconstruct&lt;/strong&gt; the 100-pixel input $x$.&lt;/p&gt;
+
+&lt;p&gt;If the input were completely random, say, each $x_{i}$ comes from an I.I.D. (Independently and Identically Distribute) Gaussian independent of the other features, then this compression task would be very difficult. But if there is structure in the data, for example, if some of the input features are correlated, then this algorithm will be able to discover some of those correlations.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;In fact, this simple autoencoder oftern ends up learning a &lt;strong&gt;low-dimensional representation&lt;/strong&gt; very similar to &lt;strong&gt;PCA&amp;rsquo;s&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Our argument above relied on the number of hidden units $s_{2}$ being small. But even when the number of hidden units is large (perhaps even greater than the number of input pixels), we can still discover interesting structure, by imposing other constraints on the network. In particular, if we impose a &lt;strong&gt;sparsity constraint&lt;/strong&gt; on the hidden units, then the autoencoder will still discover interesting structure in the data, even if the number of hidden units is large.&lt;/p&gt;
+
+&lt;p&gt;Informally, we will think of a neuron as being &amp;ldquo;active&amp;rdquo; (or as &amp;ldquo;firing&amp;rdquo;) if its output value is close to 1, or as being &amp;ldquo;inactive&amp;rdquo; if its output value is close to 0. We would like to constrain the neurons to be inactive most of the time.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This discussion assumes a &lt;code&gt;sigmoid&lt;/code&gt; activation function. If you are using a &lt;code&gt;tanh&lt;/code&gt; activation function, then we think of a neuron as being inactive when it outputs values close to -1.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Recall that $a_{j}^{(2)}$ denotes the activation of hidden unit $j$ in the autoencoder. However, this notation does not make explicit what was the input $x$ that led to that activation. Thus, we will write $a_{j}^{(2)}(x)$ to denote the activation of this hidden unit when the network is given a specific input $x$. Further, let
+$$
+\hat{\rho}_{j}=\frac{1}{m}\sum_{i=1}^{m}\big[a_{j}^{(2)}(x^{(i)})\big]\tag{1}
+$$
+be the &lt;strong&gt;average activation&lt;/strong&gt; of hidden unit $j$ (averaged over the training set). We would like to (approximately) enforce the constraint
+$$
+\hat{\rho}_{j}=\rho\tag{2}
+$$
+where $\rho$ is a &lt;strong&gt;sparsity parameter&lt;/strong&gt;, typically, a small value close to zero (say $\rho=0.05$). In other words, we would like the average activation of each hidden neuron $j$ to be close to 0.05 (say). To satisfy this constraint, the hidden unit&amp;rsquo;s activations must mostly be near 0.&lt;/p&gt;
+
+&lt;p&gt;To achieve this, we will add an extra &lt;strong&gt;penalty term&lt;/strong&gt; to our &lt;strong&gt;optimization objective&lt;/strong&gt; that penalizes $\hat{\rho}_{j}$ deviating significantly from $\rho$. Many choices of the penalty term will give reasonable results. We will choosr the following:
+$$
+\sum_{j=1}^{s_{2}}\rho\log\frac{\rho}{\hat{\rho}_{j}}+(1-\rho)\log\frac{1-\rho}{1-\hat{\rho}_{j}}\tag{3}
+$$
+Here, $s_{2}$ is the number of neurons in the hidden layer, and the index $j$ is summing over the hidden units in our network. If you are familiar with the concept of &lt;strong&gt;KL divergence&lt;/strong&gt;, this penalty term is based on it, and can also be written
+$$
+\sum_{j=1}^{s_{2}}KL(\rho\Vert\hat{\rho}_{j})\tag{4}
+$$
+where $KL(\rho\Vert\hat{\rho}_{j})=\rho\log\frac{\rho}{\hat{\rho}_{j}}+(1-\rho)\log\frac{1-\rho}{1-\hat{\rho}_{j}}$ is the &lt;strong&gt;Kullback-Leibler (KL) divergence&lt;/strong&gt; between a &lt;strong&gt;Bernoulli random variable&lt;/strong&gt; with mean $\rho$ and a &lt;strong&gt;Bernoulli random variable&lt;/strong&gt; with mean $\hat{\rho}_{j}$. &lt;strong&gt;KL-divergence is a standard function for measuring how different two different distributions are&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;This penalty function has the property that $KL(\rho\Vert\hat{\rho}_{j})=0$ if $\hat{\rho}_{j}=\rho$, and
+otherwise it increases monotonically as $\hat{\rho}_{j}$ diverges from $\rho$. For example, in the figure below, we have set $\rho=0.2$, and plotted $KL(\rho\Vert\hat{\rho}_{j})$ for a range of values of $\hat{\rho}_{j}$
+&lt;img src=&#34;https://isaacchanghau.github.io/img/deeplearning/autoencoder/2.png&#34; alt=&#34;2.png&#34; /&gt;
+We see that the KL-divergence reaches its minimum of 0 at $\hat{\rho}_{j}=\rho$, and blows up (it actually approaches $\infty$) as $\hat{\rho}_{j}$ approaches 0 or 1. &lt;strong&gt;Thus, minimizing this penalty term has the effect of causing $\hat{\rho}_{j}$ to be close to $\rho$&lt;/strong&gt;. Our overall cost function is now
+$$
+J_{sparse}(W,b)=J(W,b)+\beta\sum_{j=1}^{s_{2}}KL(\rho\Vert\hat{\rho}_{j})\tag{5}
+$$
+where $J(W,b)$ is as defined previously, and &lt;strong&gt;$\beta$ controls the weight of the sparsity penalty term&lt;/strong&gt;. The term $\hat{\rho}_{j}$ (implicitly) depends on $W$, $b$ also, because it is the average activation of hidden unit $j$, and the activation of a hidden unit depends on the parameters $W$, $b$.&lt;/p&gt;
+
+&lt;p&gt;To incorporate the KL-divergence term into your derivative calculation, there is a simple-to-implement trick involving only a small change to your code. Specifically, where previously for the second layer ($l = 2$), during backpropagation you would have computed
+$$
+\delta_{i}^{(2)}=\bigg(\sum_{j=1}^{s_{2}}W_{ji}^{(2)}\delta_{j}^{(3)}\bigg)f&amp;rsquo;(z_{i}^{(2)})\tag{6}
+$$
+now instead compute
+$$
+\delta_{i}^{(2)}=\bigg(\big(\sum_{j=1}^{s_{2}}W_{ji}^{(2)}\delta_{j}^{(3)}\big)+\beta\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)\bigg)f&amp;rsquo;(z_{i}^{(2)})\tag{7}
+$$&lt;/p&gt;
+
+&lt;p&gt;Here is how to derive the $\frac{\partial J_{sparse}(W,b)}{\partial W_{i,j}^{(l)}}$ and $\frac{\partial J_{sparse}(W,b)}{\partial b_{i}^{(l)}}$&lt;/p&gt;
+
+&lt;p&gt;Denote $S(W,b)=\sum_{j=1}^{s_{2}}KL(\rho\Vert\hat{\rho}_{j})$, so (5) can be written as
+$$
+J_{sparse}(W,b)=J(W,b)+\beta S(W,b)\tag{8}
+$$T
+hen the two partial derivations in gradient descent algorithm are
+$$\begin{cases}
+\frac{\partial J_{sparse}(W,b)}{\partial W_{i,j}^{(l)}} &amp;amp;=\frac{\partial J(W,b)}{\partial W_{i,j}^{(l)}}+\beta\frac{\partial S(W,b)}{\partial W_{i,j}^{(l)}}\newline
+\frac{\partial J_{sparse}(W,b)}{\partial b_{i}^{(l)}} &amp;amp;=\frac{\partial J(W,b)}{\partial b_{i}^{(l)}}+\beta\frac{\partial S(W,b)}{\partial b_{i}^{(l)}}
+\end{cases}\tag{9}
+$$
+The calculation of $\frac{\partial J(W,b)}{\partial W_{i,j}^{(l)}}$ and $\frac{\partial J(W,b)}{\partial b_{i}^{(l)}}$ have discussed in &lt;a href=&#34;https://isaacchanghau.github.io/2017/08/17/Backpropagation-Algorithm/&#34; target=&#34;_blank&#34;&gt;Backpropagation Algorithm&lt;/a&gt;, here we only discuss the computation of $\frac{\partial S(W,b)}{\partial W_{i,j}^{(l)}}$ and $\frac{\partial S(W,b)}{\partial b_{i}^{(l)}}$.&lt;/p&gt;
+
+&lt;p&gt;First, expand $S(W,b)$, we have
+$$
+S(W,b)=\sum_{t=1}^{s_{2}}KL(\rho\Vert\hat{\rho}_{t})=\sum_{t=1}^{s_{2}}\big[\rho\ast\log\frac{\rho}{\hat{\rho}_{t}}+(1-\rho)\ast\log\frac{1-\rho}{1-\hat{\rho}_{t}}\big]\tag{10}
+$$
+where
+$$
+\hat{\rho}_{t}=\frac{1}{m}\sum_{k=1}^{m}a_{t}^{(2)}\big(x^{(k)}\big)=\frac{1}{m}\sum_{k=1}^{m}f\big(z_{t}^{(2)}\big)\tag{11}
+$$
+here
+$$
+z_{t}^{(2)}=z_{t}^{(2)}\big(x^{(k)}\big)=\bigg(\sum_{s=1}^{s_{1}}W_{t,s}^{(1)}x_{s}^{(k)}\bigg)+b_{t}^{(1)}\tag{12}
+$$
+according to (11) and (12), we can get the following two points:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;when $l\neq 1$, $\frac{\partial S(W,b)}{\partial W_{i,j}^{(l)}}=0$, $\frac{\partial S(W,b)}{\partial b_{i}^{(l)}}=0$.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;$\frac{\partial S(W,b)}{\partial W_{i,j}^{(l)}}=\frac{\partial\sum_{t=1}^{s_{2}}KL(\rho\Vert\hat{\rho}_{t})}{\partial W_{i,j}^{(l)}}=\frac{\partial KL(\rho\Vert\hat{\rho}_{i})}{\partial W_{i,j}^{(l)}}$; $\frac{\partial S(W,b)}{\partial b_{i}^{(l)}}=\frac{\partial\sum_{t=1}^{s_{2}}KL(\rho\Vert\hat{\rho}_{t})}{\partial b_{i}^{(l)}}=\frac{\partial KL(\rho\Vert\hat{\rho}_{i})}{\partial b_{i}^{(l)}}$.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;According to the above two points, we have
+$$\begin{aligned}
+\frac{\partial S(W,b)}{\partial W_{i,j}^{(1)}} &amp;amp;=\frac{\partial}{\partial W_{i,j}^{(1)}}\big[\rho\ast\log\frac{\rho}{\hat{\rho}_{i}}+(1-\rho)\ast\log\frac{1-\rho}{1-\hat{\rho}_{i}}\big]\newline
+&amp;amp;= \frac{\partial}{\partial W_{i,j}^{(1)}}\big\{\rho(\log\rho-\log\hat{\rho}_{i})+(1-\rho)[\log(1-\rho)-\log(1-\hat{\rho}_{i})]\big\}\newline
+&amp;amp;=\rho\big(0-\frac{1}{\hat{\rho}_{i}}\frac{\partial\hat{\rho}_{i}}{\partial W_{i,j}^{(1)}}\big)+(1-\rho)\big(0+\frac{1}{1-\hat{\rho}_{i}}\frac{\partial\hat{\rho}_{i}}{\partial W_{i,j}^{(1)}}\big)\quad (\rho\textrm{ is constant})\newline
+&amp;amp;=\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)\frac{\partial\hat{\rho}_{i}}{\partial W_{i,j}^{(1)}}
+\end{aligned}
+$$
+Samely, we have
+$$
+\frac{\partial S(W,b)}{\partial b_{i}^{(1)}}=\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)\frac{\partial\hat{\rho}_{i}}{\partial b_{i}^{(1)}}
+$$
+Then, we need to compute $\frac{\partial\hat{\rho}_{i}}{\partial W_{i,j}^{(1)}}$ and $\frac{\partial\hat{\rho}_{i}}{\partial b_{i}^{(1)}}$, according to (11), we have
+$$
+\begin{aligned}
+\frac{\partial\hat{\rho}_{i}}{\partial W_{i,j}^{(1)}} &amp;amp;=\frac{1}{m}\sum_{k=1}^{m}f&amp;rsquo;\big(z_{i}^{(2)}\big)\cdot\frac{\partial z_{i}^{(2)}}{\partial W_{i,j}^{(1)}}\newline
+&amp;amp;=\frac{1}{m}\sum_{k=1}^{m}f&amp;rsquo;\big(z_{i}^{(2)}\big)\cdot x_{j}^{(k)}\quad (\textrm{according to (12), we have }\frac{\partial z_{i}^{(2)}}{\partial W_{i,j}^{(1)}}=x_{j}^{(k)})
+\end{aligned}
+$$
+Samely, we have
+$$
+\begin{aligned}
+\frac{\partial\hat{\rho}_{i}}{\partial b_{i}^{(1)}} &amp;amp;=\frac{1}{m}\sum_{k=1}^{m}f&amp;rsquo;\big(z_{i}^{(2)}\big)\cdot\frac{\partial z_{i}^{(2)}}{\partial b_{i}^{(1)}}\newline
+&amp;amp;=\frac{1}{m}\sum_{k=1}^{m}f&amp;rsquo;\big(z_{i}^{(2)}\big)\quad (\textrm{according to (12), we have }\frac{\partial z_{i}^{(2)}}{\partial b_{i}^{(1)}}=1)
+\end{aligned}
+$$
+In summary, we can obtain
+$$\begin{cases}
+\frac{\partial S(W,b)}{\partial W_{i,j}^{(1)}} &amp;amp;=\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)\cdot\frac{1}{m}\sum_{k=1}^{m}f&amp;rsquo;\big(z_{i}^{(2)}\big)\cdot x_{j}^{(k)}\newline
+\frac{\partial S(W,b)}{\partial b_{i}^{(1)}}&amp;amp;=\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)\cdot\frac{1}{m}\sum_{k=1}^{m}f&amp;rsquo;\big(z_{i}^{(2)}\big)
+\end{cases}\tag{13}
+$$
+In &lt;a href=&#34;https://isaacchanghau.github.io/2017/08/17/Backpropagation-Algorithm/&#34; target=&#34;_blank&#34;&gt;Backpropagation Algorithm&lt;/a&gt;, we already obtain that
+$$\begin{cases}
+\frac{\partial J(W,b)}{\partial W_{i,j}^{(1)}}&amp;amp;=\big[\frac{1}{m}\sum_{k=1}^{m}a_{j}^{(1)}\delta_{i}^{(2)}\big]+\lambda W_{i,j}^{(1)}\newline
+\frac{\partial J(W,b)}{\partial b_{i}^{(1)}}&amp;amp;=\frac{1}{m}\sum_{k=1}^{m}\delta_{i}^{(2)}
+\end{cases}\tag{14}
+$$
+Thus, put (13), (14) into (9), we will get
+$$\begin{cases}
+\frac{\partial J_{sparse}(W,b)}{\partial W_{i,j}^{(l)}} &amp;amp;=\big[\frac{1}{m}\sum_{k=1}^{m}a_{j}^{(1)}\delta_{i}^{(2)}\big]+\lambda W_{i,j}^{(1)}+\beta\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)\cdot\frac{1}{m}\sum_{k=1}^{m}f&amp;rsquo;\big(z_{i}^{(2)}\big)\cdot x_{j}^{(k)}\newline
+\frac{\partial J_{sparse}(W,b)}{\partial b_{i}^{(l)}} &amp;amp;=\frac{1}{m}\sum_{k=1}^{m}\delta_{i}^{(2)}+\beta\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)\cdot\frac{1}{m}\sum_{k=1}^{m}f&amp;rsquo;\big(z_{i}^{(2)}\big)
+\end{cases}\tag{15}
+$$
+Note that $a_{j}^{(1)}$, $\delta_{i}^{(2)}$ and $z_{i}^{(2)}$ are related to $x^{(k)}$ (or $y^{(k)}$), particularly, we have $a_{j}^{(1)}=x_{j}^{(k)}$. After simplify (15), we get
+$$\begin{cases}
+\frac{\partial J_{sparse}(W,b)}{\partial W_{i,j}^{(l)}} &amp;amp;=\frac{1}{m}\sum_{k=1}^{m}\bigg\{a_{j}^{(1)}\big[\delta_{i}^{(2)}+\beta\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)f&amp;rsquo;\big(z_{i}^{(2)}\big)\big]\bigg\}+\lambda W_{i,j}^{(1)}\newline
+\frac{\partial J_{sparse}(W,b)}{\partial b_{i}^{(l)}} &amp;amp;=\frac{1}{m}\sum_{k=1}^{m}\big[\delta_{i}^{(2)}+\beta\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)f&amp;rsquo;\big(z_{i}^{(2)}\big)\big]
+\end{cases}$$
+Now, we obtain how to change (6) to (7).&lt;/p&gt;
+
+&lt;p&gt;One subtlety is that you’ll need to know $\hat{\rho}_{i}$ to compute this term. Thus, you’ll need to compute a forward pass on all the training examples first to compute the average activations on the training set, before computing backpropagation on any example. If your training set is small enough to fit comfortably in computer memory (this will be the case for the programming assignment), you can compute forward passes on all your examples and keep the resulting activations in memory and compute the $\hat{\rho}_{i}$s. Then you can use your precomputed activations to perform backpropagation on all your examples. &lt;strong&gt;If your data is too large to fit in memory, you may have to scan through your examples computing a forward pass on each to accumulate (sum up) the activations and compute $\hat{\rho}_{i}$&lt;/strong&gt; (discarding the result of each forward pass after you have taken its activations $a_{i}^{(2)}$ into account for computing $\hat{\rho}_{i}$). Then after having computed $\hat{\rho}_{i}$, you’d have to redo the forward pass for each example so that you can do backpropagation on that example. &lt;strong&gt;In this latter case, you would end up computing a forward pass twice on each example in your training set, making it computationally less efficient&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The full derivation showing that the algorithm above results in gradient descent is beyond the scope of these notes. But if you implement the autoencoder using backpropagation modified this way, you will be performing gradient descent exactly on the objective $J_{sparse}(W,b)$. Using the derivative checking method, you will be able to verify this for yourself as well.&lt;/p&gt;
+
+&lt;p&gt;Below is the &lt;strong&gt;summary of notation&lt;/strong&gt;
+&lt;style&gt;
+table th:first-of-type {
+    width: 70px;
+}
+&lt;/style&gt;&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&#34;center&#34;&gt;Expression&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Explanation&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$x$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Input features for a training example, $x\in\mathbb{R}^{n}$.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$y$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Output/target values. Here, $y$ can be vector valued. In the case of an autoencoder, $y = x$.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$(x^{(i)},y^{(i)})$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The $i$-th training example.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$h_{W,b}(x)$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Output of our hypothesis on input $x$, using parameters $W$, $b$. This should be a vector of the same dimension as the target value $y$.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$W_{i,j}^{(l)}$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The parameter associated with the connection between unit $j$ in layer $l$, and unit $i$ in layer $l+1$.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$b_{i}^{(l)}$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The bias term associated with unit $i$ in layer $l+1$. Can also be thought of as the parameter associated with the connection between the bias unit in layer $l$ and unit $i$ in layer $l+1$.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$\theta$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Our parameter vector. It is useful to think of this as the result of taking the parameters $W$, $b$ and “unrolling” them into a long column vector.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$a_{i}^{(l)}$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Activation (output) of unit $i$ in layer $l$ of the network. In addition, since layer $L_{1}$ is the input layer, we also have $a_{i}^{(1)}=x_{i}$.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$f(\cdot)$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The activation function. Throughout these notes, we used $f(z)=tanh(z)$.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$z_{i}^{(l)}$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Total weighted sum of inputs to unit $i$ in layer $l$. Thus, $a_{i}^{(l)}=f\big(z_{i}^{(l)}\big)$&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$\alpha$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Learning rate parameter.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$s_{l}$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Number of units in layer $l$ (not counting the bias unit).&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$n_{l}$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Number layers in the network. Layer $L_{1}$ is usually the input layer, and layer $L_{n_{l}}$ the output layer.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$\lambda$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Weight decay parameter.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$\hat{x}$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;For an autoencoder, its output; i.e., its reconstruction of the input $x$. Same meaning as $h_{W,b}(x)$.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$\rho$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Sparsity parameter, which specifies our desired level of sparsity.&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$\hat{\rho}_{i}$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;The average activation of hidden unit $i$ (in the sparse autoencoder).&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td align=&#34;center&#34;&gt;$\beta$&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Weight of the sparsity penalty term (in the sparse autoencoder objective).&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Backpropagation in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/backpropagation/</link>
+      <pubDate>Thu, 17 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/backpropagation/</guid>
+      <description>&lt;p&gt;The article is excerpted from Andrew Ng&amp;rsquo;s &lt;a href=&#34;https://web.stanford.edu/class/cs294a/&#34; target=&#34;_blank&#34;&gt;CS294A Lecture notes&lt;/a&gt;: &lt;a href=&#34;https://web.stanford.edu/class/cs294a/sparseAutoencoder_2011new.pdf&#34; target=&#34;_blank&#34;&gt;Sparse Autoencoder&lt;/a&gt;, then I add some personal understanding.&lt;/p&gt;
+
+&lt;p&gt;In this article, we will let $n_{l}$ denote the number of layers in our network, label $l$ as $L_{l}$, so layer $L_{1}$ is the input layer, and layer $L_{n_{l}}$ the output layer. Neural network has parameters $(W,b)=(W^{(1)},b^{(1)},\dots,W^{(n_{l}-1)},b^{(n_{l}-1)})$, where we write $W_{ij}^{(l)}$ to denote the parameter (or weight) associated with the connection between unit $j$ in layer $l$ and unit $i$ in layer $l+1$. (Note the order of the indices). Also, $b_{i}^{(l)}$ is the bais associated with unit $i$ in layer $l+1$. We also let $s_{l}$ denote the number of nodes in layer $l$ (not counting the bias unit). Plus, we will write $a_{i}^{(l)}$ to denote the activation (meaning output value) of unit $i$ in layer $l$.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/deeplearning/backprop/1.png&#34; alt=&#34;1.png&#34; /&gt;
+Suppose we have a fixed training set $\{(x^{(1)},y^{(1)}),\dots,(x^{(m)},y^{(m)})\}$ of $m$ training examples. We can train our neural network using batch gradient descent. In detail, for a single training example $(x,y)$, we define the cost function with respect to that single example to be
+$$
+J(W,b;x,y)=\frac{1}{2}\Vert h_{W,b}(x)-y\Vert^{2}\tag{1}
+$$
+This is a (one-half) &lt;strong&gt;squared-error cost function&lt;/strong&gt;. Given a training set of $m$ examples, we then define the &lt;strong&gt;overall cost function&lt;/strong&gt; to be
+$$
+\begin{aligned}
+J(W,b) &amp;amp; =\bigg[\frac{1}{m}\sum_{i=1}^{m}J(W,b;x^{(i)},y^{(i)})\bigg]+\frac{\lambda}{2}\sum_{l=1}^{n_{l}-1}\sum_{i=1}^{s_{l}}\sum_{j=1}^{s_{l}+1}\big(W_{ji}^{(l)}\big)^{2}\newline
+&amp;amp; =\bigg[\frac{1}{m}\sum_{i=1}^{m}\big(\frac{1}{2}\Vert h_{W,b}(x^{(i)})-y^{(i)}\Vert^{2}\big)\bigg]+\frac{\lambda}{2}\sum_{l=1}^{n_{l}-1}\sum_{i=1}^{s_{l}}\sum_{j=1}^{s_{l}+1}\big(W_{ji}^{(l)}\big)^{2}
+\end{aligned}\tag{2}
+$$
+The first term is an &lt;strong&gt;average sum-of-squares error term&lt;/strong&gt;. The second term is a &lt;strong&gt;regularization term&lt;/strong&gt; (also called a &lt;strong&gt;weight decay term&lt;/strong&gt;) that tends to decrease the magnitude of the weights, and helps &lt;strong&gt;prevent overfitting&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Usually weight decay is not applied to the bias terms $b_{i}^{(l)}$, as reflected in the difinition of $J(W,b)$. Applying weight decay to the bias units usually makes only a small different to the final network, however. If you took &lt;a href=&#34;http://cs229.stanford.edu&#34; target=&#34;_blank&#34;&gt;CS229&lt;/a&gt;, you may also recognize weight decay this as essentially a variant of the Bayesian regularization method you saw there, where we placed a Gaussian prior on the parameters and did MAP (instead of maximum likelihood) estimation.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The &lt;strong&gt;weight decay parameter&lt;/strong&gt; $\lambda$ controls the relative importance of the two terms. Note also the slightly overloaded notation: $J(W,b;x,y)$ is the squared error cost with respect to a single example; $J(W,b)$ is the overall cost function, which includes the weight decay term.&lt;/p&gt;
+
+&lt;p&gt;This cost function above is often used both for &lt;strong&gt;classification&lt;/strong&gt; and for &lt;strong&gt;regression&lt;/strong&gt; problems. For classification, we let $y=0$ or $1$ represent the two class labels (recall that the sigmoid activation function outputs values in $[0,1]$; if we were using a tanh activation function, we would instead use $-1$ and $+1$ to denote the labels). For regression problems, we first scale our outputs to ensure that they lie in the $[0,1]$ range (or if we were using a &lt;code&gt;tanh&lt;/code&gt; activation function, then the $[−1,1]$ range).&lt;/p&gt;
+
+&lt;p&gt;Our goal is to minimize $J(W,b)$ as a function of $W$ and $b$. To train our neural network, we will initialize each parameter $W_{ij}^{(l)}$ and each $b_{i}^{(l)}$ to a small random value near zero (say according to a $\mathfrak{N}(0,\epsilon^{2})$ distribution for some small $\epsilon$, say $0.01$), and then apply an optimization algorithm such as batch gradient descent. Since $J(W,b)$ is a &lt;strong&gt;non-convex function&lt;/strong&gt;, gradient descent is susceptible to &lt;strong&gt;local optima&lt;/strong&gt;; however, in practice gradient descent usually works fairly well.&lt;/p&gt;
+
+&lt;p&gt;Finally, note that it is important to initialize the parameters randomly, rather than to all 0’s. If all the parameters start off at identical values, then all the hidden layer units will end up learning the same function of the input (more formally, $W_{ij}^{(1)}$ will be the same for all values of $i$, so that $a_{1}^{(2)}=a_{2}^{(2)}=a_{3}^{(2)}=\dots$ for any input $x$). The random initialization serves the purpose of &lt;strong&gt;symmetry breaking&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;One iteration of gradient descent updates the parameters $W$, $b$ as follows:
+$$
+W_{ij}^{(l)}:=W_{ij}^{(l)}-\alpha\frac{\partial J(W,b)}{\partial W_{ij}^{(l)}}\tag{3}
+$$
+$$
+b_{i}^{(l)}:=b_{i}^{(l)}-\alpha\frac{\partial J(W,b)}{\partial b_{i}^{(l)}}\tag{4}
+$$
+where $\alpha$ is the &lt;strong&gt;learning rate&lt;/strong&gt;. The key step is computing the partial derivatives above. We will now describe the &lt;strong&gt;backpropagation&lt;/strong&gt; algorithm, which gives an efficient way to compute these partial derivatives.&lt;/p&gt;
+
+&lt;p&gt;We will first describe how backpropagation can be used to compute $\frac{\partial}{\partial W_{ij}^{(l)}}J(W,b;x,y)$ and $\frac{\partial}{\partial b_{i}^{(l)}}J(W,b;x,y)$, the partial derivatives of the cost function $J(W,b;x,y)$ defined with respect to a single example $(x,y)$. Once we can compute these, then by referring to Equation (2), we see that the derivative of the overall cost function $J(W,b)$ can be computed as
+$$
+\frac{\partial J(W,b)}{\partial W_{ij}^{(l)}}=\bigg[\frac{1}{m}\sum_{i=1}^{m}\frac{\partial}{\partial W_{ij}^{(l)}}J(W,b;x^{(i)},y^{(i)})\bigg]+\lambda W_{ij}^{(l)}\tag{5}
+$$
+$$
+\frac{\partial J(W,b)}{\partial b_{i}^{(l)}}=\frac{1}{m}\sum_{i=1}^{m}\frac{\partial}{\partial b_{i}^{(l)}}J(W,b;x^{(i)},y^{(i)})\tag{6}
+$$
+The two lines above differ slightly &lt;em&gt;because weight decay is applied to $W$ but not $b$&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;The intuition behind the backpropagation algorithm is as follows. Given a training example $(x,y)$, we will first run a “forward pass” to compute all the activations throughout the network, including the output value of the hypothesis $h_{W,b}(x)$. Then, for each node i in layer l, we would like to compute an “&lt;strong&gt;error term&lt;/strong&gt;” $\delta_{i}^{(l)}$ that measures how much that node was “responsible” for any errors in our output. For an output node, we can directly measure the difference between the network’s activation and the true target value, and use that to define $\delta_{i}^{(n_{l})}$ (where layer $n_{l}$ is the output layer). How about hidden units? For those, we will compute $\delta_{i}^{(l)}$ based on a weighted average of the error terms of the nodes that uses $a_{i}^{(l)}$ (the $i$-th activation value of $l$ layer) as an input.&lt;/p&gt;
+
+&lt;p&gt;The reason why we need to introduce error term $\delta_{i}^{(l)}$:&lt;br /&gt;
+Using the &lt;strong&gt;chain rule of derivation&lt;/strong&gt;, we have
+$$
+\frac{\partial J(w,b;x,y)}{\partial W_{ij}^{(l)}}=\frac{\partial J(w,b;x,y)}{\partial z_{i}^{(l+1)}}\frac{\partial z_{i}^{(l+1)}}{\partial W_{ij}^{(l)}}
+$$
+$$
+\frac{\partial J(w,b;x,y)}{\partial b_{i}^{(l)}}=\frac{\partial J(w,b;x,y)}{\partial z_{i}^{(l+1)}}\frac{\partial z_{i}^{(l+1)}}{\partial b_{i}^{(l)}}
+$$
+Since $z^{(l+1)}=W^{(l)}a^{(l)}+b^{(l)}$, then
+$$
+z_{i}^{(l+1)}=\sum_{k=1}^{s_{l}}W_{ik}^{(l)}a_{k}^{(l)}+b_{i}^{(l)}
+$$
+Thus we have
+$$\frac{\partial z_{i}^{(l+1)}}{\partial W_{ij}^{(l)}}=a_{j}^{(l)},\quad\frac{\partial z_{i}^{(l+1)}}{b_{i}^{(l)}}=1
+$$
+If we let $\delta_{i}^{(l)}=\frac{\partial J(w,b;x,y)}{\partial z_{i}^{(l)}}$, then we have
+$$\frac{\partial J(w,b;x,y)}{\partial W_{ij}^{(l)}}=a_{i}^{(l)}\delta_{i}^{(l+1)}
+$$
+$$
+\frac{\partial J(w,b;x,y)}{\partial b_{i}^{(l)}}=\delta_{i}^{(l+1)}
+$$
+Thus, in order to compute $\frac{\partial J(W,b)}{\partial W_{ij}^{(l)}}$ and $\frac{\partial J(W,b)}{\partial b_{i}^{(l)}}$, the key is to compute $\delta_{i}^{(l+1)}$.&lt;/p&gt;
+
+&lt;p&gt;In detail, here is the backpropagation algorithm:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Perform a feedforward pass, computing the activations $a_{i}^{(l)}$ for layers $L_{2}$, $L_{3}$, and so on up to the output layer $L_{n_{l}}$.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For each output unit $i$ in layer $n_{l}$ (the output layer), set
+$$
+\delta_{i}^{(n_{l})}=\frac{\partial}{\partial z_{i}^{(n_{l})}}\frac{1}{2}\Vert y-h_{W,b}(x)\Vert^{2}=-(y_{i}-a_{i}^{(n_{l})})\cdot f&amp;rsquo;(z_{i}^{(n_{l})})\tag{7}
+$$
+Its computation process as follow:
+$$\begin{aligned}
+\delta_{i}^{(n_{l})} &amp;amp;=\frac{\partial J(W,b;x,y)}{\partial z_{i}^{(n_{l})}}=\frac{\partial}{\partial z_{i}^{(n_{l})}}\bigg(\frac{1}{2}\Vert y-h_{W,b}(x)\Vert^{2}\bigg)\quad (\textrm{The definition of }J(W,b;x,y))\newline
+&amp;amp;=\frac{1}{2}\frac{\partial}{\partial z_{i}^{(n_{l})}}\bigg(\sum_{j=1}^{s_{n_{l}}}\big(y_{j}-a_{j}^{(n_{l})}\big)^{2}\bigg)\quad (\textrm{The definition of vector norm }\Vert\cdot\Vert)\newline
+&amp;amp;=\frac{1}{2}\frac{\partial}{\partial z_{i}^{(n_{l})}}\bigg(\sum_{j=1}^{s_{n_{l}}}\big(y_{j}-f(z_{j}^{(n_{l})})\big)^{2}\bigg)\quad (\textrm{Using }a_{j}^{(n_{l})}=f(z_{j}^{(n_{l})}))\newline
+&amp;amp;=-(y_{i}-f(z_{i}^{(n_{l})}))\cdot f&amp;rsquo;(z_{i}^{(n_{l})})\quad (\textrm{compute partial derivative of sum term wrt. }z_{i}^{(n_{l})})\newline
+&amp;amp;=-(y_{i}-a_{i}^{(n_{l})})\cdot f&amp;rsquo;(z_{i}^{(n_{l})})\quad (\textrm{Using }a_{j}^{(n_{l})}=f(z_{j}^{(n_{l})}))
+\end{aligned}
+$$&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For $l=n_{l}-1, n_{l}-2,\dots,2$, each node $i$ in layer $l$, set
+$$
+\delta_{i}^{(l)}=\bigg(\sum_{j=1}^{s_{l}+1}W_{ji}^{(l)}\delta_{j}^{(l+1)}\bigg)f&amp;rsquo;(z_{i}^{(l)})\tag{8}
+$$
+Its computation process as follow:
+$$
+\begin{aligned}
+\delta_{i}^{(n_{l}-1)} &amp;amp;=\frac{\partial J(W,b;x,y)}{\partial z_{i}^{(n_{l}-1)}}=\frac{\partial}{\partial z_{i}^{(n_{l}-1)}}\bigg(\frac{1}{2}\Vert y-h_{W,b}(x)\Vert^{2}\bigg)\quad (\textrm{The definition of }J(W,b;x,y))\newline
+&amp;amp;=\frac{1}{2}\frac{\partial}{\partial z_{i}^{(n_{l}-1)}}\bigg(\sum_{j=1}^{s_{n_{l}}}\big(y_{j}-a_{j}^{(n_{l})}\big)^{2}\bigg)\quad (\textrm{The definition of vector norm }\Vert\cdot\Vert)\newline
+&amp;amp;=\frac{1}{2}\sum_{j=1}^{s_{n_{l}}}\frac{\partial}{\partial z_{i}^{(n_{l}-1)}}\big(y_{j}-a_{j}^{(n_{l})}\big)^{2}\newline
+&amp;amp;=\frac{1}{2}\sum_{j=1}^{s_{n_{l}}}\frac{\partial}{\partial z_{i}^{(n_{l}-1)}}\big(y_{j}-f(z_{j}^{(n_{l})})\big)^{2}\quad (\textrm{Using }a_{j}^{(n_{l})}=f(z_{j}^{(n_{l})}))\newline
+&amp;amp;=\sum_{j=1}^{s_{n_{l}}}-\big(y_{j}-f(z_{j}^{(n_{l})})\big)\frac{\partial f(z_{j}^{(n_{l})})}{\partial z_{i}^{(n_{l}-1)}}\quad (\textrm{Compute partial derivative})\newline
+&amp;amp;=\sum_{j=1}^{s_{n_{l}}}-\big(y_{j}-f(z_{j}^{(n_{l})})\big)\cdot f&amp;rsquo;(z_{j}^{(n_{l})})\cdot\frac{\partial z_{i}^{(n_{l})}}{\partial z_{i}^{(n_{l}-1)}}\quad (\textrm{Using Chain rule to compute }\frac{\partial f(z_{j}^{(n_{l})})}{\partial z_{i}^{(n_{l}-1)}})\newline
+&amp;amp;=\sum_{j=1}^{s_{n_{l}}}\delta_{j}^{(n_{l})}\cdot\frac{\partial z_{i}^{(n_{l})}}{\partial z_{i}^{(n_{l}-1)}}\quad (\textrm{Using Equation (7)})\newline
+&amp;amp;=\sum_{j=1}^{s_{n_{l}}}\delta_{j}^{(n_{l})}\cdot\frac{\partial}{\partial z_{i}^{(n_{l}-1)}}\bigg(\sum_{k=1}^{s_{n_{l}-1}}f(z_{k}^{(n_{l}-1)})\cdot W_{jk}^{(n_{l}-1)}+b_{j}^{(n_{l}-1)}\bigg)\quad (\textrm{According to the definition of }z_{j}^{(n_{l})})\newline
+&amp;amp;=\sum_{j=1}^{s_{n_{l}}}\delta_{j}^{(n_{l})}\cdot W_{ji}^{(n_{l}-1)}\cdot f&amp;rsquo;(z_{i}^{(n_{l}-1)})\quad (\textrm{Compute partial derivative of }z_{i}^{(n_{l}-1)})\newline
+&amp;amp;=\bigg(\sum_{j=1}^{s_{n_{l}}}W_{ji}^{(n_{l}-1)}\cdot\delta_{j}^{(n_{l})}\bigg)\cdot f&amp;rsquo;(z_{i}^{(n_{l}-1)})
+\end{aligned}
+$$
+By replacing the relationship between $n_{l}-1$ and $n_{l}$ to the relationship between $l$ and $l+1$, we can derive the Equation (8). And the above derivation process from backward to forward is the essence of &amp;ldquo;Backpropagation&amp;rdquo;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Compute the desired partial derivatives, which are given as:
+$$\begin{aligned}
+\frac{\partial}{\partial W_{ij}^{(l)}}J(W,b;x,y) &amp;amp;=a_{j}^{(l)}\delta_{i}^{(l+1)}\newline
+\frac{\partial}{\partial b_{i}^{(l)}}J(W,b;x,y) &amp;amp;=\delta_{i}^{(l+1)}
+\end{aligned}
+$$&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Below gives a graph to illustrate the above steps, we use a sample $(x,y)$ as an example.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/deeplearning/backprop/2.png&#34; alt=&#34;2.png&#34; /&gt;
+Finally, we can also rewrite the algorithm using matrix-vectorial notation. We will use “$\bullet$” to denote the element-wise product operator (also called the Hadamard product), so that if $a=b\bullet c$, then $a_{i}=b_{i}c_{i}$. Similar to how we extended the definition of $f(\cdot)$ to apply element-wise to vectors, we also do the same for $f&amp;rsquo;(\cdot)$ (so that $f&amp;rsquo;([z_{1},z_{2},z_{3}])=\big[\frac{\partial f(z_{1})}{\partial z_{1}},\frac{\partial f(z_{2})}{\partial z_{2}},\frac{\partial f(z_{3})}{\partial z_{3}}\big]$). The algorithm can then be written:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Perform a feedforward pass, computing the activations for layers $L_{2}$, $L_{3}$, up to the output layer $L_{n_{l}}$, using Equations
+$$
+\begin{aligned}
+z^{(l+1)} &amp;amp;=W^{(l)}a^{(l)}+b^{(l)}\newline
+a^{(l+1)} &amp;amp;=f(z^{(l+1)})
+\end{aligned}
+$$&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For the output layer (layer $n_{l}$), set
+$$
+\delta^{(n_{l})}=-(y-a^{(n_{l})})\bullet f&amp;rsquo;(z^{(n)})
+$$&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For $l=n_{l}-1, n_{l}-2,\dots,2$, set
+$$
+\delta^{(l)}=\big((W^{(l)})^{T}\delta^{(l+1)}\big)\bullet f&amp;rsquo;(z^{(l)})
+$$&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Compute the desired partial derivatives:
+$$
+\begin{aligned}
+\nabla_{W^{(l)}}J(W,b;x,y) &amp;amp;=\delta^{(l+1)}\big(a^{(l)}\big)^{T}\newline
+\nabla_{b^{(l)}}J(W,b;x,y) &amp;amp;=\delta^{(l+1)}
+\end{aligned}
+$$&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Implementation note&lt;/strong&gt;: In steps 2 and 3 above, we need to compute $f&amp;rsquo;(z^{(l)})$ for each value of $i$. Assuming $f(z)$ is the &lt;code&gt;sigmoid&lt;/code&gt; activation function, we would already have $a_{i}^{(l)}$ stored away from the forward pass through the network. Thus, using the expression that we worked out earlier for $f&amp;rsquo;(z)$, we can compute this as
+$$
+f&amp;rsquo;(z^{(l)})=a_{i}^{(l)}(1-a_{i}^{(l)})
+$$
+Finally, we are ready to describe the full &lt;strong&gt;gradient descent algorithm&lt;/strong&gt;. In the pseudo-code below, $\Delta W^{(l)}$ is a matrix (of the same dimension as $W^{(l)}$), and $\Delta b^{(l)}$ is a vector (of the same dimension as $b^{(l)}$). Note that in this notation, $\Delta W^{(l)}$ is a matrix, and in particular it isn&amp;rsquo;t $\Delta$ times $W^{(l)}$. We implement one iteration of batch gradient descent as follows:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Set $\Delta W^{(l)}:=0$, $\Delta b^{(l)}:=0$ (matrix/vector of zeros) for all $l$.&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;For $i=1$ to $m$:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Use backpropagation to compute $\nabla_{W^{(l)}}J(W,b;x,y)$ and $\nabla_{b^{(l)}}J(W,b;x,y)$.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set $\Delta W^{(l)}:=\Delta W^{(l)}+\nabla_{W^{(l)}}J(W,b;x,y)$&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Set $\Delta b^{(l)}:=\Delta b^{(l)}+\nabla_{b^{(l)}}J(W,b;x,y)$&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Update the parameters
+$$
+\begin{aligned}
+W^{(l)} &amp;amp;:= W^{(l)}-\alpha\bigg[\big(\frac{1}{m}\Delta W^{(l)}\big)+\lambda W^{(l)}\bigg]\newline
+b^{(l)} &amp;amp;:= b^{(l)}-\alpha\bigg[\frac{1}{m}\Delta b^{(l)}\bigg]
+\end{aligned}
+$$&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;To train our neural network, we can now repeatedly take steps of gradient descent to reduce our cost function $J(W,b)$.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

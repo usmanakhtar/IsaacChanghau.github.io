@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Isaac Changhau</title>
+    <link>https://isaacchanghau.github.io/tags/python/</link>
+    <description>Recent content in Python on Isaac Changhau</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017-2018</copyright>
+    <lastBuildDate>Wed, 21 Feb 2018 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://isaacchanghau.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Introduction of TensorFlow Dataset API</title>
+      <link>https://isaacchanghau.github.io/post/tensorflow_dataset_api/</link>
+      <pubDate>Wed, 21 Feb 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/tensorflow_dataset_api/</guid>
+      <description>Reprinted from Francesco Zuppichini·How to use Dataset in TensorFlow.
+Based on TensorFlow 1.6
+As you should know, feed-dict is the slowest possible way to pass information to TensorFlow and it must be avoided. The correct way to feed data into your models is to use an input pipeline to ensure that the GPU has never to wait for new stuff to come in.
+Fortunately, TensorFlow has a built-in API, called Dataset to make it easier to accomplish this task.</description>
+    </item>
+    
+    <item>
+      <title>TensorFlow Updates Multiple Tensors Using Scan</title>
+      <link>https://isaacchanghau.github.io/post/tensorflow_scan/</link>
+      <pubDate>Tue, 20 Feb 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/tensorflow_scan/</guid>
+      <description>This post is reprinted from Wilka Carvalho · How to update multiple tensors using a single value with tf.scan.
+Corresponding Jupyter Notebook
+I assume that you have a set of Tensors that you want to update with a sequence iteratively. E.g. you have a neural network that you’d like to update with a point at time t in a sequence and values from the network at time t-1. If you want to see this in full-fledged use, look at my jupyter notebook where I recreate the Variational Recurrent Neural Network!</description>
+    </item>
+    
+    <item>
+      <title>PTransE -- Modeling Relation Paths for Representation Learning of Knowledge Bases</title>
+      <link>https://isaacchanghau.github.io/post/ptranse/</link>
+      <pubDate>Tue, 19 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ptranse/</guid>
+      <description>It is a summary of the paper Modeling Relation Paths for Representation Learning of Knowledge Bases (PTransE). PTransE is a novel extension of TransE, which is a path-based representation learning model, to model relation paths for representation learning of knowledge bases. The authors argue that multiple-step relation paths also contain rich inference patterns between entities, thus, PTransE also considers relation paths as translations between entities for representation learning, and addresses two key challenges:</description>
+    </item>
+    
+    <item>
+      <title>TransX: Embedding Entities and Relationships of Multi-relational Data</title>
+      <link>https://isaacchanghau.github.io/post/transx/</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/transx/</guid>
+      <description>It is a summary of several papers about embedding entities and relationships of multi-relational knowledge database, while each paper contains one kind of specific method. Generally, the set of methods are called TransX. Here, I only describe the general idea and mathematical process of each method, for more information about those methods in parameters setting, experiment results and discussion, you can directly read the original papers through the links I provide.</description>
+    </item>
+    
+    <item>
+      <title>Analyzing Wolf Warrior II Movie Comments using Python</title>
+      <link>https://isaacchanghau.github.io/post/wolf_warrior/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/wolf_warrior/</guid>
+      <description>想要分析“战狼II”的影评数据，首先需要获取这些数据，这里使用 Python 的 requests 包进行网页请求，并使用正则表达式匹配出我们需要的数据。首先使用Chrome打开豆瓣影评·战狼II的网页 (https://movie.douban.com/subject/26363254/comments?start=0)，使用 Developer Tools 对当前页面做一个简单的了解和分析，如下图： 我们发现页面的所有评论、评论者、投票、评价等级等信息均存储在 &amp;lt;div class=&amp;quot;comment-item&amp;quot; ...&amp;gt; 标签下。而转向下一页面的链接信息存储在 &amp;lt;div id=&amp;quot;paginator&amp;quot;&amp;gt; 标签的 &amp;lt;a href=&amp;quot;?start=26&amp;amp;amp;limit=20&amp;amp;amp;sort=new_score&amp;amp;amp;status=P&amp;quot; ... class=&amp;quot;next&amp;quot;&amp;gt;... 中。因此，可以针对这部分 HTML 标签创建相应的正则表达式来获取数据。简易的爬虫代码如下：
+import requests import re import pandas as pd url_first = &#39;https://movie.douban.com/subject/26363254/comments?start=0&#39; # start page head = {&#39;User-Agent&#39;:&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36&#39;} cookies = {&#39;cookie&#39;:&#39;you own cookies} #cookie of your account html = requests.get(url_first, headers=head, cookies=cookies) # get first page re_page = re.</description>
+    </item>
+    
+    <item>
+      <title>Analyzing Your Friends Information in WeChat using Python</title>
+      <link>https://isaacchanghau.github.io/post/wechat_analysis/</link>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/wechat_analysis/</guid>
+      <description>首先需要安装 itchat 包：sudo pip3 install itchat 或者 sudo pip install itchat。
+成功安装 itchat 后，便可正式使用这个包来爬一爬自己的微信朋友了。这里，我先导入之后需要用到的Python 包：
+import itchat # itchat documentation -- https://itchat.readthedocs.io/zh/latest/api/ import matplotlib.pyplot as plt import seaborn as sns import numpy as np import pandas as pd import re from wordcloud import WordCloud, ImageColorGenerator import PIL.Image as Image # pillow import jieba # chinese word segementation tool from matplotlib.font_manager import FontProperties # since matplotlib and pandas.plot cannot display chinese font = FontProperties(fname=&#39;.</description>
+    </item>
+    
+    <item>
+      <title>House Prices Advanced Regression Techniques -- Modeling and Prediction</title>
+      <link>https://isaacchanghau.github.io/post/house_price_modeling/</link>
+      <pubDate>Mon, 10 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/house_price_modeling/</guid>
+      <description>After cleaning and transforming processes in House Prices Advanced Regression Techniques &amp;ndash; Data Analysis. Here we continue to build machine learning model to train the dataset and make a prediction based on the trained model. We use Elastic Net and Gradient Boosting models to train the dataset and make predictions separately, then average the results of the two models to generate the final output.
+Elastic Net Regression In statistics and, in particular, in the fitting of linear or logistic regression models, the elastic net is a regularized regression method that linearly combines the L1 and L2 penalties of the lasso and ridge methods.</description>
+    </item>
+    
+    <item>
+      <title>House Prices Advanced Regression Techniques -- Data Analysis</title>
+      <link>https://isaacchanghau.github.io/post/house_price_data_analysis/</link>
+      <pubDate>Sat, 08 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/house_price_data_analysis/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.kaggle.com/c/house-prices-advanced-regression-techniques&#34; target=&#34;_blank&#34;&gt;House Prices: Advanced Regression Techniques&lt;/a&gt; is a &lt;a href=&#34;https://www.kaggle.com/&#34; target=&#34;_blank&#34;&gt;kaggle&lt;/a&gt; competition to predict the house prices, which aims to practice feature engineering, RFs, and gradient boosting. After exploring and referring others&amp;rsquo; methods, I decide to do it by myself to improve my python skill in data science and data analysis ability.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Machine Learning Note (4): Ensemble Learning</title>
+      <link>https://isaacchanghau.github.io/post/ml_zzh_note_4/</link>
+      <pubDate>Thu, 18 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ml_zzh_note_4/</guid>
+      <description>摘自周志华《机器学习》第八章-集成学习。
+个体与集成 集成学习 (ensemble learning) 通过构建并结合多个学习器来完成学习任务，也被称为多分类器系统 (multi-classifier system)、基于委员会的学习 (committee-based learning) 等。 下图展示了集成学习的一般结构：先产生一组“个体学习器” (individual learner)，再用某种策略将它们结合。若集成中只包含同种类型的个体学习器，这样的集成是“同质的” (homogeneous)，同质集成中的个体学习器称为“基学习器” (base learner)，相应的学习算法称为“基学习算法” (base learning algorithm)。集成也可以包含不同类型的个体学习器，即“异质的” (heterogenous)。异质集成中的个体学习器由不同的学习算法生成，此时不再有基学习算法，而个体学习器也常称为“组件学习器” (component learner)。 集成学习通过将多个学习器进行结合，通常可以获得比单一学习器显著优越的泛化性能。这对“弱学习器” (weak learner) 尤为明显。实际中，要获得好的集成，个体学习器通常应该“好二不同”，即个体学习器要有一定的“准确性”，并且要有“多样性”，即学习器间具有差异。如下图所示 举个例子，考虑二分类问题 $y\in\{-1,+1\}$ 和真实函数 $\boldsymbol{f}$，假设基分类器的错误率为 $\epsilon$，即对每个基分类器 $h_{i}$ 有 $$ P(h_{i}(\boldsymbol{x})\neq\boldsymbol{f}(\boldsymbol{x}))=\epsilon\tag{1} $$ 假设集成通过简单投票法结合 $T$ 个基分类器，若有超过半数的基分类器正确，则集成分类就正确： $$ H(\boldsymbol{x})=sign\bigg(\sum_{i=1}^{T}h_{i}(\boldsymbol{x})\bigg)\tag{2} $$ 假设基分类器的错误率相互独立，则由 Hoeffding 不等式可知，集成的错误率为 $$ P(H(\boldsymbol{x})\neq\boldsymbol{f}(\boldsymbol{x}))=\sum_{k=0}^{\lfloor T/2\rfloor}{T\choose k}(1-\epsilon)^{k}\epsilon^{T-k}\leq\exp\big(-\frac{1}{2}T(1-2\epsilon)^{2}\big)\tag{3} $$ 由上式可得，随着个体集成中个体分类器数目 $T$ 的增大，集成的错误率将指数级下降，最终趋向于零。上面的分析有一个关键假设：基学习器的误差相互独立。实际上，个体学习器是为解决同一个问题训练出来的，显然不能相互独立。而“准确性”和“多样性”本身就存在冲突，当准确性很高之后，增加多样性就需要牺牲准确性。
+根据个体学习器的生成方式，集成学习大致分为两类：
+ 个体学习器间存在强依赖关系、必须串行生成的序列化方法，如 Boosting。 个体学习器不存在强依赖关系、可同时生成的并行化方法，如 Bagging 和“随即森林” (Random Forest)。  Boosting Boosting 是一族可将弱学习器提升为强学习器的算法，其工作机制类似：先从初始训练集训练出一个基学习器，再根据基学习器的表现对训练样本进行调整，使得先前基学习器做错的训练样本在后续受到更多的关注，然后基于调整后的样本训练下一个基学习器，如此重复进行，直至基学习器达到事先指定的值 $T$，最终将这 $T$ 个基学习器进行加权结合。如 AdaBoost 算法，</description>
+    </item>
+    
+  </channel>
+</rss>

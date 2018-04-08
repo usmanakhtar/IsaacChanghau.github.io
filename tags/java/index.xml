@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on Isaac Changhau</title>
+    <link>https://isaacchanghau.github.io/tags/java/</link>
+    <description>Recent content in Java on Isaac Changhau</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017-2018</copyright>
+    <lastBuildDate>Wed, 02 Aug 2017 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://isaacchanghau.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Seq2Seq Learning and Neural Conversational Model</title>
+      <link>https://isaacchanghau.github.io/post/seq2seq_conversation/</link>
+      <pubDate>Wed, 02 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/seq2seq_conversation/</guid>
+      <description>It is a summary of two papers: Sequence to Sequence Learning with Neural Networks and A Neural Conversational Model, as well as the implementation of Neural Conversation Model via Java with deeplearning4j package.
+Sequence to Sequence Model In this paper, the author presents a general end-to-end approach to sequence learning that makes minimal assumptions on the sequence structure. The method uses a multilayered Long Short-Term Memory (LSTM) to map the input sequence to a vector of a fixed dimensionality, and then another deep LSTM to decode the target sequence from the vector.</description>
+    </item>
+    
+    <item>
+      <title>Plain Stock Price Prediction via LSTM</title>
+      <link>https://isaacchanghau.github.io/post/stock_price_predict/</link>
+      <pubDate>Wed, 26 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/stock_price_predict/</guid>
+      <description>This is a practice of using LSTM to do the one day ahead prediction of the stock close price. The dataset I used here is the New York Stock Exchange from Kaggle, which consists of following files:
+ prices.csv: raw, as-is daily prices. Most of data spans from 2010 to the end 2016, for companies new on stock market date range is shorter. There have been approx. 140 stock splits in that time, this set doesn&amp;rsquo;t account for that.</description>
+    </item>
+    
+    <item>
+      <title>Word2Vecf -- Dependency-Based Word Embeddings and Lexical Substitute</title>
+      <link>https://isaacchanghau.github.io/post/word2vecf/</link>
+      <pubDate>Thu, 18 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/word2vecf/</guid>
+      <description>It is a summary of Dependency-based Word Embeddings and A Simple Word Embedding Model for Lexical Substitution proposed by Omer Levy on ACL 2014 and VSM 2015 respectively. After studying the two papers, I implement the methods intorduced in the two papers with Java to enhance my comprehension and deal with some practical tasks.
+Introduction The method proposed in &amp;ldquo;Dependency-based Word Embeddings&amp;rdquo; is a generalized skip-gram model with negative sampling, which is capable of dealing with the arbitrary contexts, and its generated embeddings are less topical and exhibit more functional similarity than the original skip-gram embeddings in Word2Vec.</description>
+    </item>
+    
+    <item>
+      <title>Machine Learning Note (3): Support Vector Machine</title>
+      <link>https://isaacchanghau.github.io/post/ml_zzh_note_3/</link>
+      <pubDate>Tue, 16 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ml_zzh_note_3/</guid>
+      <description>摘自周志华《机器学习》第六章–支持向量机。
+间隔与支持向量 给定数据集$D=\{(\boldsymbol{x}_{1},y_{1}),\dots,(\boldsymbol{x}_{m},y_{m})\}$，$y_{i}\in\{-1,+1\}$，分类学习最基本的思想是基于训练集$D$在样本空间中找到一个划分超平面，将不同类别的样本分开。但能将训练样本粉来的划分超平面可能有很多，直观上，应该去找两类训练样本“正中间”的划分超平面，即下图中粗线表示的划分超平面，因为该划分对训练样本局部扰动的*“容忍性”*最好。 在样本空间中，划分超平面由下述线性方程表示： $$ \boldsymbol{w}^{T}\boldsymbol{x}+b=0\tag{1} $$ 其中$\boldsymbol{w}=(w_{1},\dots,w_{d})$为法向量，决定了超平面的方向，$b$为位移项，决定了超平面与原点之间的距离。记超平面为$(\boldsymbol{w},b)$，样本空间中任意点$\boldsymbol{x}$到超平面$(\boldsymbol{w},b)$的距离可写为 $$ r=\frac{\vert\boldsymbol{w}^{T}\boldsymbol{x}+b\vert}{\Vert\boldsymbol{w}\Vert}\tag{2} $$ 假设$(\boldsymbol{w},b)$能将训练样本正确分类，即对于$(\boldsymbol{x}_{i},y_{i})\in D$，若$y_{i}=+1$，则有$\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b&amp;gt;0$；若$y_{i}=-1$，则$\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b&amp;lt;0$。令 $$ \begin{cases} \boldsymbol{w}^{T}\boldsymbol{x}_{i}+b\geq+1,&amp;amp;y_{i}=+1;\newline \boldsymbol{w}^{T}\boldsymbol{x}_{i}+b\leq-1,&amp;amp;y_{i}=-1. \end{cases}\tag{3} $$ 如下图，距离超平面最近的几个训练样本点使公式(3)成立，它们被称为“支持向量” (support vector)，两个异类支持向量到超平面的距离之和为$$ \gamma=\frac{2}{\Vert\boldsymbol{w}\Vert}\tag{4}$$它被称为“间隔” (margin)。 求解“最大间隔” (maximum margin)的划分超平面，即找到满足公式(3)中的约束参数$\boldsymbol{w}$和$b$，使得$\gamma$最大： $$ \begin{aligned} &amp;amp; \max_{\boldsymbol{w},b}\frac{2}{\Vert\boldsymbol{w}\Vert}\newline &amp;amp; s.t.\quad y_{i}(\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b)\geq 1,\quad i=1,2,\dots,m \end{aligned}\tag{5} $$ 最大化间隔，仅需要最大化$\Vert\boldsymbol{w}\Vert^{-1}$，等价于最小化$\Vert\boldsymbol{w}\Vert^{2}$，于是有 $$ \begin{aligned} &amp;amp; \min_{\boldsymbol{w},b}\frac{1}{2}\Vert\boldsymbol{w}\Vert^{2}\newline &amp;amp; s.t.\quad y_{i}(\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b)\geq 1,\quad i=1,2,\dots,m \end{aligned}\tag{6} $$ 上式为支持向量机(Support Vector Machine，SVM)的基本型。
+对偶问题 我们希望求解式(6)来得到最大间隔划分超平面所对应的模型 $$ f(\boldsymbol{x})=\boldsymbol{w}^{T}\boldsymbol{x}+b\tag{7} $$ 公式(6)本身为一个凸二次规划 (convex quadratic programming)问题，为求解(6)式，对其使用拉格朗日乘子法可得其“对偶问题” (dual problem)： $$ L(\boldsymbol{w},b,\boldsymbol{\alpha})=\frac{1}{2}\Vert\boldsymbol{w}\Vert^{2}+ \sum_{i=1}^{m}\alpha_{i}\big(1-y_{i}(\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b)\big)\tag{8} $$ 其中$\boldsymbol{\alpha}=(\alpha_{1};\dots;\alpha_{m})$。令$L(\boldsymbol{w},b,\boldsymbol{\alpha})$对$\boldsymbol{w}$和$b$的偏导为零可得 $$ \boldsymbol{w}=\sum_{i=1}^{m}\alpha_{i}y_{i}\boldsymbol{x}_{i}\tag{9} $$ $$ 0=\sum_{i=1}^{m}\alpha_{i}y_{i}\tag{10} $$ 将(9)代入(8)，即可将$L(\boldsymbol{w},b,\boldsymbol{\alpha})$中的$\boldsymbol{w}$和$b$消去，再考虑式(10)的约束，可得到式(6)的对偶问题 $$ \begin{aligned} &amp;amp; \max_{\boldsymbol{\alpha}}\sum_{i=1}^{m}\alpha_{i}-\frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_{i}\alpha_{j}y_{i}y_{j}\boldsymbol{x}_{i}^{T}\boldsymbol{x}_{j}\newline &amp;amp; s.</description>
+    </item>
+    
+    <item>
+      <title>Word2Vec -- Mathematical Principles and Java Implementation</title>
+      <link>https://isaacchanghau.github.io/post/word2vec/</link>
+      <pubDate>Sat, 13 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/word2vec/</guid>
+      <description>I began to get to know the natural language process area when I started to work as a research engineer around one year ago, and the first technique I was asked to learn is the Word2Vec. Since the Word2Vec was proposed amost four years ago, there are already amount of research reports, papers, tutorials and even applications are available online. In order to understand this technique well, I explored and studied many of those online resources at that time.</description>
+    </item>
+    
+    <item>
+      <title>Machine Learning Note (2): Linear Regression</title>
+      <link>https://isaacchanghau.github.io/post/ml_zzh_note_2/</link>
+      <pubDate>Thu, 04 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ml_zzh_note_2/</guid>
+      <description>摘自周志华《机器学习》第三章&amp;ndash;线性模型。
+线性模型 给定由$d$个属性描述的示例$\mathbf{x}=(x_{1};x_{2};\dots ;x_{d})$，其中$x_{i}$是$\mathbf{x}$在第$i$个属性上的取值，线性模型(linear model)试图学的一个通过属性的线性组合来进行预测的函数，即 $$ f(\mathbf{x})=\mathbf{w}^{T}\mathbf{x}+b $$ 其中$\mathbf{w}=(w_{1};w_{2};\dots ;w_{d})$。$\mathbf{w}$和$b$学得之后，模型就可以确定。
+线性回归 给定数据集$D={(\mathbf{x}_{1},y_{1}),(\mathbf{x}_{2},y_{2}),\dots ,(\mathbf{x}_{m},y_{m})}$，其中$\mathbf{x}_{i}=(x_{i1};x_{i2};\dots ;x_{id}), y_{i}\in \mathbb{R}$。“线性回归” (linear regression)试图学得 $$ f(\mathbf{x}_{i})=\mathbf{w}^{T}\mathbf{x}_{i}+b, 使得f(\mathbf{x}_{i})\simeq y_{i} $$ 接下来的任务是确定$\mathbf{w}$和$b$，其关键在于衡量$f(x)$和$y$之间的差别，而均方误差是回归任务中最常用的性能度量，它对应了常用的“欧式距离” (Euclidean distance)，因此可以试图让均方误差最小化。均方误差最小化进行模型求解的方法称为“最小二乘法” (least square method)。在线性回归中，最小二乘法就是试图找到一条直线，使所有样本到直线上的欧式距离之和最小。这里，我们将$\mathbf{w}$和$b$吸收入向量形式$\mathbf{\hat{w}}=(b;\mathbf{w})=(b;w_{1};w_{2};\dots ;w_{d})$，相应的，将数据集$D$中的$\mathbf{x}_{i}$表示为$\mathbf{x}_{i}=(1;x_{i1};x_{i2};\dots ;x_{id})$，因此数据集$D$可以表示为一个$m\times (d+1)$的矩阵$\mathbf{X}=(\mathbf{x}_{1};\mathbf{x}_{2};\dots ;\mathbf{x}_{m})^{T}$，再把标记也写成向量形式$\mathbf{y}=(y_{1};y_{2};\dots ;y_{m})$。于是有 $$ f(\mathbf{X})=\mathbf{X}\mathbf{\hat{w}}, 使得f(\mathbf{X})\simeq\mathbf{y} $$ 最小化均方误差，有 $$ \mathbf{\hat{w}}^{*}=\arg\min_{\mathbf{\hat{w}}}(f(\mathbf{X})-\mathbf{y})^{2}=\arg\min_{\mathbf{\hat{w}}}(\mathbf{y}-\mathbf{X}\mathbf{\hat{w}})^{T}(\mathbf{y}-\mathbf{X}\mathbf{\hat{w}}) $$ 令$E_{\mathbf{\hat{w}}}=(\mathbf{y}-\mathbf{X}\mathbf{\hat{w}})^{T}(\mathbf{y}-\mathbf{X}\mathbf{\hat{w}})$，对$\mathbf{\hat{w}}$求导得到 $$\frac{\partial E_{\mathbf{\hat{w}}}}{\partial \mathbf{\hat{w}}}=2\mathbf{X}^{T}(\mathbf{X}\mathbf{\hat{w}}-\mathbf{y}) $$ 令上式为零可得$\mathbf{\hat{w}}$最优解的封闭式。当$\mathbf{X}^{T}\mathbf{X}$为满秩矩阵 (full-rank matrix)或正定矩阵 (positive definite matrix)时，可得到 $$ \mathbf{\hat{w}}^{*}=(\mathbf{X}^{T}\mathbf{X})^{-1}\mathbf{X}^{T}\mathbf{y} $$ 其中$(\mathbf{X}^{T}\mathbf{X})^{-1}$是$\mathbf{X}^{T}\mathbf{X}$的逆矩阵。然而现实任务中，$\mathbf{X}^{T}\mathbf{X}$往往不是满秩矩阵，此时可解出多个$\mathbf{\hat{w}}$，都能使均方误差最小化，而选择哪一个解作为输出将由算法的归纳偏好决定，常见的做法是引入正则化(regularization)项。
+线性模型预测值不仅可以逼近$y$，也可以使其逼近$y$的衍生物。比如，可将输出标记的对数作为线性模型逼近的目标，即“对数线性回归” (log-linear regression) $$ \ln y=\mathbf{w}^{T}\mathbf{x}+b $$ 它实际上是让$e^{\mathbf{w}^{T}\mathbf{x}+b}$逼近$y$，形式上它仍是线性回归，但实质上已是在求取输入空间到输出空间的非线性函数映射，如图 更一般地，考虑单调可微函数$g(\cdot)$，令$$y=g^{-1}(\mathbf{w}^{T}\mathbf{x}+b)$$这样得到的模型称为“广义线性模型” (generalized linear model)，其中函数$g(\cdot)$称为“联系函数” (link function)。对数线性回归是广义线性模型在$g(\cdot)=\ln (\cdot)$时的特例。</description>
+    </item>
+    
+    <item>
+      <title>Removing Backscatter to Enhance the Visibility of Underwater Object</title>
+      <link>https://isaacchanghau.github.io/post/removing_backscatter/</link>
+      <pubDate>Thu, 20 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/removing_backscatter/</guid>
+      <description>This is a novel method based on underwater optical model for underwater object visibility enhancement based on single image.
+General Schema For an underwater distorted image, it is firstly decomposed to reflectance and illuminance. Then color correction and dehazing methods are utilized to process each component separately, according to their specific features. Finally, we calculate the weights of two components and apply an efficient image fusion method to obtain the enhanced image.</description>
+    </item>
+    
+    <item>
+      <title>Underwater Image Enhance via Fusion and Its Java Implementation</title>
+      <link>https://isaacchanghau.github.io/post/underwater_image_fusion/</link>
+      <pubDate>Sat, 15 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/underwater_image_fusion/</guid>
+      <description>This paper &amp;ldquo;Enhancing Underwater Images and Videos by Fusion&amp;rdquo;, published by Ancuti et al. on CVPR, describes a novel strategy, built on the fusion principles, to enhance underwater videos and images. Here I implement this algorithm by Java, and summerize the main idea in this paper.
+General Schema The enhancing approach starts from a single distorted underwater image, first of all, applying white balance to this image to generate the first input of fusion process, denotes as $img_{1}$, and applying a temporal coherent noise reduction method to this $img_{1}$ to derive another input of fusion process, denotes as $img_{2}$; then, obtaining the weights of these two inputs, where Laplacian contrast weight ($W_{L}$), local contrast weight ($W_{LC}$), Saliency weight ($W_{S}$) and exposedness weight ($W_{E}$) are used in this process; finally, the multi-scale fusion process is applied to generate the restored image.</description>
+    </item>
+    
+    <item>
+      <title>Adaptive Local Tone Mapping Technique for HDR Image and Java Implementation</title>
+      <link>https://isaacchanghau.github.io/post/altm/</link>
+      <pubDate>Tue, 11 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/altm/</guid>
+      <description>This short paper, published by Ahn et al. on ICCE, introduces a new tone mapping technique for HDR images based on the retinex theory. Here I summarize this paper and show the Java implementation with OpenCV to realize the proposed algorithm.
+Center/Surround Retinex The retinex theory, initially defined by Land et al., explains how the realiable color information from the real world is extracted by human visual system, and Jobson et al.</description>
+    </item>
+    
+    <item>
+      <title>Skiing In Singapore</title>
+      <link>https://isaacchanghau.github.io/post/skiing_in_singapore/</link>
+      <pubDate>Thu, 30 Mar 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/skiing_in_singapore/</guid>
+      <description>It is an online test provided by RedMart, who asks to solve a problem by using DFS algorithm. More details you can find here.
+Discription Sometimes it&amp;rsquo;s nice to take a break and code up a solution to a small, fun problem. Here is one some of our engineers enjoyed recently called Skiing In Singapore. Well you can’t really ski in Singapore. But let’s say you hopped on a flight to the Niseko ski resort in Japan.</description>
+    </item>
+    
+  </channel>
+</rss>

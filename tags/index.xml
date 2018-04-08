@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Isaac Changhau</title>
+    <link>https://isaacchanghau.github.io/tags/</link>
+    <description>Recent content in Tags on Isaac Changhau</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017-2018</copyright>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://isaacchanghau.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Content tagged as &#39;Academic&#39;</title>
+      <link>https://isaacchanghau.github.io/tags/academic/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/academic/</guid>
+      <description>Here is a list of all the content that has been tagged as academic.</description>
+    </item>
+    
+    <item>
+      <title>Algorithms</title>
+      <link>https://isaacchanghau.github.io/tags/algorithms/</link>
+      <pubDate>Sat, 19 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/algorithms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Autoencoder</title>
+      <link>https://isaacchanghau.github.io/tags/autoencoder/</link>
+      <pubDate>Sat, 19 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/autoencoder/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Backpropagation</title>
+      <link>https://isaacchanghau.github.io/tags/backpropagation/</link>
+      <pubDate>Thu, 17 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/backpropagation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;</title>
+      <link>https://isaacchanghau.github.io/tags/c&#43;&#43;/</link>
+      <pubDate>Tue, 19 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/c&#43;&#43;/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Covariance</title>
+      <link>https://isaacchanghau.github.io/tags/covariance/</link>
+      <pubDate>Sat, 17 Jun 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/covariance/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deep-learning</title>
+      <link>https://isaacchanghau.github.io/tags/deep-learning/</link>
+      <pubDate>Wed, 28 Mar 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Depth-first-search</title>
+      <link>https://isaacchanghau.github.io/tags/depth-first-search/</link>
+      <pubDate>Thu, 30 Mar 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/depth-first-search/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ensemble-learning</title>
+      <link>https://isaacchanghau.github.io/tags/ensemble-learning/</link>
+      <pubDate>Thu, 18 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/ensemble-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Gru</title>
+      <link>https://isaacchanghau.github.io/tags/gru/</link>
+      <pubDate>Wed, 02 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/gru/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Image-processing</title>
+      <link>https://isaacchanghau.github.io/tags/image-processing/</link>
+      <pubDate>Thu, 20 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/image-processing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java</title>
+      <link>https://isaacchanghau.github.io/tags/java/</link>
+      <pubDate>Wed, 02 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Life</title>
+      <link>https://isaacchanghau.github.io/tags/life/</link>
+      <pubDate>Wed, 15 Nov 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/life/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://isaacchanghau.github.io/tags/linux/</link>
+      <pubDate>Sun, 28 Jan 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Lstm</title>
+      <link>https://isaacchanghau.github.io/tags/lstm/</link>
+      <pubDate>Wed, 02 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/lstm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mac-os</title>
+      <link>https://isaacchanghau.github.io/tags/mac-os/</link>
+      <pubDate>Sun, 28 Jan 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/mac-os/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine-learning</title>
+      <link>https://isaacchanghau.github.io/tags/machine-learning/</link>
+      <pubDate>Sat, 19 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Natural-language-processing</title>
+      <link>https://isaacchanghau.github.io/tags/natural-language-processing/</link>
+      <pubDate>Wed, 28 Mar 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/natural-language-processing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Opencv</title>
+      <link>https://isaacchanghau.github.io/tags/opencv/</link>
+      <pubDate>Thu, 20 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/opencv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://isaacchanghau.github.io/tags/python/</link>
+      <pubDate>Wed, 21 Feb 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Relation-representation</title>
+      <link>https://isaacchanghau.github.io/tags/relation-representation/</link>
+      <pubDate>Tue, 19 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/relation-representation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Scala</title>
+      <link>https://isaacchanghau.github.io/tags/scala/</link>
+      <pubDate>Tue, 16 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/scala/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Seq2seq</title>
+      <link>https://isaacchanghau.github.io/tags/seq2seq/</link>
+      <pubDate>Thu, 10 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/seq2seq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Setting</title>
+      <link>https://isaacchanghau.github.io/tags/setting/</link>
+      <pubDate>Sun, 28 Jan 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/setting/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Support-vector-machine</title>
+      <link>https://isaacchanghau.github.io/tags/support-vector-machine/</link>
+      <pubDate>Tue, 16 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/support-vector-machine/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tensorflow</title>
+      <link>https://isaacchanghau.github.io/tags/tensorflow/</link>
+      <pubDate>Wed, 21 Feb 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/tags/tensorflow/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Natural-language-processing on Isaac Changhau</title>
+    <link>https://isaacchanghau.github.io/tags/natural-language-processing/</link>
+    <description>Recent content in Natural-language-processing on Isaac Changhau</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017-2018</copyright>
+    <lastBuildDate>Wed, 28 Mar 2018 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://isaacchanghau.github.io/tags/natural-language-processing/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Punctuation Restoration and Sentence Boundary Detection</title>
+      <link>https://isaacchanghau.github.io/project/punctuation/</link>
+      <pubDate>Wed, 28 Mar 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/project/punctuation/</guid>
+      <description>Date: Jan. 2018 - Apr. 2018
+ Collaborators: Hao Zhang, Gangeshwar Krishnamurthy
+Automatic Speech Recognition (ASR) systems generally produce unpunctuated text which is difficult to read for humans and degrades the performance of many downstream machine processing tasks such as machine translation, question answering, sentiment analysis and so on. Restoring the punctuation greatly improves the readability of transcripts and increases the effectiveness of subsequent processing.
+Punctuation restoration and a related task of segmentation or sentence boundary detection have been extensively studied.</description>
+    </item>
+    
+    <item>
+      <title>Neural Sequence Labeling</title>
+      <link>https://isaacchanghau.github.io/project/neural_seq_labeling/</link>
+      <pubDate>Tue, 20 Feb 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/project/neural_seq_labeling/</guid>
+      <description>Date: Nov. 2017 - Feb. 2018
+ Collaborators: Hao Zhang
+TODO
+Source codes for this project: IsaacChanghau/neural_sequence_labeling.</description>
+    </item>
+    
+    <item>
+      <title>WordNet Troponymy and Action Hierarchy Extraction</title>
+      <link>https://isaacchanghau.github.io/project/action_hierarchy/</link>
+      <pubDate>Sun, 07 Jan 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/project/action_hierarchy/</guid>
+      <description>Date: Oct. 2017 - Jan. 2018
+ Collaborators: Huminski Aliaksandr, Hao Zhang
+This project is part of exploration of PrimeNet. The PrimeNet is one of the projects I am involved in, which aims to build a comprehensive and accurate commonsense knowledge graph database to encode and link the concepts, relations and knowledge of the real-world as much as possibale and help machines to understand the world easier and better.</description>
+    </item>
+    
+    <item>
+      <title>PTransE -- Modeling Relation Paths for Representation Learning of Knowledge Bases</title>
+      <link>https://isaacchanghau.github.io/post/ptranse/</link>
+      <pubDate>Tue, 19 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ptranse/</guid>
+      <description>It is a summary of the paper Modeling Relation Paths for Representation Learning of Knowledge Bases (PTransE). PTransE is a novel extension of TransE, which is a path-based representation learning model, to model relation paths for representation learning of knowledge bases. The authors argue that multiple-step relation paths also contain rich inference patterns between entities, thus, PTransE also considers relation paths as translations between entities for representation learning, and addresses two key challenges:</description>
+    </item>
+    
+    <item>
+      <title>TransX: Embedding Entities and Relationships of Multi-relational Data</title>
+      <link>https://isaacchanghau.github.io/post/transx/</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/transx/</guid>
+      <description>It is a summary of several papers about embedding entities and relationships of multi-relational knowledge database, while each paper contains one kind of specific method. Generally, the set of methods are called TransX. Here, I only describe the general idea and mathematical process of each method, for more information about those methods in parameters setting, experiment results and discussion, you can directly read the original papers through the links I provide.</description>
+    </item>
+    
+    <item>
+      <title>Analyzing Wolf Warrior II Movie Comments using Python</title>
+      <link>https://isaacchanghau.github.io/post/wolf_warrior/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/wolf_warrior/</guid>
+      <description>想要分析“战狼II”的影评数据，首先需要获取这些数据，这里使用 Python 的 requests 包进行网页请求，并使用正则表达式匹配出我们需要的数据。首先使用Chrome打开豆瓣影评·战狼II的网页 (https://movie.douban.com/subject/26363254/comments?start=0)，使用 Developer Tools 对当前页面做一个简单的了解和分析，如下图： 我们发现页面的所有评论、评论者、投票、评价等级等信息均存储在 &amp;lt;div class=&amp;quot;comment-item&amp;quot; ...&amp;gt; 标签下。而转向下一页面的链接信息存储在 &amp;lt;div id=&amp;quot;paginator&amp;quot;&amp;gt; 标签的 &amp;lt;a href=&amp;quot;?start=26&amp;amp;amp;limit=20&amp;amp;amp;sort=new_score&amp;amp;amp;status=P&amp;quot; ... class=&amp;quot;next&amp;quot;&amp;gt;... 中。因此，可以针对这部分 HTML 标签创建相应的正则表达式来获取数据。简易的爬虫代码如下：
+import requests import re import pandas as pd url_first = &#39;https://movie.douban.com/subject/26363254/comments?start=0&#39; # start page head = {&#39;User-Agent&#39;:&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36&#39;} cookies = {&#39;cookie&#39;:&#39;you own cookies} #cookie of your account html = requests.get(url_first, headers=head, cookies=cookies) # get first page re_page = re.</description>
+    </item>
+    
+    <item>
+      <title>PrimeNet: Human-inspired Framework for Commonsense Knowledge Representation and Reasoning</title>
+      <link>https://isaacchanghau.github.io/project/primenet/</link>
+      <pubDate>Mon, 28 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/project/primenet/</guid>
+      <description>Date: Dec. 2016 - Present (Ongoing)
+ Collaborators: Kenneth Kwok, Huminski Aliaksandr, Yi Chen, Hao Zhang and etc. Commonsense knowledge bases (KBs) are needed for inference in AI, in contexts such as natural language understanding, image and visual scene understanding, decision-making, etc. For tasks involving real-time interaction and decision-making, especially, the speed of such inference can be critical.
+The goal of PrimeNet is to set out a framework for a commonsense KB that allows for efficient processing, in order to meet the demands of commonsense reasoning and, hence, support intelligent machine performance in real-world tasks.</description>
+    </item>
+    
+    <item>
+      <title>Beam Search Algorithms in Sequence to Sequence</title>
+      <link>https://isaacchanghau.github.io/post/beam_search/</link>
+      <pubDate>Thu, 10 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/beam_search/</guid>
+      <description>摘自知乎专栏·机器学习算法与自然语言处理的seq2seq中的beam search算法过程。
+在 Sequence2Sequence 模型中，beam search 的方法只用在测试的情况，因为在训练过程中，每一个 decoder 的输出是有正确答案的，也就不需要 beam search 去加大输出的准确率。假设现在我们用机器翻译作为例子来说明，我们需要翻译：
+ 我是中国人 &amp;mdash;&amp;gt; I am Chinese
+ 假设我们的词表大小只有三个单词就是I am Chinese。那么如果我们的beam size为2的话，我们现在来解释。
+如下图所示，我们在 decoder 的过程中，有了beam search 方法后，在第一次的输出，我们选取概率最大的I和am 两个单词，而不是只挑选一个概率最大的单词。 然后接下来我们要做的就是，把 I&amp;quot;单词作为下一个 decoder 的输入算一遍得到 $y_{2}$ 的输出概率分布，把 &amp;ldquo;am&amp;rdquo; 单词作为下一个 decoder 的输入算一遍也得到 $y_{2}$ 的输出概率分布。
+比如将I单词作为下一个 decoder 的输入算一遍得到 $y_{2}$ 的输出概率分布如下： 比如将am单词作为下一个 decoder 的输入算一遍得到 $y_{2}$ 的输出概率分布如下： 那么此时我们由于我们的beam size为2，也就是我们只能保留概率最大的两个序列，此时我们可以计算所有的序列概率： $$ \begin{aligned} \textrm{&amp;ldquo;I I&amp;rdquo;} &amp;amp; =0.4\times 0.3 &amp;amp; =0.12,\newline \textrm{&amp;ldquo;I am&amp;rdquo;} &amp;amp; =0.4\times 0.6 &amp;amp; =0.24,\newline \textrm{&amp;ldquo;I Chinese&amp;rdquo;} &amp;amp; =0.</description>
+    </item>
+    
+    <item>
+      <title>Seq2Seq Learning and Neural Conversational Model</title>
+      <link>https://isaacchanghau.github.io/post/seq2seq_conversation/</link>
+      <pubDate>Wed, 02 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/seq2seq_conversation/</guid>
+      <description>It is a summary of two papers: Sequence to Sequence Learning with Neural Networks and A Neural Conversational Model, as well as the implementation of Neural Conversation Model via Java with deeplearning4j package.
+Sequence to Sequence Model In this paper, the author presents a general end-to-end approach to sequence learning that makes minimal assumptions on the sequence structure. The method uses a multilayered Long Short-Term Memory (LSTM) to map the input sequence to a vector of a fixed dimensionality, and then another deep LSTM to decode the target sequence from the vector.</description>
+    </item>
+    
+    <item>
+      <title>Neural Responding Machine for Short-Text Conversation -- Summary</title>
+      <link>https://isaacchanghau.github.io/post/neural_responding_machine/</link>
+      <pubDate>Wed, 19 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/neural_responding_machine/</guid>
+      <description>The paper, Neural Responding Machine for Short-Text Conversation, published by L Shang et. al. in 2015, introduces Neural Responding Machine (NRM), a neural network-based response generator for short-text conversation. The NRM takes the general encoder-decoder framework, which formalizes the generation of response as a decoding process based on the latent representation of the input text, while both encoding and decoding are realized with recurrent neural networks (RNN). In this paper, the author demonstrates that the proposed encoder-decoder-based neural network overperform the traditional Retrivial-based methods and Statistical Machine Translation (SMT) based methods.</description>
+    </item>
+    
+    <item>
+      <title>Word2Vecf -- Dependency-Based Word Embeddings and Lexical Substitute</title>
+      <link>https://isaacchanghau.github.io/post/word2vecf/</link>
+      <pubDate>Thu, 18 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/word2vecf/</guid>
+      <description>It is a summary of Dependency-based Word Embeddings and A Simple Word Embedding Model for Lexical Substitution proposed by Omer Levy on ACL 2014 and VSM 2015 respectively. After studying the two papers, I implement the methods intorduced in the two papers with Java to enhance my comprehension and deal with some practical tasks.
+Introduction The method proposed in &amp;ldquo;Dependency-based Word Embeddings&amp;rdquo; is a generalized skip-gram model with negative sampling, which is capable of dealing with the arbitrary contexts, and its generated embeddings are less topical and exhibit more functional similarity than the original skip-gram embeddings in Word2Vec.</description>
+    </item>
+    
+    <item>
+      <title>Word2Vec -- Mathematical Principles and Java Implementation</title>
+      <link>https://isaacchanghau.github.io/post/word2vec/</link>
+      <pubDate>Sat, 13 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/word2vec/</guid>
+      <description>I began to get to know the natural language process area when I started to work as a research engineer around one year ago, and the first technique I was asked to learn is the Word2Vec. Since the Word2Vec was proposed amost four years ago, there are already amount of research reports, papers, tutorials and even applications are available online. In order to understand this technique well, I explored and studied many of those online resources at that time.</description>
+    </item>
+    
+  </channel>
+</rss>

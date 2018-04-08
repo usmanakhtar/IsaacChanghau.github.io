@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Isaac Changhau</title>
+    <link>https://isaacchanghau.github.io/post/</link>
+    <description>Recent content in Posts on Isaac Changhau</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017-2018</copyright>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://isaacchanghau.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Introduction of TensorFlow Dataset API</title>
+      <link>https://isaacchanghau.github.io/post/tensorflow_dataset_api/</link>
+      <pubDate>Wed, 21 Feb 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/tensorflow_dataset_api/</guid>
+      <description>Reprinted from Francesco Zuppichini·How to use Dataset in TensorFlow.
+Based on TensorFlow 1.6
+As you should know, feed-dict is the slowest possible way to pass information to TensorFlow and it must be avoided. The correct way to feed data into your models is to use an input pipeline to ensure that the GPU has never to wait for new stuff to come in.
+Fortunately, TensorFlow has a built-in API, called Dataset to make it easier to accomplish this task.</description>
+    </item>
+    
+    <item>
+      <title>TensorFlow Updates Multiple Tensors Using Scan</title>
+      <link>https://isaacchanghau.github.io/post/tensorflow_scan/</link>
+      <pubDate>Tue, 20 Feb 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/tensorflow_scan/</guid>
+      <description>This post is reprinted from Wilka Carvalho · How to update multiple tensors using a single value with tf.scan.
+Corresponding Jupyter Notebook
+I assume that you have a set of Tensors that you want to update with a sequence iteratively. E.g. you have a neural network that you’d like to update with a point at time t in a sequence and values from the network at time t-1. If you want to see this in full-fledged use, look at my jupyter notebook where I recreate the Variational Recurrent Neural Network!</description>
+    </item>
+    
+    <item>
+      <title>Useful Tricks for Operating Mac OS and Linux (Ubuntu)</title>
+      <link>https://isaacchanghau.github.io/post/useful_commands/</link>
+      <pubDate>Sun, 28 Jan 2018 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/useful_commands/</guid>
+      <description>Useful commands and tricks to raise efficiency under Mac OS and Linux, keep updating!
+Mac OS Tricks Terminal Themes and VIM Follow this GitHub repository to build your own powerful and colorful Terminal: [color-theme-link], [vimrc-link]
+Generate New SSH-Key and Add to GitHub Please refer the link (based on Mac OS platform):
+ Generating a new SSH key and adding it to the ssh-agent. Working with SSH key passphrases. Adding a new SSH key to your GitHub account.</description>
+    </item>
+    
+    <item>
+      <title>A Letter to the Past October</title>
+      <link>https://isaacchanghau.github.io/post/letter_october/</link>
+      <pubDate>Wed, 15 Nov 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/letter_october/</guid>
+      <description>任何一种环境或一个人，初次见面就预感到离别的隐痛时，你必定是爱上TA了&amp;hellip;&amp;hellip;
+过去的十月，很漫长，发生了太多。
+一段三年的感情走到尽头，所有的经历，所有的回忆，顷刻间，化为乌有&amp;hellip; 养了快一年的乔巴宝贝，一场车祸&amp;hellip; 可能是上帝觉得它太可爱了，所以起了私心，想在天堂里让它作伴，希望你能在新的“家里”也过得好&amp;hellip; 也是十月，我的生命中出现了一个意外，不！更诚实，更具体的说，那是一场命中注定&amp;hellip;
+如果&amp;hellip;把心掏给你是我的错&amp;hellip;我会一点一点把它赎回来&amp;hellip;剩下的、赎不回来的，就放在你那儿吧，反正它本来也属于你，就让它慢慢失去温度、冰冷、然后死去&amp;hellip;
+ In the end, I struggled, ran out of my enthusiasm, lost my own pain at your lips, a touch of sweet, it&amp;rsquo;s just a laniated miracle.
+ 你出现了，像光那样，从一颗星到达另外一颗星。后来，你又离开了。</description>
+    </item>
+    
+    <item>
+      <title>PTransE -- Modeling Relation Paths for Representation Learning of Knowledge Bases</title>
+      <link>https://isaacchanghau.github.io/post/ptranse/</link>
+      <pubDate>Tue, 19 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ptranse/</guid>
+      <description>It is a summary of the paper Modeling Relation Paths for Representation Learning of Knowledge Bases (PTransE). PTransE is a novel extension of TransE, which is a path-based representation learning model, to model relation paths for representation learning of knowledge bases. The authors argue that multiple-step relation paths also contain rich inference patterns between entities, thus, PTransE also considers relation paths as translations between entities for representation learning, and addresses two key challenges:</description>
+    </item>
+    
+    <item>
+      <title>TransX: Embedding Entities and Relationships of Multi-relational Data</title>
+      <link>https://isaacchanghau.github.io/post/transx/</link>
+      <pubDate>Thu, 14 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/transx/</guid>
+      <description>It is a summary of several papers about embedding entities and relationships of multi-relational knowledge database, while each paper contains one kind of specific method. Generally, the set of methods are called TransX. Here, I only describe the general idea and mathematical process of each method, for more information about those methods in parameters setting, experiment results and discussion, you can directly read the original papers through the links I provide.</description>
+    </item>
+    
+    <item>
+      <title>Analyzing Wolf Warrior II Movie Comments using Python</title>
+      <link>https://isaacchanghau.github.io/post/wolf_warrior/</link>
+      <pubDate>Mon, 11 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/wolf_warrior/</guid>
+      <description>想要分析“战狼II”的影评数据，首先需要获取这些数据，这里使用 Python 的 requests 包进行网页请求，并使用正则表达式匹配出我们需要的数据。首先使用Chrome打开豆瓣影评·战狼II的网页 (https://movie.douban.com/subject/26363254/comments?start=0)，使用 Developer Tools 对当前页面做一个简单的了解和分析，如下图： 我们发现页面的所有评论、评论者、投票、评价等级等信息均存储在 &amp;lt;div class=&amp;quot;comment-item&amp;quot; ...&amp;gt; 标签下。而转向下一页面的链接信息存储在 &amp;lt;div id=&amp;quot;paginator&amp;quot;&amp;gt; 标签的 &amp;lt;a href=&amp;quot;?start=26&amp;amp;amp;limit=20&amp;amp;amp;sort=new_score&amp;amp;amp;status=P&amp;quot; ... class=&amp;quot;next&amp;quot;&amp;gt;... 中。因此，可以针对这部分 HTML 标签创建相应的正则表达式来获取数据。简易的爬虫代码如下：
+import requests import re import pandas as pd url_first = &#39;https://movie.douban.com/subject/26363254/comments?start=0&#39; # start page head = {&#39;User-Agent&#39;:&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36&#39;} cookies = {&#39;cookie&#39;:&#39;you own cookies} #cookie of your account html = requests.get(url_first, headers=head, cookies=cookies) # get first page re_page = re.</description>
+    </item>
+    
+    <item>
+      <title>Analyzing Your Friends Information in WeChat using Python</title>
+      <link>https://isaacchanghau.github.io/post/wechat_analysis/</link>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/wechat_analysis/</guid>
+      <description>首先需要安装 itchat 包：sudo pip3 install itchat 或者 sudo pip install itchat。
+成功安装 itchat 后，便可正式使用这个包来爬一爬自己的微信朋友了。这里，我先导入之后需要用到的Python 包：
+import itchat # itchat documentation -- https://itchat.readthedocs.io/zh/latest/api/ import matplotlib.pyplot as plt import seaborn as sns import numpy as np import pandas as pd import re from wordcloud import WordCloud, ImageColorGenerator import PIL.Image as Image # pillow import jieba # chinese word segementation tool from matplotlib.font_manager import FontProperties # since matplotlib and pandas.plot cannot display chinese font = FontProperties(fname=&#39;.</description>
+    </item>
+    
+    <item>
+      <title>Autoencoder and Sparsity</title>
+      <link>https://isaacchanghau.github.io/post/autoencoder_and_sparsity/</link>
+      <pubDate>Sat, 19 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/autoencoder_and_sparsity/</guid>
+      <description>The article is excerpted from Andrew Ng&amp;rsquo;s CS294A Lecture notes: Sparse Autoencoder with some personal understanding. Before going through this article, you would better get some information from the Backpropagation Algorithm.
+Suppose we have only unlabeled training examples set $\{x^{(1)},x^{(2)},x^{(3)},\dots\}$, where $x^{(i)}\in\mathbb{R}^{n}$. An autoencoder neural network is an unsupervised learning algorithm that applies backpropagation, setting the target values to be equal to the inputs. i.e., it uses $y^{(i)}=x^{(i)}$. Below is an autoencoder: The autoencoder tries to learn a function $h_{W,b}(x)\approx x$.</description>
+    </item>
+    
+    <item>
+      <title>Backpropagation in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/backpropagation/</link>
+      <pubDate>Thu, 17 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/backpropagation/</guid>
+      <description>The article is excerpted from Andrew Ng&amp;rsquo;s CS294A Lecture notes: Sparse Autoencoder, then I add some personal understanding.
+In this article, we will let $n_{l}$ denote the number of layers in our network, label $l$ as $L_{l}$, so layer $L_{1}$ is the input layer, and layer $L_{n_{l}}$ the output layer. Neural network has parameters $(W,b)=(W^{(1)},b^{(1)},\dots,W^{(n_{l}-1)},b^{(n_{l}-1)})$, where we write $W_{ij}^{(l)}$ to denote the parameter (or weight) associated with the connection between unit $j$ in layer $l$ and unit $i$ in layer $l+1$.</description>
+    </item>
+    
+    <item>
+      <title>Beam Search Algorithms in Sequence to Sequence</title>
+      <link>https://isaacchanghau.github.io/post/beam_search/</link>
+      <pubDate>Thu, 10 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/beam_search/</guid>
+      <description>摘自知乎专栏·机器学习算法与自然语言处理的seq2seq中的beam search算法过程。
+在 Sequence2Sequence 模型中，beam search 的方法只用在测试的情况，因为在训练过程中，每一个 decoder 的输出是有正确答案的，也就不需要 beam search 去加大输出的准确率。假设现在我们用机器翻译作为例子来说明，我们需要翻译：
+ 我是中国人 &amp;mdash;&amp;gt; I am Chinese
+ 假设我们的词表大小只有三个单词就是I am Chinese。那么如果我们的beam size为2的话，我们现在来解释。
+如下图所示，我们在 decoder 的过程中，有了beam search 方法后，在第一次的输出，我们选取概率最大的I和am 两个单词，而不是只挑选一个概率最大的单词。 然后接下来我们要做的就是，把 I&amp;quot;单词作为下一个 decoder 的输入算一遍得到 $y_{2}$ 的输出概率分布，把 &amp;ldquo;am&amp;rdquo; 单词作为下一个 decoder 的输入算一遍也得到 $y_{2}$ 的输出概率分布。
+比如将I单词作为下一个 decoder 的输入算一遍得到 $y_{2}$ 的输出概率分布如下： 比如将am单词作为下一个 decoder 的输入算一遍得到 $y_{2}$ 的输出概率分布如下： 那么此时我们由于我们的beam size为2，也就是我们只能保留概率最大的两个序列，此时我们可以计算所有的序列概率： $$ \begin{aligned} \textrm{&amp;ldquo;I I&amp;rdquo;} &amp;amp; =0.4\times 0.3 &amp;amp; =0.12,\newline \textrm{&amp;ldquo;I am&amp;rdquo;} &amp;amp; =0.4\times 0.6 &amp;amp; =0.24,\newline \textrm{&amp;ldquo;I Chinese&amp;rdquo;} &amp;amp; =0.</description>
+    </item>
+    
+    <item>
+      <title>Seq2Seq Learning and Neural Conversational Model</title>
+      <link>https://isaacchanghau.github.io/post/seq2seq_conversation/</link>
+      <pubDate>Wed, 02 Aug 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/seq2seq_conversation/</guid>
+      <description>It is a summary of two papers: Sequence to Sequence Learning with Neural Networks and A Neural Conversational Model, as well as the implementation of Neural Conversation Model via Java with deeplearning4j package.
+Sequence to Sequence Model In this paper, the author presents a general end-to-end approach to sequence learning that makes minimal assumptions on the sequence structure. The method uses a multilayered Long Short-Term Memory (LSTM) to map the input sequence to a vector of a fixed dimensionality, and then another deep LSTM to decode the target sequence from the vector.</description>
+    </item>
+    
+    <item>
+      <title>Plain Stock Price Prediction via LSTM</title>
+      <link>https://isaacchanghau.github.io/post/stock_price_predict/</link>
+      <pubDate>Wed, 26 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/stock_price_predict/</guid>
+      <description>This is a practice of using LSTM to do the one day ahead prediction of the stock close price. The dataset I used here is the New York Stock Exchange from Kaggle, which consists of following files:
+ prices.csv: raw, as-is daily prices. Most of data spans from 2010 to the end 2016, for companies new on stock market date range is shorter. There have been approx. 140 stock splits in that time, this set doesn&amp;rsquo;t account for that.</description>
+    </item>
+    
+    <item>
+      <title>LSTM and GRU -- Formula Summary</title>
+      <link>https://isaacchanghau.github.io/post/lstm-gru-formula/</link>
+      <pubDate>Sat, 22 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/lstm-gru-formula/</guid>
+      <description>Introduction Long Short-Term Memory (LSTM) unit and Gated Recurrent Unit (GRU) RNNs are among the most widely used models in Deep Learning for NLP today. Both LSTM (1997) and GRU (2014) are designed to combat the vanishing gradient problem prevents standard RNNs from learning long-term dependencies through gating mechanism.
+Note that, this article heavily rely on the following to articles, Understanding LSTM Networks and Recurrent Neural Network Tutorial, I summary the formula definition and explanation from them to enhance my understanding of LSTM and GRU as well as their similarity and difference.</description>
+    </item>
+    
+    <item>
+      <title>Neural Responding Machine for Short-Text Conversation -- Summary</title>
+      <link>https://isaacchanghau.github.io/post/neural_responding_machine/</link>
+      <pubDate>Wed, 19 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/neural_responding_machine/</guid>
+      <description>The paper, Neural Responding Machine for Short-Text Conversation, published by L Shang et. al. in 2015, introduces Neural Responding Machine (NRM), a neural network-based response generator for short-text conversation. The NRM takes the general encoder-decoder framework, which formalizes the generation of response as a decoding process based on the latent representation of the input text, while both encoding and decoding are realized with recurrent neural networks (RNN). In this paper, the author demonstrates that the proposed encoder-decoder-based neural network overperform the traditional Retrivial-based methods and Statistical Machine Translation (SMT) based methods.</description>
+    </item>
+    
+    <item>
+      <title>Singapore, Two Years</title>
+      <link>https://isaacchanghau.github.io/post/singapore_two_years/</link>
+      <pubDate>Fri, 14 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/singapore_two_years/</guid>
+      <description>以此纪念在异国漂泊的两年&amp;hellip;&amp;hellip;
+14岁&amp;hellip;离开家去另一座城市上高中&amp;hellip;
+17岁&amp;hellip;高中毕业，在家短暂的待了一个月，便启程去了遥远的北方城市，大连&amp;hellip;
+21岁&amp;hellip;大学毕业，匆匆回家，十四天后，登上了飞往新加坡的航班&amp;hellip;
+这个故事，便从21岁开始。
+2015年7月14日一大早，带上前一晚打包好的行李出发&amp;hellip;
+不舍，因为离别。
+新加坡真的是很干净，从机场出来，坐上的士赶往NTU，一路上的风景也算是让我小小的惊呆了。到NTU已经是晚上，学校很安静，但那会儿的我好像没有心思去感受，因为从踏上这片土地时，心里一直有种空虚感，很少像这样，想家&amp;hellip;&amp;hellip;
+似乎攻略没做好，不认路，没有晚餐&amp;hellip; 在新朋友的帮助下，好不容易找到一间7-11，吃了来新加坡的第一顿饭：泡面。而回到寝室发现没有被子，没有床单，没有枕头。那晚，我就简单的擦了擦床垫，蜷在上面挨过了异国他乡的第一个夜晚。
+那晚，我不停问自己，这个选择，好吗？明知道只有今后漫长的时光能慢慢告诉我答案，可还是忍不住沉思&amp;hellip;
+假如，我没有选择出国，不用花费大量的时间学英语，也许我会继续大学时的研究方向，接着走下去；不用沉重的签下放弃保研承诺书，这样的话，我最终会去到哪个学校呢？
+很快，我便不再思考这些没用的问题，因为我没有重来一次的机会，也因为新的生活，比我想象中，更有趣。
+这里的生活没有国内丰富，但这里的人很nice。
+在学校的一年里，主旋律是学习，伴奏是旅行和探索。第一次面对全英文授课时，内心无遗是崩溃的，而论文也是一头雾水。一路跌跌撞撞，参杂着喜和忧，走到了毕业。
+一年很短，很快又是离别&amp;hellip;
+毕业，我送给自己一首诗：
+小小的屋里弥漫着 每个夜晚 安抚着伤感焦虑的灵魂 伴着芬芳 静静飘散在孤单单的梦里 启程、离别 充满着勇气 却没有魄力去忘记 几日几年后 回首看看 也算是无悔的经历 若从来没有无谓的坚持 又何为无奈的放弃 凡事未必结果 却并非没有意义 我只是努力和憧憬着小小的愿望和私心罢了 坚持，为爱的人，为想要的生活 坚持下去 什么样的方式 什么样的存在 什么样的结局 都无所谓 我有强大的内心 暂别，Singapore 再回来，就不再是可以不管不顾的傻傻学生了...  离开学校，很快就开始工作，连毕业旅行的时间都没留下。而工作，正如很多人所说的那样，教会了我许许多多在学校里学不到和从来不曾想过的事情。这一年里，我最大的体悟便是那曾经最为触动我内心的一句话 &amp;ndash; 成熟，不是学会表达，而是学会咽下，当你一点一点学会克制住很多东西，才能驾驭好人生。
+本想好好的，写一写，曾经的点滴，但我发现，似乎不太有意义。曾经老师教过，说过程是重要的，但后来，我发现，没人在乎过程，大家想要的似乎都只是结果而已。而慢慢的，我还发现，经历过什么其实也不是那么的重要，重要的是，从这些经历中得到了什么。努力过，拼搏过，感动过，伤感过，哭泣过，跌倒过，战胜过，成功过，又有何用，那些都只是过去，都将被淹没在时间的长河里，被人遗忘，被自己遗忘。而只有刻在内心深处的那些因为经历而留下的印记和感悟或许才会终身受用，这些印记又如何能表达，如何能让人感同身受？我觉得似乎不能。。。
+生活从来都不会太美好，但它还会继续，无论是否愿意。倒不是悲观，我很享受现在，即使迷惘，即使彷徨，好奇和期待着接下来的发生的一切。</description>
+    </item>
+    
+    <item>
+      <title>House Prices Advanced Regression Techniques -- Modeling and Prediction</title>
+      <link>https://isaacchanghau.github.io/post/house_price_modeling/</link>
+      <pubDate>Mon, 10 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/house_price_modeling/</guid>
+      <description>After cleaning and transforming processes in House Prices Advanced Regression Techniques &amp;ndash; Data Analysis. Here we continue to build machine learning model to train the dataset and make a prediction based on the trained model. We use Elastic Net and Gradient Boosting models to train the dataset and make predictions separately, then average the results of the two models to generate the final output.
+Elastic Net Regression In statistics and, in particular, in the fitting of linear or logistic regression models, the elastic net is a regularized regression method that linearly combines the L1 and L2 penalties of the lasso and ridge methods.</description>
+    </item>
+    
+    <item>
+      <title>House Prices Advanced Regression Techniques -- Data Analysis</title>
+      <link>https://isaacchanghau.github.io/post/house_price_data_analysis/</link>
+      <pubDate>Sat, 08 Jul 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/house_price_data_analysis/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.kaggle.com/c/house-prices-advanced-regression-techniques&#34; target=&#34;_blank&#34;&gt;House Prices: Advanced Regression Techniques&lt;/a&gt; is a &lt;a href=&#34;https://www.kaggle.com/&#34; target=&#34;_blank&#34;&gt;kaggle&lt;/a&gt; competition to predict the house prices, which aims to practice feature engineering, RFs, and gradient boosting. After exploring and referring others&amp;rsquo; methods, I decide to do it by myself to improve my python skill in data science and data analysis ability.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Spark Installation on Mac OS X</title>
+      <link>https://isaacchanghau.github.io/post/install_spark_mac/</link>
+      <pubDate>Wed, 28 Jun 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/install_spark_mac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hadoop Installation on Mac OS X</title>
+      <link>https://isaacchanghau.github.io/post/install_hadoop_mac/</link>
+      <pubDate>Tue, 27 Jun 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/install_hadoop_mac/</guid>
+      <description>It is an introduction of Hadoop installation under pseudo-distributed model. The difference among single node, pseudo-distributed and distributed is introduced here: link.
+Install Homebrew and Cask Homebrew is a free and open-source software package management system that simplifies the installation of software on Apple&amp;rsquo;s macOS operating system. Originally written by Max Howell, the package manager has gained popularity in the Ruby on Rails community and earned praise for its extensibility.</description>
+    </item>
+    
+    <item>
+      <title>Install XGBoost on Mac OS X</title>
+      <link>https://isaacchanghau.github.io/post/install_xgboost_mac/</link>
+      <pubDate>Tue, 20 Jun 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/install_xgboost_mac/</guid>
+      <description>Generally, installing XGBoost on Mac is not a cumbersome task, but I still suffered some errors while dealing with it. So I make a note here to record the overall process to make it works.
+XGBoost is an optimized distributed gradient boosting library designed to be highly efficient, flexible and portable. It implements machine learning algorithms under the Gradient Boosting framework. Um&amp;hellip; those words are directly copy from XGBoost GitHub page.</description>
+    </item>
+    
+    <item>
+      <title>Mathematical Derivation of Covariance Matrix</title>
+      <link>https://isaacchanghau.github.io/post/covariance_derivation/</link>
+      <pubDate>Sat, 17 Jun 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/covariance_derivation/</guid>
+      <description>In probability theory and statistics, covariance is a measure of the joint variability of two random variables. If the greater values of one variable mainly correspond with the greater values of the other variable, and the same holds for the lesser values, i.e., the variables tend to show similar behavior, the covariance is positive. In the opposite case, when the greater values of one variable mainly correspond to the lesser values of the other, i.</description>
+    </item>
+    
+    <item>
+      <title>Understanding LSTM Networks</title>
+      <link>https://isaacchanghau.github.io/post/understand_lstm/</link>
+      <pubDate>Tue, 13 Jun 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/understand_lstm/</guid>
+      <description>Declaration: This blog article is totaly not my original article. I just reproduce it from colah&amp;rsquo;s blog &amp;ndash; Understanding LSTM Networks, since it is really an excellent article of explanation of LSTM and I am afraid that I may lose the link of this article or the author may change her blog address. So I put this article into my own blog&amp;hellip; Moreover, the Chinese version of this article, translated by Not_GOD, are available here.</description>
+    </item>
+    
+    <item>
+      <title>Loss Functions in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/loss_functions/</link>
+      <pubDate>Wed, 07 Jun 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/loss_functions/</guid>
+      <description>Loss function is an important part in artificial neural networks, which is used to measure the inconsistency between predicted value ($\hat{y}$) and actual label ($y$). It is a non-negative value, where the robustness of model increases along with the decrease of the value of loss function. Loss function is the hard core of empirical risk function as well as a significant component of structural risk function. Generally, the structural risk function of a model is consist of empirical risk term and regularization term, which can be represented as $$ \begin{aligned} \boldsymbol{\theta}^{*} &amp;amp; =\arg\min_{\boldsymbol{\theta}}\boldsymbol{\mathcal{L}}(\boldsymbol{\theta})+\lambda\cdot\Phi(\boldsymbol{\theta})\newline &amp;amp; =\arg\min_{\boldsymbol{\theta}}\frac{1}{n}\sum_{i=1}^{n}L\big(y^{(i)},\hat{y}^{(i)}\big)+\lambda\cdot\Phi(\boldsymbol{\theta})\newline &amp;amp; =\arg\min_{\boldsymbol{\theta}}\frac{1}{n}\sum_{i=1}^{n}L\big(y^{(i)},f(\mathbf{x}^{(i)},\boldsymbol{\theta})\big)+\lambda\cdot\Phi(\boldsymbol{\theta}) \end{aligned} $$ where $\Phi(\boldsymbol{\theta})$ is the regularization term or penalty term, $\boldsymbol{\theta}$ is the parameters of model to be learned, $f(\cdot)$ represents the activation function and $\mathbf{x}^{(i)}=\{x_{1}^{(i)},x_{2}^{(i)},\dots ,x_{m}^{(i)}\}\in\mathbb{R}^{m}$ denotes the a training sample.</description>
+    </item>
+    
+    <item>
+      <title>Parameter Update Methods in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/parameters_update/</link>
+      <pubDate>Mon, 29 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/parameters_update/</guid>
+      <description>Gradient descent optimization algorithms are very popular to perform optimization and by far the most common way to optimize neural networks. However, there are also many other algorithms, like Hessian Free, Conjugate Gradient, BFGS, L-BFGS and etc., are proposed to deal with optimization tasks, here we only take those gradient descent methods into account. And we will discuss the drawbacks among those gradient algorithms and the methods to solve these blemishes.</description>
+    </item>
+    
+    <item>
+      <title>Weight Initialization Methods in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/weight_initialization/</link>
+      <pubDate>Wed, 24 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/weight_initialization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Activation Functions in Neural Networks</title>
+      <link>https://isaacchanghau.github.io/post/activation_functions/</link>
+      <pubDate>Mon, 22 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/activation_functions/</guid>
+      <description>By definition, activation function is a function used to transform the activation level of a unit (neuron) into an output signal. Typically, activation function has a &amp;ldquo;squashing&amp;rdquo; effect. An activation function serves as a threshold, alternatively called classification or a partition. Bengio et al. refers to this as &amp;ldquo;Space Folding&amp;rdquo;. It essentially divides the original space into typically two partitions. Activation functions are usually introduced as requiring to be a non-linear function, that is, the role of activation function is made neural networks non-linear.</description>
+    </item>
+    
+    <item>
+      <title>Machine Learning Note (4): Ensemble Learning</title>
+      <link>https://isaacchanghau.github.io/post/ml_zzh_note_4/</link>
+      <pubDate>Thu, 18 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ml_zzh_note_4/</guid>
+      <description>摘自周志华《机器学习》第八章-集成学习。
+个体与集成 集成学习 (ensemble learning) 通过构建并结合多个学习器来完成学习任务，也被称为多分类器系统 (multi-classifier system)、基于委员会的学习 (committee-based learning) 等。 下图展示了集成学习的一般结构：先产生一组“个体学习器” (individual learner)，再用某种策略将它们结合。若集成中只包含同种类型的个体学习器，这样的集成是“同质的” (homogeneous)，同质集成中的个体学习器称为“基学习器” (base learner)，相应的学习算法称为“基学习算法” (base learning algorithm)。集成也可以包含不同类型的个体学习器，即“异质的” (heterogenous)。异质集成中的个体学习器由不同的学习算法生成，此时不再有基学习算法，而个体学习器也常称为“组件学习器” (component learner)。 集成学习通过将多个学习器进行结合，通常可以获得比单一学习器显著优越的泛化性能。这对“弱学习器” (weak learner) 尤为明显。实际中，要获得好的集成，个体学习器通常应该“好二不同”，即个体学习器要有一定的“准确性”，并且要有“多样性”，即学习器间具有差异。如下图所示 举个例子，考虑二分类问题 $y\in\{-1,+1\}$ 和真实函数 $\boldsymbol{f}$，假设基分类器的错误率为 $\epsilon$，即对每个基分类器 $h_{i}$ 有 $$ P(h_{i}(\boldsymbol{x})\neq\boldsymbol{f}(\boldsymbol{x}))=\epsilon\tag{1} $$ 假设集成通过简单投票法结合 $T$ 个基分类器，若有超过半数的基分类器正确，则集成分类就正确： $$ H(\boldsymbol{x})=sign\bigg(\sum_{i=1}^{T}h_{i}(\boldsymbol{x})\bigg)\tag{2} $$ 假设基分类器的错误率相互独立，则由 Hoeffding 不等式可知，集成的错误率为 $$ P(H(\boldsymbol{x})\neq\boldsymbol{f}(\boldsymbol{x}))=\sum_{k=0}^{\lfloor T/2\rfloor}{T\choose k}(1-\epsilon)^{k}\epsilon^{T-k}\leq\exp\big(-\frac{1}{2}T(1-2\epsilon)^{2}\big)\tag{3} $$ 由上式可得，随着个体集成中个体分类器数目 $T$ 的增大，集成的错误率将指数级下降，最终趋向于零。上面的分析有一个关键假设：基学习器的误差相互独立。实际上，个体学习器是为解决同一个问题训练出来的，显然不能相互独立。而“准确性”和“多样性”本身就存在冲突，当准确性很高之后，增加多样性就需要牺牲准确性。
+根据个体学习器的生成方式，集成学习大致分为两类：
+ 个体学习器间存在强依赖关系、必须串行生成的序列化方法，如 Boosting。 个体学习器不存在强依赖关系、可同时生成的并行化方法，如 Bagging 和“随即森林” (Random Forest)。  Boosting Boosting 是一族可将弱学习器提升为强学习器的算法，其工作机制类似：先从初始训练集训练出一个基学习器，再根据基学习器的表现对训练样本进行调整，使得先前基学习器做错的训练样本在后续受到更多的关注，然后基于调整后的样本训练下一个基学习器，如此重复进行，直至基学习器达到事先指定的值 $T$，最终将这 $T$ 个基学习器进行加权结合。如 AdaBoost 算法，</description>
+    </item>
+    
+    <item>
+      <title>Word2Vecf -- Dependency-Based Word Embeddings and Lexical Substitute</title>
+      <link>https://isaacchanghau.github.io/post/word2vecf/</link>
+      <pubDate>Thu, 18 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/word2vecf/</guid>
+      <description>It is a summary of Dependency-based Word Embeddings and A Simple Word Embedding Model for Lexical Substitution proposed by Omer Levy on ACL 2014 and VSM 2015 respectively. After studying the two papers, I implement the methods intorduced in the two papers with Java to enhance my comprehension and deal with some practical tasks.
+Introduction The method proposed in &amp;ldquo;Dependency-based Word Embeddings&amp;rdquo; is a generalized skip-gram model with negative sampling, which is capable of dealing with the arbitrary contexts, and its generated embeddings are less topical and exhibit more functional similarity than the original skip-gram embeddings in Word2Vec.</description>
+    </item>
+    
+    <item>
+      <title>Machine Learning Note (3): Support Vector Machine</title>
+      <link>https://isaacchanghau.github.io/post/ml_zzh_note_3/</link>
+      <pubDate>Tue, 16 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ml_zzh_note_3/</guid>
+      <description>摘自周志华《机器学习》第六章–支持向量机。
+间隔与支持向量 给定数据集$D=\{(\boldsymbol{x}_{1},y_{1}),\dots,(\boldsymbol{x}_{m},y_{m})\}$，$y_{i}\in\{-1,+1\}$，分类学习最基本的思想是基于训练集$D$在样本空间中找到一个划分超平面，将不同类别的样本分开。但能将训练样本粉来的划分超平面可能有很多，直观上，应该去找两类训练样本“正中间”的划分超平面，即下图中粗线表示的划分超平面，因为该划分对训练样本局部扰动的*“容忍性”*最好。 在样本空间中，划分超平面由下述线性方程表示： $$ \boldsymbol{w}^{T}\boldsymbol{x}+b=0\tag{1} $$ 其中$\boldsymbol{w}=(w_{1},\dots,w_{d})$为法向量，决定了超平面的方向，$b$为位移项，决定了超平面与原点之间的距离。记超平面为$(\boldsymbol{w},b)$，样本空间中任意点$\boldsymbol{x}$到超平面$(\boldsymbol{w},b)$的距离可写为 $$ r=\frac{\vert\boldsymbol{w}^{T}\boldsymbol{x}+b\vert}{\Vert\boldsymbol{w}\Vert}\tag{2} $$ 假设$(\boldsymbol{w},b)$能将训练样本正确分类，即对于$(\boldsymbol{x}_{i},y_{i})\in D$，若$y_{i}=+1$，则有$\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b&amp;gt;0$；若$y_{i}=-1$，则$\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b&amp;lt;0$。令 $$ \begin{cases} \boldsymbol{w}^{T}\boldsymbol{x}_{i}+b\geq+1,&amp;amp;y_{i}=+1;\newline \boldsymbol{w}^{T}\boldsymbol{x}_{i}+b\leq-1,&amp;amp;y_{i}=-1. \end{cases}\tag{3} $$ 如下图，距离超平面最近的几个训练样本点使公式(3)成立，它们被称为“支持向量” (support vector)，两个异类支持向量到超平面的距离之和为$$ \gamma=\frac{2}{\Vert\boldsymbol{w}\Vert}\tag{4}$$它被称为“间隔” (margin)。 求解“最大间隔” (maximum margin)的划分超平面，即找到满足公式(3)中的约束参数$\boldsymbol{w}$和$b$，使得$\gamma$最大： $$ \begin{aligned} &amp;amp; \max_{\boldsymbol{w},b}\frac{2}{\Vert\boldsymbol{w}\Vert}\newline &amp;amp; s.t.\quad y_{i}(\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b)\geq 1,\quad i=1,2,\dots,m \end{aligned}\tag{5} $$ 最大化间隔，仅需要最大化$\Vert\boldsymbol{w}\Vert^{-1}$，等价于最小化$\Vert\boldsymbol{w}\Vert^{2}$，于是有 $$ \begin{aligned} &amp;amp; \min_{\boldsymbol{w},b}\frac{1}{2}\Vert\boldsymbol{w}\Vert^{2}\newline &amp;amp; s.t.\quad y_{i}(\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b)\geq 1,\quad i=1,2,\dots,m \end{aligned}\tag{6} $$ 上式为支持向量机(Support Vector Machine，SVM)的基本型。
+对偶问题 我们希望求解式(6)来得到最大间隔划分超平面所对应的模型 $$ f(\boldsymbol{x})=\boldsymbol{w}^{T}\boldsymbol{x}+b\tag{7} $$ 公式(6)本身为一个凸二次规划 (convex quadratic programming)问题，为求解(6)式，对其使用拉格朗日乘子法可得其“对偶问题” (dual problem)： $$ L(\boldsymbol{w},b,\boldsymbol{\alpha})=\frac{1}{2}\Vert\boldsymbol{w}\Vert^{2}+ \sum_{i=1}^{m}\alpha_{i}\big(1-y_{i}(\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b)\big)\tag{8} $$ 其中$\boldsymbol{\alpha}=(\alpha_{1};\dots;\alpha_{m})$。令$L(\boldsymbol{w},b,\boldsymbol{\alpha})$对$\boldsymbol{w}$和$b$的偏导为零可得 $$ \boldsymbol{w}=\sum_{i=1}^{m}\alpha_{i}y_{i}\boldsymbol{x}_{i}\tag{9} $$ $$ 0=\sum_{i=1}^{m}\alpha_{i}y_{i}\tag{10} $$ 将(9)代入(8)，即可将$L(\boldsymbol{w},b,\boldsymbol{\alpha})$中的$\boldsymbol{w}$和$b$消去，再考虑式(10)的约束，可得到式(6)的对偶问题 $$ \begin{aligned} &amp;amp; \max_{\boldsymbol{\alpha}}\sum_{i=1}^{m}\alpha_{i}-\frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_{i}\alpha_{j}y_{i}y_{j}\boldsymbol{x}_{i}^{T}\boldsymbol{x}_{j}\newline &amp;amp; s.</description>
+    </item>
+    
+    <item>
+      <title>Word2Vec -- Mathematical Principles and Java Implementation</title>
+      <link>https://isaacchanghau.github.io/post/word2vec/</link>
+      <pubDate>Sat, 13 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/word2vec/</guid>
+      <description>I began to get to know the natural language process area when I started to work as a research engineer around one year ago, and the first technique I was asked to learn is the Word2Vec. Since the Word2Vec was proposed amost four years ago, there are already amount of research reports, papers, tutorials and even applications are available online. In order to understand this technique well, I explored and studied many of those online resources at that time.</description>
+    </item>
+    
+    <item>
+      <title>Machine Learning Note (2): Linear Regression</title>
+      <link>https://isaacchanghau.github.io/post/ml_zzh_note_2/</link>
+      <pubDate>Thu, 04 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ml_zzh_note_2/</guid>
+      <description>摘自周志华《机器学习》第三章&amp;ndash;线性模型。
+线性模型 给定由$d$个属性描述的示例$\mathbf{x}=(x_{1};x_{2};\dots ;x_{d})$，其中$x_{i}$是$\mathbf{x}$在第$i$个属性上的取值，线性模型(linear model)试图学的一个通过属性的线性组合来进行预测的函数，即 $$ f(\mathbf{x})=\mathbf{w}^{T}\mathbf{x}+b $$ 其中$\mathbf{w}=(w_{1};w_{2};\dots ;w_{d})$。$\mathbf{w}$和$b$学得之后，模型就可以确定。
+线性回归 给定数据集$D={(\mathbf{x}_{1},y_{1}),(\mathbf{x}_{2},y_{2}),\dots ,(\mathbf{x}_{m},y_{m})}$，其中$\mathbf{x}_{i}=(x_{i1};x_{i2};\dots ;x_{id}), y_{i}\in \mathbb{R}$。“线性回归” (linear regression)试图学得 $$ f(\mathbf{x}_{i})=\mathbf{w}^{T}\mathbf{x}_{i}+b, 使得f(\mathbf{x}_{i})\simeq y_{i} $$ 接下来的任务是确定$\mathbf{w}$和$b$，其关键在于衡量$f(x)$和$y$之间的差别，而均方误差是回归任务中最常用的性能度量，它对应了常用的“欧式距离” (Euclidean distance)，因此可以试图让均方误差最小化。均方误差最小化进行模型求解的方法称为“最小二乘法” (least square method)。在线性回归中，最小二乘法就是试图找到一条直线，使所有样本到直线上的欧式距离之和最小。这里，我们将$\mathbf{w}$和$b$吸收入向量形式$\mathbf{\hat{w}}=(b;\mathbf{w})=(b;w_{1};w_{2};\dots ;w_{d})$，相应的，将数据集$D$中的$\mathbf{x}_{i}$表示为$\mathbf{x}_{i}=(1;x_{i1};x_{i2};\dots ;x_{id})$，因此数据集$D$可以表示为一个$m\times (d+1)$的矩阵$\mathbf{X}=(\mathbf{x}_{1};\mathbf{x}_{2};\dots ;\mathbf{x}_{m})^{T}$，再把标记也写成向量形式$\mathbf{y}=(y_{1};y_{2};\dots ;y_{m})$。于是有 $$ f(\mathbf{X})=\mathbf{X}\mathbf{\hat{w}}, 使得f(\mathbf{X})\simeq\mathbf{y} $$ 最小化均方误差，有 $$ \mathbf{\hat{w}}^{*}=\arg\min_{\mathbf{\hat{w}}}(f(\mathbf{X})-\mathbf{y})^{2}=\arg\min_{\mathbf{\hat{w}}}(\mathbf{y}-\mathbf{X}\mathbf{\hat{w}})^{T}(\mathbf{y}-\mathbf{X}\mathbf{\hat{w}}) $$ 令$E_{\mathbf{\hat{w}}}=(\mathbf{y}-\mathbf{X}\mathbf{\hat{w}})^{T}(\mathbf{y}-\mathbf{X}\mathbf{\hat{w}})$，对$\mathbf{\hat{w}}$求导得到 $$\frac{\partial E_{\mathbf{\hat{w}}}}{\partial \mathbf{\hat{w}}}=2\mathbf{X}^{T}(\mathbf{X}\mathbf{\hat{w}}-\mathbf{y}) $$ 令上式为零可得$\mathbf{\hat{w}}$最优解的封闭式。当$\mathbf{X}^{T}\mathbf{X}$为满秩矩阵 (full-rank matrix)或正定矩阵 (positive definite matrix)时，可得到 $$ \mathbf{\hat{w}}^{*}=(\mathbf{X}^{T}\mathbf{X})^{-1}\mathbf{X}^{T}\mathbf{y} $$ 其中$(\mathbf{X}^{T}\mathbf{X})^{-1}$是$\mathbf{X}^{T}\mathbf{X}$的逆矩阵。然而现实任务中，$\mathbf{X}^{T}\mathbf{X}$往往不是满秩矩阵，此时可解出多个$\mathbf{\hat{w}}$，都能使均方误差最小化，而选择哪一个解作为输出将由算法的归纳偏好决定，常见的做法是引入正则化(regularization)项。
+线性模型预测值不仅可以逼近$y$，也可以使其逼近$y$的衍生物。比如，可将输出标记的对数作为线性模型逼近的目标，即“对数线性回归” (log-linear regression) $$ \ln y=\mathbf{w}^{T}\mathbf{x}+b $$ 它实际上是让$e^{\mathbf{w}^{T}\mathbf{x}+b}$逼近$y$，形式上它仍是线性回归，但实质上已是在求取输入空间到输出空间的非线性函数映射，如图 更一般地，考虑单调可微函数$g(\cdot)$，令$$y=g^{-1}(\mathbf{w}^{T}\mathbf{x}+b)$$这样得到的模型称为“广义线性模型” (generalized linear model)，其中函数$g(\cdot)$称为“联系函数” (link function)。对数线性回归是广义线性模型在$g(\cdot)=\ln (\cdot)$时的特例。</description>
+    </item>
+    
+    <item>
+      <title>Machine Learning Note (1): Model Evaluation and Selection</title>
+      <link>https://isaacchanghau.github.io/post/ml_zzh_note_1/</link>
+      <pubDate>Fri, 28 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ml_zzh_note_1/</guid>
+      <description>摘自周志华《机器学习》第二章&amp;ndash;模型评估与选择。
+根据训练数据是否拥有标记信息，学习任务可大致分为两大类: “监督学习” (supervised learning) 和“无监督学习” (unsupervised learning)，分类 (classification) 和回归 (regression) 是前者的代表，而聚类 (clustering) 是后者的代表。 机器学习的目标是使学得的模型能很好的适用于“新样本”，而不是仅仅在训练样本上工作得很好；即便对聚类这样的无监督学习任务，我们也希望学得的簇划分能适用于没在训练集中出现的样本。学得模型适用于新样本的能力，称为泛化 (generalization) 能力。具有强泛化能力的模型能很好的适用于整个样本空间。
+经验误差与过拟合 错误率 (error rate): 为分类错误的样本数占样本总数的比例，即在$m$个样本中有$a$个样本分类错误，则错误率$E=\frac{a}{m}$，相应的$1-\frac{a}{m}$称为精度 (accuracy)，即“精度=1-错误率”。
+误差 (error): 学习器实际预测输出与样本的真实输出之间的差异。
+训练误差 (training error)或“经验误差”(empirical error): 学习器在训练集上的误差。
+泛化误差 (generalization error): 学习器在新样本上的误差。 过拟合 (overfitting): 指在拟合一个统计模型时，使用过多参数。对比于可获取的数据总量来说，一个荒谬的模型只要足够复杂，是可以完美地适应数据。过拟合一般可以视为违反奥卡姆剃刀原则。当可选择的参数的自由度超过数据所包含信息内容时，这会导致最后（拟合后）模型使用任意的参数，这会减少或破坏模型一般化的能力更甚于适应数据。过拟合的可能性不只取决于参数个数和数据，也跟模型架构与数据的一致性有关。此外对比于数据中预期的噪声或错误数量，跟模型错误的数量也有关。
+欠拟合 (underfitting): 指模型没有很好地捕捉到数据特征，不能够很好地拟合数据，与过拟合相反。
+评估方法 留出法 (hold-out): 直接将数据集D划分为两个互斥的集合，其中一个集合作为训练集$S$，另一个作为测试集$T$，即$D=S\cup T$，$S\cap T=\varnothing$。在$S$上训练出模型后，用$T$来评估器测试误差，作为泛化误差的估计。拆分数据集$D$一般采用“分层采样” (stratified sampling)。
+交叉验证法 (cross validation): 先将数据集$D$划分为$k$个大小相似的互斥子集，即$D=D_{1}\cup D_{2} \cup &amp;hellip;\cup D_{k}$，$D_{i}\cap D_{j}=\varnothing (i\neq j)$。每个子集$D_{i}$都尽可能保持数据分布的一致性，即从$D$中通过分层采样得到。然后，每次用k-1个子集的并集作为训练集，余下的那个子集作为测试集，这样就可以获得k组训练/测试集，从而可进行k次训练和测试，最终返回k次测试结果的均值。这种方法的稳定性 (stability) 和保真性 (fidelity) 很大程度上取决于k的取值，通常这种方法又称为“k折交叉验证” (k-fold cross validation)。通常k的取值为10。
+自助法 (bootstrapping): 以自助采样 (bootstrap sampling) 为基础，给定包含$m$个样本的数据集$D$，对它进行采样产生数据集$D&amp;rsquo;$，每次随机从$D$中挑选一个样本，将其拷贝到$D&amp;rsquo;$，然后再将该样本放回初始数据集$D$中，使得该样本在下次采样时仍有可能被采到；这个过程重复执行$m$次后，就得到包含$m$个样本的数据集$D&amp;rsquo;$，这就是自助采样的结果。显然$D$中有一部分样本会在$D&amp;rsquo;$中多次出现，而另一部分样本不出现。粗略估计，样本在$m$次采样中始终不被采到的概率是$(1-\frac{1}{m})^{m}$，取极限得到 $$ \lim_{m \to \infty}(1-\frac{1}{m})^{m}\longmapsto\frac{1}{e}\approx0.</description>
+    </item>
+    
+    <item>
+      <title>Removing Backscatter to Enhance the Visibility of Underwater Object</title>
+      <link>https://isaacchanghau.github.io/post/removing_backscatter/</link>
+      <pubDate>Thu, 20 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/removing_backscatter/</guid>
+      <description>This is a novel method based on underwater optical model for underwater object visibility enhancement based on single image.
+General Schema For an underwater distorted image, it is firstly decomposed to reflectance and illuminance. Then color correction and dehazing methods are utilized to process each component separately, according to their specific features. Finally, we calculate the weights of two components and apply an efficient image fusion method to obtain the enhanced image.</description>
+    </item>
+    
+    <item>
+      <title>Underwater Image Enhance via Fusion and Its Java Implementation</title>
+      <link>https://isaacchanghau.github.io/post/underwater_image_fusion/</link>
+      <pubDate>Sat, 15 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/underwater_image_fusion/</guid>
+      <description>This paper &amp;ldquo;Enhancing Underwater Images and Videos by Fusion&amp;rdquo;, published by Ancuti et al. on CVPR, describes a novel strategy, built on the fusion principles, to enhance underwater videos and images. Here I implement this algorithm by Java, and summerize the main idea in this paper.
+General Schema The enhancing approach starts from a single distorted underwater image, first of all, applying white balance to this image to generate the first input of fusion process, denotes as $img_{1}$, and applying a temporal coherent noise reduction method to this $img_{1}$ to derive another input of fusion process, denotes as $img_{2}$; then, obtaining the weights of these two inputs, where Laplacian contrast weight ($W_{L}$), local contrast weight ($W_{LC}$), Saliency weight ($W_{S}$) and exposedness weight ($W_{E}$) are used in this process; finally, the multi-scale fusion process is applied to generate the restored image.</description>
+    </item>
+    
+    <item>
+      <title>Adaptive Local Tone Mapping Technique for HDR Image and Java Implementation</title>
+      <link>https://isaacchanghau.github.io/post/altm/</link>
+      <pubDate>Tue, 11 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/altm/</guid>
+      <description>This short paper, published by Ahn et al. on ICCE, introduces a new tone mapping technique for HDR images based on the retinex theory. Here I summarize this paper and show the Java implementation with OpenCV to realize the proposed algorithm.
+Center/Surround Retinex The retinex theory, initially defined by Land et al., explains how the realiable color information from the real world is extracted by human visual system, and Jobson et al.</description>
+    </item>
+    
+    <item>
+      <title>Installation of OpenCV for Java</title>
+      <link>https://isaacchanghau.github.io/post/install_opencv_java/</link>
+      <pubDate>Mon, 10 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/install_opencv_java/</guid>
+      <description>As of OpenCV 2.4.4, OpenCV supports desktop Java development. Note that this post is transported from OpenCV Java Tutorials. This tutorial will help you install OpenCV on your desktop operating system.
+Install the latest Java version Download the latest Java JDK from the Oracle website. Now you should be able to install the last Java JDK by open the file just downloaded.
+Install the latest Eclipse version Download the latest Eclipse version at the Eclipse Download page choosing the Eclipse IDE for Java Developers version (suggested).</description>
+    </item>
+    
+    <item>
+      <title>MacOS Dictionary Application Extension</title>
+      <link>https://isaacchanghau.github.io/post/mac_dict_extension/</link>
+      <pubDate>Mon, 03 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/mac_dict_extension/</guid>
+      <description>Here are two ways to build your MacOS Discionary to make it powerful.
+Use DictUnifier Toolkit Dictionary Conversion Tool Download DictUnifier through this link, uncompressing it after downloeded, since it is a .app software, so we can use it on Mac directly. The Dictionary packages are available here.
+Convert Dict After downloaded your preferred dictionary sources, we need to convert them to the format can be recognized by MacOS Dictionary Application.</description>
+    </item>
+    
+    <item>
+      <title>Configure BitBucket Git Repository in Eclipse</title>
+      <link>https://isaacchanghau.github.io/post/config_git_eclipse/</link>
+      <pubDate>Sat, 01 Apr 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/config_git_eclipse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Skiing In Singapore</title>
+      <link>https://isaacchanghau.github.io/post/skiing_in_singapore/</link>
+      <pubDate>Thu, 30 Mar 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/skiing_in_singapore/</guid>
+      <description>It is an online test provided by RedMart, who asks to solve a problem by using DFS algorithm. More details you can find here.
+Discription Sometimes it&amp;rsquo;s nice to take a break and code up a solution to a small, fun problem. Here is one some of our engineers enjoyed recently called Skiing In Singapore. Well you can’t really ski in Singapore. But let’s say you hopped on a flight to the Niseko ski resort in Japan.</description>
+    </item>
+    
+  </channel>
+</rss>

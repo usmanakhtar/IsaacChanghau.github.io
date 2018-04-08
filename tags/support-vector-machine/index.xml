@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Support-vector-machine on Isaac Changhau</title>
+    <link>https://isaacchanghau.github.io/tags/support-vector-machine/</link>
+    <description>Recent content in Support-vector-machine on Isaac Changhau</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2017-2018</copyright>
+    <lastBuildDate>Tue, 16 May 2017 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="https://isaacchanghau.github.io/tags/support-vector-machine/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Machine Learning Note (3): Support Vector Machine</title>
+      <link>https://isaacchanghau.github.io/post/ml_zzh_note_3/</link>
+      <pubDate>Tue, 16 May 2017 00:00:00 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/ml_zzh_note_3/</guid>
+      <description>摘自周志华《机器学习》第六章–支持向量机。
+间隔与支持向量 给定数据集$D=\{(\boldsymbol{x}_{1},y_{1}),\dots,(\boldsymbol{x}_{m},y_{m})\}$，$y_{i}\in\{-1,+1\}$，分类学习最基本的思想是基于训练集$D$在样本空间中找到一个划分超平面，将不同类别的样本分开。但能将训练样本粉来的划分超平面可能有很多，直观上，应该去找两类训练样本“正中间”的划分超平面，即下图中粗线表示的划分超平面，因为该划分对训练样本局部扰动的*“容忍性”*最好。 在样本空间中，划分超平面由下述线性方程表示： $$ \boldsymbol{w}^{T}\boldsymbol{x}+b=0\tag{1} $$ 其中$\boldsymbol{w}=(w_{1},\dots,w_{d})$为法向量，决定了超平面的方向，$b$为位移项，决定了超平面与原点之间的距离。记超平面为$(\boldsymbol{w},b)$，样本空间中任意点$\boldsymbol{x}$到超平面$(\boldsymbol{w},b)$的距离可写为 $$ r=\frac{\vert\boldsymbol{w}^{T}\boldsymbol{x}+b\vert}{\Vert\boldsymbol{w}\Vert}\tag{2} $$ 假设$(\boldsymbol{w},b)$能将训练样本正确分类，即对于$(\boldsymbol{x}_{i},y_{i})\in D$，若$y_{i}=+1$，则有$\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b&amp;gt;0$；若$y_{i}=-1$，则$\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b&amp;lt;0$。令 $$ \begin{cases} \boldsymbol{w}^{T}\boldsymbol{x}_{i}+b\geq+1,&amp;amp;y_{i}=+1;\newline \boldsymbol{w}^{T}\boldsymbol{x}_{i}+b\leq-1,&amp;amp;y_{i}=-1. \end{cases}\tag{3} $$ 如下图，距离超平面最近的几个训练样本点使公式(3)成立，它们被称为“支持向量” (support vector)，两个异类支持向量到超平面的距离之和为$$ \gamma=\frac{2}{\Vert\boldsymbol{w}\Vert}\tag{4}$$它被称为“间隔” (margin)。 求解“最大间隔” (maximum margin)的划分超平面，即找到满足公式(3)中的约束参数$\boldsymbol{w}$和$b$，使得$\gamma$最大： $$ \begin{aligned} &amp;amp; \max_{\boldsymbol{w},b}\frac{2}{\Vert\boldsymbol{w}\Vert}\newline &amp;amp; s.t.\quad y_{i}(\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b)\geq 1,\quad i=1,2,\dots,m \end{aligned}\tag{5} $$ 最大化间隔，仅需要最大化$\Vert\boldsymbol{w}\Vert^{-1}$，等价于最小化$\Vert\boldsymbol{w}\Vert^{2}$，于是有 $$ \begin{aligned} &amp;amp; \min_{\boldsymbol{w},b}\frac{1}{2}\Vert\boldsymbol{w}\Vert^{2}\newline &amp;amp; s.t.\quad y_{i}(\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b)\geq 1,\quad i=1,2,\dots,m \end{aligned}\tag{6} $$ 上式为支持向量机(Support Vector Machine，SVM)的基本型。
+对偶问题 我们希望求解式(6)来得到最大间隔划分超平面所对应的模型 $$ f(\boldsymbol{x})=\boldsymbol{w}^{T}\boldsymbol{x}+b\tag{7} $$ 公式(6)本身为一个凸二次规划 (convex quadratic programming)问题，为求解(6)式，对其使用拉格朗日乘子法可得其“对偶问题” (dual problem)： $$ L(\boldsymbol{w},b,\boldsymbol{\alpha})=\frac{1}{2}\Vert\boldsymbol{w}\Vert^{2}+ \sum_{i=1}^{m}\alpha_{i}\big(1-y_{i}(\boldsymbol{w}^{T}\boldsymbol{x}_{i}+b)\big)\tag{8} $$ 其中$\boldsymbol{\alpha}=(\alpha_{1};\dots;\alpha_{m})$。令$L(\boldsymbol{w},b,\boldsymbol{\alpha})$对$\boldsymbol{w}$和$b$的偏导为零可得 $$ \boldsymbol{w}=\sum_{i=1}^{m}\alpha_{i}y_{i}\boldsymbol{x}_{i}\tag{9} $$ $$ 0=\sum_{i=1}^{m}\alpha_{i}y_{i}\tag{10} $$ 将(9)代入(8)，即可将$L(\boldsymbol{w},b,\boldsymbol{\alpha})$中的$\boldsymbol{w}$和$b$消去，再考虑式(10)的约束，可得到式(6)的对偶问题 $$ \begin{aligned} &amp;amp; \max_{\boldsymbol{\alpha}}\sum_{i=1}^{m}\alpha_{i}-\frac{1}{2}\sum_{i=1}^{m}\sum_{j=1}^{m}\alpha_{i}\alpha_{j}y_{i}y_{j}\boldsymbol{x}_{i}^{T}\boldsymbol{x}_{j}\newline &amp;amp; s.</description>
+    </item>
+    
+  </channel>
+</rss>
