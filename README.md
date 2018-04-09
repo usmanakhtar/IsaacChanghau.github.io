@@ -1,3 +1,3 @@
-# Personal Blog
+# IsaacChanghau's Personal Blog
 
-Hugo + Academic Theme
+Powered by [Hugo](https://gohugo.io) + [Academic Theme](https://themes.gohugo.io/academic/)
