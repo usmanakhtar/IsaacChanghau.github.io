@@ -468,8 +468,6 @@ Test Loss: 0.115165
 &lt;h3 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h3&gt;
 
 &lt;p&gt;The Dataset API gives us a fast and robust way to create optimized input pipeline to train, evaluate and test our models. In this article, we have seen most of the common operation we can do with them.&lt;/p&gt;
-
-&lt;p&gt;Chinese version：&lt;a href=&#34;http://mp.weixin.qq.com/s/KSCvRRu9Bb4_p_12Xa2rNA&#34; target=&#34;_blank&#34;&gt;AI科技大本营·如何使用TensorFlow中的Dataset API (使用内置输入管道，告别&lt;code&gt;feed-dict&lt;/code&gt;)&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -481,7 +479,15 @@ Test Loss: 0.115165
       <guid>https://isaacchanghau.github.io/project/neural_seq_labeling/</guid>
       <description>&lt;p&gt;&lt;i class=&#34;fa fa-calendar&#34;&gt;&lt;/i&gt; &lt;strong&gt;Date&lt;/strong&gt;: Nov. 2017 - Feb. 2018&lt;br&gt;&lt;i class=&#34;fa fa-user&#34;&gt;&lt;/i&gt; &lt;strong&gt;Collaborators&lt;/strong&gt;: Hao Zhang&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;TODO&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Sequence labeling is a type of pattern recognition task that involves the algorithmic assignment of a categorical label to each member of a sequence of observed values. Sequence labeling tasks include but not limit to Part Of Speech (POS) tagging, Chunking, Named Entity Recognition (NER) and Semantic Role Labeling (SRL). Those tasks can be treated as the pre-processing for various natural language processing tasks, which are capable of providing aplenty syntatic or semantic information and greatly improving the performance of subsequent tasks.&lt;/p&gt;
+
+&lt;p&gt;In this project, we investigated a unified neural network architecture and learning algorithm that can be applied to various sequence labeling tasks including Part of Speech (POS) Tagging, Chunking, Named Entity Recognition (NER) and so on. The aim of this project is to build an effective and versatile module that is able to learn and performance well among various seqeuence labeling datasets without exploiting man-made input features, carefully tuning parameters or setting up different model structures. This versatility is achieved by trying to avoid task-specific engineering and therefore disregarding a lot of prior knowledge.&lt;/p&gt;
+
+&lt;p&gt;We used &lt;a href=&#34;https://cogcomp.org/page/resource_view/81&#34; target=&#34;_blank&#34;&gt;CoNLL 2003 shared task dataset&lt;/a&gt; for experiment, which contains three different datasets, one is for POS tagging task, one is for Chunking task while the other is for NER task. At the same time, each dataset contains training, development and test sets. For POS tagging task, each word in a sentence is assigned a POS tag, and there are totally &lt;code&gt;45&lt;/code&gt; Penn Treebank tags. For Chunking dataset, every word in a sentence is assigned an IOB-based (Inside-Outside-Beginning) label, and there are totally &lt;code&gt;21&lt;/code&gt; labels. For NER dataset, every word in a sentence is also assigned an IOB-based label with &lt;code&gt;4&lt;/code&gt; different types, &lt;code&gt;PER&lt;/code&gt;, &lt;code&gt;ORG&lt;/code&gt;, &lt;code&gt;LOC&lt;/code&gt; and &lt;code&gt;MISC&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Generally, our model follows the structure of &lt;code&gt;Embeddings (word + char features extracted from CNNs)&lt;/code&gt; &amp;ndash;&amp;gt; &lt;code&gt;Highway Network&lt;/code&gt; &amp;ndash;&amp;gt; &lt;code&gt;RNN&lt;/code&gt; &amp;ndash;&amp;gt; (&lt;code&gt;Attention&lt;/code&gt;) &amp;ndash;&amp;gt; &lt;code&gt;CRF&lt;/code&gt;. For &lt;code&gt;RNN&lt;/code&gt;, several variant modules are available such as single bi-RNN, stacked bi-RNN and densely connected bi-RNN as well as experiments on introducing the attention mechanism (dot attention, Bahdanau attention and etc). And the cell can use LSTM unit or GRU unit or any other feasible RNN cells.&lt;/p&gt;
+
+&lt;p&gt;With hyperparameters tuning and configuration modifying, our model achieves the state-of-the-arts on the experimental datasets. More details are placed in the project&amp;rsquo;s GitHub page.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Source codes for this project&lt;/strong&gt;: &lt;a href=&#34;https://github.com/IsaacChanghau/neural_sequence_labeling&#34; target=&#34;_blank&#34;&gt;IsaacChanghau/neural_sequence_labeling&lt;/a&gt;.&lt;/p&gt;
 </description>

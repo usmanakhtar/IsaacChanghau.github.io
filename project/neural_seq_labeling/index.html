@@ -19,8 +19,7 @@
   
   <meta name="description" content="Date: Nov. 2017 - Feb. 2018
  Collaborators: Hao Zhang
-TODO
-Source codes for this project: IsaacChanghau/neural_sequence_labeling.">
+Sequence labeling is a type of pattern recognition task that involves the algorithmic assignment of a categorical label to each member of a sequence of observed values. Sequence labeling tasks include but not limit to Part Of Speech (POS) tagging, Chunking, Named Entity Recognition (NER) and Semantic Role Labeling (SRL). Those tasks can be treated as the pre-processing for various natural language processing tasks, which are capable of providing aplenty syntatic or semantic information and greatly improving the performance of subsequent tasks.">
 
   
   <link rel="alternate" hreflang="en-us" href="https://isaacchanghau.github.io/project/neural_seq_labeling/">
@@ -82,8 +81,7 @@ Source codes for this project: IsaacChanghau/neural_sequence_labeling.">
   <meta property="og:title" content="Neural Sequence Labeling | Isaac Changhau">
   <meta property="og:description" content="Date: Nov. 2017 - Feb. 2018
  Collaborators: Hao Zhang
-TODO
-Source codes for this project: IsaacChanghau/neural_sequence_labeling.">
+Sequence labeling is a type of pattern recognition task that involves the algorithmic assignment of a categorical label to each member of a sequence of observed values. Sequence labeling tasks include but not limit to Part Of Speech (POS) tagging, Chunking, Named Entity Recognition (NER) and Semantic Role Labeling (SRL). Those tasks can be treated as the pre-processing for various natural language processing tasks, which are capable of providing aplenty syntatic or semantic information and greatly improving the performance of subsequent tasks.">
   <meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2018-02-20T00:00:00&#43;08:00">
@@ -287,7 +285,15 @@ Source codes for this project: IsaacChanghau/neural_sequence_labeling.">
     <div class="article-style" itemprop="articleBody">
       <p><i class="fa fa-calendar"></i> <strong>Date</strong>: Nov. 2017 - Feb. 2018<br><i class="fa fa-user"></i> <strong>Collaborators</strong>: Hao Zhang</p>
 
-<p><strong>TODO</strong></p>
+<p>Sequence labeling is a type of pattern recognition task that involves the algorithmic assignment of a categorical label to each member of a sequence of observed values. Sequence labeling tasks include but not limit to Part Of Speech (POS) tagging, Chunking, Named Entity Recognition (NER) and Semantic Role Labeling (SRL). Those tasks can be treated as the pre-processing for various natural language processing tasks, which are capable of providing aplenty syntatic or semantic information and greatly improving the performance of subsequent tasks.</p>
+
+<p>In this project, we investigated a unified neural network architecture and learning algorithm that can be applied to various sequence labeling tasks including Part of Speech (POS) Tagging, Chunking, Named Entity Recognition (NER) and so on. The aim of this project is to build an effective and versatile module that is able to learn and performance well among various seqeuence labeling datasets without exploiting man-made input features, carefully tuning parameters or setting up different model structures. This versatility is achieved by trying to avoid task-specific engineering and therefore disregarding a lot of prior knowledge.</p>
+
+<p>We used <a href="https://cogcomp.org/page/resource_view/81" target="_blank">CoNLL 2003 shared task dataset</a> for experiment, which contains three different datasets, one is for POS tagging task, one is for Chunking task while the other is for NER task. At the same time, each dataset contains training, development and test sets. For POS tagging task, each word in a sentence is assigned a POS tag, and there are totally <code>45</code> Penn Treebank tags. For Chunking dataset, every word in a sentence is assigned an IOB-based (Inside-Outside-Beginning) label, and there are totally <code>21</code> labels. For NER dataset, every word in a sentence is also assigned an IOB-based label with <code>4</code> different types, <code>PER</code>, <code>ORG</code>, <code>LOC</code> and <code>MISC</code>.</p>
+
+<p>Generally, our model follows the structure of <code>Embeddings (word + char features extracted from CNNs)</code> &ndash;&gt; <code>Highway Network</code> &ndash;&gt; <code>RNN</code> &ndash;&gt; (<code>Attention</code>) &ndash;&gt; <code>CRF</code>. For <code>RNN</code>, several variant modules are available such as single bi-RNN, stacked bi-RNN and densely connected bi-RNN as well as experiments on introducing the attention mechanism (dot attention, Bahdanau attention and etc). And the cell can use LSTM unit or GRU unit or any other feasible RNN cells.</p>
+
+<p>With hyperparameters tuning and configuration modifying, our model achieves the state-of-the-arts on the experimental datasets. More details are placed in the project&rsquo;s GitHub page.</p>
 
 <p><strong>Source codes for this project</strong>: <a href="https://github.com/IsaacChanghau/neural_sequence_labeling" target="_blank">IsaacChanghau/neural_sequence_labeling</a>.</p>
 

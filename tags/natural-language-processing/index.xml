@@ -32,8 +32,7 @@ Punctuation restoration and a related task of segmentation or sentence boundary 
       <guid>https://isaacchanghau.github.io/project/neural_seq_labeling/</guid>
       <description>Date: Nov. 2017 - Feb. 2018
  Collaborators: Hao Zhang
-TODO
-Source codes for this project: IsaacChanghau/neural_sequence_labeling.</description>
+Sequence labeling is a type of pattern recognition task that involves the algorithmic assignment of a categorical label to each member of a sequence of observed values. Sequence labeling tasks include but not limit to Part Of Speech (POS) tagging, Chunking, Named Entity Recognition (NER) and Semantic Role Labeling (SRL). Those tasks can be treated as the pre-processing for various natural language processing tasks, which are capable of providing aplenty syntatic or semantic information and greatly improving the performance of subsequent tasks.</description>
     </item>
     
     <item>
