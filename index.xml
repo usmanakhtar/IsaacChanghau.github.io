@@ -16,7 +16,7 @@
       <pubDate>Wed, 28 Mar 2018 00:00:00 +0800</pubDate>
       
       <guid>https://isaacchanghau.github.io/project/punctuation/</guid>
-      <description>&lt;p&gt;&lt;i class=&#34;fa fa-calendar&#34;&gt;&lt;/i&gt; &lt;strong&gt;Date&lt;/strong&gt;: Jan. 2018 - Apr. 2018&lt;br&gt;&lt;i class=&#34;fa fa-user&#34;&gt;&lt;/i&gt; &lt;strong&gt;Collaborators&lt;/strong&gt;: Hao Zhang, Gangeshwar Krishnamurthy&lt;/p&gt;
+      <description>&lt;p&gt;&lt;i class=&#34;fa fa-calendar&#34;&gt;&lt;/i&gt; &lt;strong&gt;Date&lt;/strong&gt;: Jan. 2018 - Apr. 2018&lt;br&gt;&lt;i class=&#34;fa fa-user&#34;&gt;&lt;/i&gt; &lt;strong&gt;Collaborators&lt;/strong&gt;: Hao Zhang, &lt;a href=&#34;http://www.gangeshwark.com&#34; target=&#34;_blank&#34;&gt;Gangeshwar Krishnamurthy&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Automatic Speech Recognition (ASR) systems generally produce unpunctuated text which is difficult to read for humans and degrades the performance of many downstream machine processing tasks such as machine translation, question answering, sentiment analysis and so on. Restoring the punctuation greatly improves the readability of transcripts and increases the effectiveness of subsequent processing.&lt;/p&gt;
 
