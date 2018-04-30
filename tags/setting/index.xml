@@ -30,7 +30,8 @@ Generate New SSH-Key and Add to GitHub Please refer the link (based on Mac OS pl
       <pubDate>Wed, 28 Jun 2017 00:00:00 +0800</pubDate>
       
       <guid>https://isaacchanghau.github.io/post/install_spark_mac/</guid>
-      <description></description>
+      <description>It is an introduction of Spark installation under localhost mode. Generally, Spark is available for multiple models: local, clustered&amp;ndash;Spark Standalone, clustered&amp;ndash;Spark on Apache Mesos and so forth, more details here: link.
+Install Spark Since Spark requires Hadoop environment, so we need to install and configure Hadoop first. Here, I assume you already installed and configured Hadoop environment successfully. After that, we need to install Scala (&amp;gt;2.9.3 version). First, go to Scala official website and download the newest version of Scala, then unzip and move it to /usr/local/:</description>
     </item>
     
     <item>
@@ -81,7 +82,7 @@ Convert Dict After downloaded your preferred dictionary sources, we need to conv
       <pubDate>Sat, 01 Apr 2017 00:00:00 +0800</pubDate>
       
       <guid>https://isaacchanghau.github.io/post/config_git_eclipse/</guid>
-      <description></description>
+      <description>Bitbucket is a distributed version control system (DVCS) code hosting site that supports Mercurial and Git. It provides a fully-featured environment for managing development project, including code repository, wiki, powerful issue tracker and easy collaboration with others. The most important thing is that it is free to create a Private repository compare to GitHub, so it is a cheap and convenient way for individuals or a small team to manage their private projects.</description>
     </item>
     
   </channel>

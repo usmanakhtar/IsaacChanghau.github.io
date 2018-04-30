@@ -30,7 +30,8 @@ Generate New SSH-Key and Add to GitHub Please refer the link (based on Mac OS pl
       <pubDate>Wed, 28 Jun 2017 00:00:00 +0800</pubDate>
       
       <guid>https://isaacchanghau.github.io/post/install_spark_mac/</guid>
-      <description></description>
+      <description>It is an introduction of Spark installation under localhost mode. Generally, Spark is available for multiple models: local, clustered&amp;ndash;Spark Standalone, clustered&amp;ndash;Spark on Apache Mesos and so forth, more details here: link.
+Install Spark Since Spark requires Hadoop environment, so we need to install and configure Hadoop first. Here, I assume you already installed and configured Hadoop environment successfully. After that, we need to install Scala (&amp;gt;2.9.3 version). First, go to Scala official website and download the newest version of Scala, then unzip and move it to /usr/local/:</description>
     </item>
     
     <item>

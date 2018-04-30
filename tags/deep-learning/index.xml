@@ -159,7 +159,7 @@ Note that, this article heavily rely on the following to articles, Understanding
       <pubDate>Wed, 24 May 2017 00:00:00 +0800</pubDate>
       
       <guid>https://isaacchanghau.github.io/post/weight_initialization/</guid>
-      <description></description>
+      <description>This is a summary of weight initialization in aritifical neural networks. All Zero Initialization (Pitfall): Note that we do not know what the final value of every weight should be in the trained network, but with proper data normalization it is reasonable to assume that approximately half of the weights will be positive and half of them will be negative. A reasonable-sounding idea then might be to set all the initial weights to zero, which we expect to be the “best guess” in expectation.</description>
     </item>
     
     <item>
