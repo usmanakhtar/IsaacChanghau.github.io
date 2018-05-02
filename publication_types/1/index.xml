@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2017-2018</copyright>
-    <lastBuildDate>Mon, 08 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 01 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://isaacchanghau.github.io/publication_types/1/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Action Hierarchy Extraction and its Application</title>
+      <link>https://isaacchanghau.github.io/publication/action-hierarchy/</link>
+      <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/publication/action-hierarchy/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>WordNet Troponymy and Extraction of Manner-Result Relations</title>
