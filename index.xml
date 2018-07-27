@@ -822,6 +822,15 @@ $ sudo rm -rf /Library/Receipts/MySQL*
 $ sudo rm -rf /var/db/receipts/com.mysql.*
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;h3 id=&#34;homebrew-rollback&#34;&gt;Homebrew: Rollback&lt;/h3&gt;
+
+&lt;p&gt;For example: rollback from Python 3.7 to Python 3.6.5_1&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;brew switch python 3.6.5_1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;ref: &lt;a href=&#34;https://apple.stackexchange.com/questions/329187/homebrew-rollback-from-python-3-7-to-python-3-6-5-x&#34; target=&#34;_blank&#34;&gt;Homebrew: Rollback from Python 3.7 to Python 3.6.5.x?&lt;/a&gt;.&lt;/p&gt;
+
 &lt;h3 id=&#34;terminal-cheatsheet&#34;&gt;Terminal Cheatsheet&lt;/h3&gt;
 
 &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Information from &lt;a href=&#34;https://github.com/0nn0/terminal-mac-cheatsheet&#34; target=&#34;_blank&#34;&gt;[0nn0/terminal-mac-cheatsheet]&lt;/a&gt;.&lt;/p&gt;
