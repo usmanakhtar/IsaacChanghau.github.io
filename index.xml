@@ -11,6 +11,106 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Variational Autoencoders Explained</title>
+      <link>https://isaacchanghau.github.io/post/vae_explained/</link>
+      <pubDate>Fri, 27 Jul 2018 14:20:36 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/vae_explained/</guid>
+      <description>
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: This blog article is borrowed from &lt;a href=&#34;http://kvfrans.com/variational-autoencoders-explained/&#34; target=&#34;_blank&#34;&gt;kevin frans blog · Variational Autoencoders Explained&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;In &lt;a href=&#34;http://kvfrans.com/generative-adversial-networks-explained/&#34; target=&#34;_blank&#34;&gt;my previous post about generative adversarial networks&lt;/a&gt;, I went over a simple method to training a network that could generate realistic-looking images.&lt;/p&gt;
+
+&lt;p&gt;However, there were a couple of downsides to using a plain GAN.&lt;/p&gt;
+
+&lt;p&gt;First, the images are generated off some arbitrary noise. If you wanted to generate a picture with specific features, there&amp;rsquo;s no way of determining which initial noise values would produce that picture, other than searching over the entire distribution.&lt;/p&gt;
+
+&lt;p&gt;Second, a generative adversarial model only discriminates between &amp;ldquo;real&amp;rdquo; and &amp;ldquo;fake&amp;rdquo; images. There&amp;rsquo;s no constraints that an image of a cat has to look like a cat. This leads to results where there&amp;rsquo;s no actual object in a generated image, but the style just looks like picture.&lt;/p&gt;
+
+&lt;p&gt;In this post, I&amp;rsquo;ll go over the variational autoencoder, a type of network that solves these two problems.&lt;/p&gt;
+
+&lt;h3 id=&#34;what-is-a-variational-autoencoder&#34;&gt;What is a variational autoencoder?&lt;/h3&gt;
+
+&lt;p&gt;To get an understanding of a VAE, we&amp;rsquo;ll first start from a simple network and add parts step by step.&lt;/p&gt;
+
+&lt;p&gt;An common way of describing a neural network is an approximation of some function we wish to model. However, they can also be thought of as a data structure that holds information.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s say we had a network comprised of a few &lt;a href=&#34;http://kvfrans.com/generative-adversial-networks-explained/&#34; target=&#34;_blank&#34;&gt;deconvolution layers&lt;/a&gt;. We set the input to always be a vector of ones. Then, we can train the network to reduce the mean squared error between itself and one target image. The &amp;ldquo;data&amp;rdquo; for that image is now contained within the network&amp;rsquo;s parameters.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/deeplearning/vae/1.jpg&#34; alt=&#34;1.jpg&#34; /&gt;
+Now, let&amp;rsquo;s try it on multiple images. Instead of a vector of ones, we&amp;rsquo;ll use a one-hot vector for the input. &lt;code&gt;[1, 0, 0, 0]&lt;/code&gt; could mean a cat image, while &lt;code&gt;[0, 1, 0, 0]&lt;/code&gt; could mean a dog. This works, but we can only store up to 4 images. Using a longer vector means adding in more and more parameters so the network can memorize the different images.&lt;/p&gt;
+
+&lt;p&gt;To fix this, we use a vector of real numbers instead of a one-hot vector. We can think of this as a code for an image, which is where the terms encode/decode come from. For example, &lt;code&gt;[3.3, 4.5, 2.1, 9.8]&lt;/code&gt; could represent the cat image, while &lt;code&gt;[3.4, 2.1, 6.7, 4.2]&lt;/code&gt; could represent the dog. This initial vector is known as our latent variables.&lt;/p&gt;
+
+&lt;p&gt;Choosing the latent variables randomly, like I did above, is obviously a bad idea. In an autoencoder, we add in another component that takes in the original images and encodes them into vectors for us. The deconvolutional layers then &amp;ldquo;decode&amp;rdquo; the vectors back to the original images.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/deeplearning/vae/2.jpg&#34; alt=&#34;1.jpg&#34; /&gt;
+We&amp;rsquo;ve finally reached a stage where our model has some hint of a practical use. We can train our network on as many images as we want. If we save the encoded vector of an image, we can reconstruct it later by passing it into the decoder portion. What we have is the standard autoencoder.&lt;/p&gt;
+
+&lt;p&gt;However, we&amp;rsquo;re trying to build a generative model here, not just a fuzzy data structure that can &amp;ldquo;memorize&amp;rdquo; images. We can&amp;rsquo;t generate anything yet, since we don&amp;rsquo;t know how to create latent vectors other than encoding them from images.&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s a simple solution here. We add a constraint on the encoding network, that forces it to generate latent vectors that roughly follow a unit gaussian distribution. It is this constraint that separates a variational autoencoder from a standard one.&lt;/p&gt;
+
+&lt;p&gt;Generating new images is now easy: all we need to do is sample a latent vector from the unit gaussian and pass it into the decoder.&lt;/p&gt;
+
+&lt;p&gt;In practice, there&amp;rsquo;s a tradeoff between how accurate our network can be and how close its latent variables can match the unit gaussian distribution.&lt;/p&gt;
+
+&lt;p&gt;We let the network decide this itself. For our loss term, we sum up two separate losses: the generative loss, which is a mean squared error that measures how accurately the network reconstructed the images, and a latent loss, which is the KL divergence that measures how closely the latent variables match a unit gaussian.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;generation_loss = mean(square(generated_image - real_image))  
+latent_loss = KL-Divergence(latent_variable, unit_gaussian)  
+loss = generation_loss + latent_loss  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In order to optimize the KL divergence, we need to apply a simple reparameterization trick: instead of the encoder generating a vector of real values, it will generate a vector of means and a vector of standard deviations.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/deeplearning/vae/3.jpg&#34; alt=&#34;3.jpg&#34; /&gt;
+This lets us calculate KL divergence as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# z_mean and z_stddev are two vectors generated by encoder network
+latent_loss = 0.5 * tf.reduce_sum(tf.square(z_mean) + tf.square(z_stddev) - tf.log(tf.square(z_stddev)) - 1,1)  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When we&amp;rsquo;re calculating loss for the decoder network, we can just sample from the standard deviations and add the mean, and use that as our latent vector:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;samples = tf.random_normal([batchsize,n_z],0,1,dtype=tf.float32)  
+sampled_z = z_mean + (z_stddev * samples)  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In addition to allowing us to generate random latent variables, this constraint also improves the generalization of our network.&lt;/p&gt;
+
+&lt;p&gt;To visualize this, we can think of the latent variable as a transfer of data.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s say you were given a bunch of pairs of real numbers between &lt;code&gt;[0, 10]&lt;/code&gt;, along with a name. For example, &lt;code&gt;5.43&lt;/code&gt; means apple, and &lt;code&gt;5.44&lt;/code&gt; means banana. When someone gives you the number &lt;code&gt;5.43&lt;/code&gt;, you know for sure they are talking about an apple. We can essentially encode infinite information this way, since there&amp;rsquo;s no limit on how many different real numbers we can have between &lt;code&gt;[0, 10]&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;However, what if there was a gaussian noise of one added every time someone tried to tell you a number? Now when you receive the number &lt;code&gt;5.43&lt;/code&gt;, the original number could have been anywhere around &lt;code&gt;[4.4 ~ 6.4]&lt;/code&gt;, so the other person could just as well have meant banana (&lt;code&gt;5.44&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;The greater standard deviation on the noise added, the less information we can pass using that one variable.&lt;/p&gt;
+
+&lt;p&gt;Now we can apply this same logic to the latent variable passed between the encoder and decoder. The more efficiently we can encode the original image, the higher we can raise the standard deviation on our gaussian until it reaches one.&lt;/p&gt;
+
+&lt;p&gt;This constraint forces the encoder to be very efficient, creating information-rich latent variables. This improves generalization, so latent variables that we either randomly generated, or we got from encoding non-training images, will produce a nicer result when decoded.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-well-does-it-work&#34;&gt;How well does it work?&lt;/h3&gt;
+
+&lt;p&gt;I ran a few tests to see how well a variational autoencoder would work on the MNIST handwriting dataset.
+&lt;img src=&#34;https://isaacchanghau.github.io/img/deeplearning/vae/4.jpg&#34; alt=&#34;4.jpg&#34; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;left: 1st epoch, middle: 9th epoch, right: original&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Looking good! After only 15 minutes on my laptop w/o a GPU, it&amp;rsquo;s producing some nice results on MNIST.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s something convenient about VAEs. Since they follow an encoding-decoding scheme, we can compare generated images directly to the originals, which is not possible when using a GAN.&lt;/p&gt;
+
+&lt;p&gt;A downside to the VAE is that it uses direct mean squared error instead of an adversarial network, so the network tends to produce more blurry images.&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s been some work looking into combining the VAE and the GAN: Using the same encoder-decoder setup, but using an adversarial network as a metric for training the decoder. Check out &lt;a href=&#34;https://arxiv.org/pdf/1512.09300.pdf&#34; target=&#34;_blank&#34;&gt;this paper&lt;/a&gt; or &lt;a href=&#34;http://blog.otoro.net/2016/04/01/generating-large-images-from-latent-vectors/&#34; target=&#34;_blank&#34;&gt;this blog post&lt;/a&gt; for more on that.&lt;/p&gt;
+
+&lt;p&gt;You can get the code for this post on &lt;a href=&#34;https://github.com/kvfrans/variational-autoencoder&#34; target=&#34;_blank&#34;&gt;kvfrans&amp;rsquo; Github&lt;/a&gt;. It&amp;rsquo;s a cleaned up version of the code from &lt;a href=&#34;https://jmetzen.github.io/2015-11-27/vae.html&#34; target=&#34;_blank&#34;&gt;this post&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Action Hierarchy Extraction and its Application</title>
       <link>https://isaacchanghau.github.io/publication/action-hierarchy/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
@@ -1547,271 +1647,6 @@ plt.show()
 &lt;p&gt;The goal of PrimeNet is to set out a framework for a commonsense KB that allows for efficient processing, in order to meet the demands of commonsense reasoning and, hence, support intelligent machine performance in real-world tasks. At the same time, the PrimeNet still provide access to a vast knowledge resource of concepts involving specific object instances.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;This project is ongoing currently, more details will be updated soon.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Autoencoder and Sparsity</title>
-      <link>https://isaacchanghau.github.io/post/autoencoder_and_sparsity/</link>
-      <pubDate>Sat, 19 Aug 2017 00:00:00 +0800</pubDate>
-      
-      <guid>https://isaacchanghau.github.io/post/autoencoder_and_sparsity/</guid>
-      <description>&lt;p&gt;The article is excerpted from Andrew Ng&amp;rsquo;s &lt;a href=&#34;https://web.stanford.edu/class/cs294a/&#34; target=&#34;_blank&#34;&gt;CS294A Lecture notes&lt;/a&gt;: &lt;a href=&#34;https://web.stanford.edu/class/cs294a/sparseAutoencoder_2011new.pdf&#34; target=&#34;_blank&#34;&gt;Sparse Autoencoder&lt;/a&gt; with some personal understanding. Before going through this article, you would better get some information from the &lt;a href=&#34;http://cs229.stanford.edu/notes/cs229-notes-deep_learning.pdf&#34; target=&#34;_blank&#34;&gt;Backpropagation Algorithm&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Suppose we have only unlabeled training examples set $\{x^{(1)},x^{(2)},x^{(3)},\dots\}$, where $x^{(i)}\in\mathbb{R}^{n}$. An &lt;strong&gt;autoencoder neural network&lt;/strong&gt; is an &lt;strong&gt;unsupervised learning algorithm&lt;/strong&gt; that applies backpropagation, setting the target values to be equal to the inputs. i.e., it uses $y^{(i)}=x^{(i)}$. Below is an autoencoder:
-&lt;img src=&#34;https://isaacchanghau.github.io/img/deeplearning/autoencoder/1.png&#34; alt=&#34;1.png&#34; /&gt;
-The &lt;strong&gt;autoencoder&lt;/strong&gt; tries to learn a function $h_{W,b}(x)\approx x$. In other words, it is trying to learn an approximation to the identity function, so as to output $\hat{x}$ that is similar to $x$. The identity function seems a particularly trivial function to be trying to learn; but &lt;strong&gt;by placing constraints on the network&lt;/strong&gt;, such as by &lt;strong&gt;limiting the number of hidden units&lt;/strong&gt;, we can &lt;strong&gt;discover interesting structure about the data&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;As a concrete example, suppose the inputs $x$ are the pixel intensity values from a $10\times 10$ image (100 pixels) so $n=100$, and there are $s_{2}=50$ hidden units in layer $L_{2}$. Note that we also have $y\in\mathbb{R}^{100}$. Since there are only 50 hidden units, the network is forced to &lt;strong&gt;learn a compressed representation of the input&lt;/strong&gt;. That is, given only the vector of hidden unit activations $a^{(2)}\in\mathbb{R}^{50}$, it must try to &lt;strong&gt;reconstruct&lt;/strong&gt; the 100-pixel input $x$.&lt;/p&gt;
-
-&lt;p&gt;If the input were completely random, say, each $x_{i}$ comes from an I.I.D. (Independently and Identically Distribute) Gaussian independent of the other features, then this compression task would be very difficult. But if there is structure in the data, for example, if some of the input features are correlated, then this algorithm will be able to discover some of those correlations.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;In fact, this simple autoencoder oftern ends up learning a &lt;strong&gt;low-dimensional representation&lt;/strong&gt; very similar to &lt;strong&gt;PCA&amp;rsquo;s&lt;/strong&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Our argument above relied on the number of hidden units $s_{2}$ being small. But even when the number of hidden units is large (perhaps even greater than the number of input pixels), we can still discover interesting structure, by imposing other constraints on the network. In particular, if we impose a &lt;strong&gt;sparsity constraint&lt;/strong&gt; on the hidden units, then the autoencoder will still discover interesting structure in the data, even if the number of hidden units is large.&lt;/p&gt;
-
-&lt;p&gt;Informally, we will think of a neuron as being &amp;ldquo;active&amp;rdquo; (or as &amp;ldquo;firing&amp;rdquo;) if its output value is close to 1, or as being &amp;ldquo;inactive&amp;rdquo; if its output value is close to 0. We would like to constrain the neurons to be inactive most of the time.&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;This discussion assumes a &lt;code&gt;sigmoid&lt;/code&gt; activation function. If you are using a &lt;code&gt;tanh&lt;/code&gt; activation function, then we think of a neuron as being inactive when it outputs values close to -1.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Recall that $a_{j}^{(2)}$ denotes the activation of hidden unit $j$ in the autoencoder. However, this notation does not make explicit what was the input $x$ that led to that activation. Thus, we will write $a_{j}^{(2)}(x)$ to denote the activation of this hidden unit when the network is given a specific input $x$. Further, let
-$$
-\hat{\rho}_{j}=\frac{1}{m}\sum_{i=1}^{m}\big[a_{j}^{(2)}(x^{(i)})\big]\tag{1}
-$$
-be the &lt;strong&gt;average activation&lt;/strong&gt; of hidden unit $j$ (averaged over the training set). We would like to (approximately) enforce the constraint
-$$
-\hat{\rho}_{j}=\rho\tag{2}
-$$
-where $\rho$ is a &lt;strong&gt;sparsity parameter&lt;/strong&gt;, typically, a small value close to zero (say $\rho=0.05$). In other words, we would like the average activation of each hidden neuron $j$ to be close to 0.05 (say). To satisfy this constraint, the hidden unit&amp;rsquo;s activations must mostly be near 0.&lt;/p&gt;
-
-&lt;p&gt;To achieve this, we will add an extra &lt;strong&gt;penalty term&lt;/strong&gt; to our &lt;strong&gt;optimization objective&lt;/strong&gt; that penalizes $\hat{\rho}_{j}$ deviating significantly from $\rho$. Many choices of the penalty term will give reasonable results. We will choosr the following:
-$$
-\sum_{j=1}^{s_{2}}\rho\log\frac{\rho}{\hat{\rho}_{j}}+(1-\rho)\log\frac{1-\rho}{1-\hat{\rho}_{j}}\tag{3}
-$$
-Here, $s_{2}$ is the number of neurons in the hidden layer, and the index $j$ is summing over the hidden units in our network. If you are familiar with the concept of &lt;strong&gt;KL divergence&lt;/strong&gt;, this penalty term is based on it, and can also be written
-$$
-\sum_{j=1}^{s_{2}}KL(\rho\Vert\hat{\rho}_{j})\tag{4}
-$$
-where $KL(\rho\Vert\hat{\rho}_{j})=\rho\log\frac{\rho}{\hat{\rho}_{j}}+(1-\rho)\log\frac{1-\rho}{1-\hat{\rho}_{j}}$ is the &lt;strong&gt;Kullback-Leibler (KL) divergence&lt;/strong&gt; between a &lt;strong&gt;Bernoulli random variable&lt;/strong&gt; with mean $\rho$ and a &lt;strong&gt;Bernoulli random variable&lt;/strong&gt; with mean $\hat{\rho}_{j}$. &lt;strong&gt;KL-divergence is a standard function for measuring how different two different distributions are&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;This penalty function has the property that $KL(\rho\Vert\hat{\rho}_{j})=0$ if $\hat{\rho}_{j}=\rho$, and
-otherwise it increases monotonically as $\hat{\rho}_{j}$ diverges from $\rho$. For example, in the figure below, we have set $\rho=0.2$, and plotted $KL(\rho\Vert\hat{\rho}_{j})$ for a range of values of $\hat{\rho}_{j}$
-&lt;img src=&#34;https://isaacchanghau.github.io/img/deeplearning/autoencoder/2.png&#34; alt=&#34;2.png&#34; /&gt;
-We see that the KL-divergence reaches its minimum of 0 at $\hat{\rho}_{j}=\rho$, and blows up (it actually approaches $\infty$) as $\hat{\rho}_{j}$ approaches 0 or 1. &lt;strong&gt;Thus, minimizing this penalty term has the effect of causing $\hat{\rho}_{j}$ to be close to $\rho$&lt;/strong&gt;. Our overall cost function is now
-$$
-J_{sparse}(W,b)=J(W,b)+\beta\sum_{j=1}^{s_{2}}KL(\rho\Vert\hat{\rho}_{j})\tag{5}
-$$
-where $J(W,b)$ is as defined previously, and &lt;strong&gt;$\beta$ controls the weight of the sparsity penalty term&lt;/strong&gt;. The term $\hat{\rho}_{j}$ (implicitly) depends on $W$, $b$ also, because it is the average activation of hidden unit $j$, and the activation of a hidden unit depends on the parameters $W$, $b$.&lt;/p&gt;
-
-&lt;p&gt;To incorporate the KL-divergence term into your derivative calculation, there is a simple-to-implement trick involving only a small change to your code. Specifically, where previously for the second layer ($l = 2$), during backpropagation you would have computed
-$$
-\delta_{i}^{(2)}=\bigg(\sum_{j=1}^{s_{2}}W_{ji}^{(2)}\delta_{j}^{(3)}\bigg)f&amp;rsquo;(z_{i}^{(2)})\tag{6}
-$$
-now instead compute
-$$
-\delta_{i}^{(2)}=\bigg(\big(\sum_{j=1}^{s_{2}}W_{ji}^{(2)}\delta_{j}^{(3)}\big)+\beta\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)\bigg)f&amp;rsquo;(z_{i}^{(2)})\tag{7}
-$$&lt;/p&gt;
-
-&lt;p&gt;Here is how to derive the $\frac{\partial J_{sparse}(W,b)}{\partial W_{i,j}^{(l)}}$ and $\frac{\partial J_{sparse}(W,b)}{\partial b_{i}^{(l)}}$&lt;/p&gt;
-
-&lt;p&gt;Denote $S(W,b)=\sum_{j=1}^{s_{2}}KL(\rho\Vert\hat{\rho}_{j})$, so (5) can be written as
-$$
-J_{sparse}(W,b)=J(W,b)+\beta S(W,b)\tag{8}
-$$T
-hen the two partial derivations in gradient descent algorithm are
-$$\begin{cases}
-\frac{\partial J_{sparse}(W,b)}{\partial W_{i,j}^{(l)}} &amp;amp;=\frac{\partial J(W,b)}{\partial W_{i,j}^{(l)}}+\beta\frac{\partial S(W,b)}{\partial W_{i,j}^{(l)}}\newline
-\frac{\partial J_{sparse}(W,b)}{\partial b_{i}^{(l)}} &amp;amp;=\frac{\partial J(W,b)}{\partial b_{i}^{(l)}}+\beta\frac{\partial S(W,b)}{\partial b_{i}^{(l)}}
-\end{cases}\tag{9}
-$$
-The calculation of $\frac{\partial J(W,b)}{\partial W_{i,j}^{(l)}}$ and $\frac{\partial J(W,b)}{\partial b_{i}^{(l)}}$ have discussed in &lt;a href=&#34;https://isaacchanghau.github.io/2017/08/17/Backpropagation-Algorithm/&#34; target=&#34;_blank&#34;&gt;Backpropagation Algorithm&lt;/a&gt;, here we only discuss the computation of $\frac{\partial S(W,b)}{\partial W_{i,j}^{(l)}}$ and $\frac{\partial S(W,b)}{\partial b_{i}^{(l)}}$.&lt;/p&gt;
-
-&lt;p&gt;First, expand $S(W,b)$, we have
-$$
-S(W,b)=\sum_{t=1}^{s_{2}}KL(\rho\Vert\hat{\rho}_{t})=\sum_{t=1}^{s_{2}}\big[\rho\ast\log\frac{\rho}{\hat{\rho}_{t}}+(1-\rho)\ast\log\frac{1-\rho}{1-\hat{\rho}_{t}}\big]\tag{10}
-$$
-where
-$$
-\hat{\rho}_{t}=\frac{1}{m}\sum_{k=1}^{m}a_{t}^{(2)}\big(x^{(k)}\big)=\frac{1}{m}\sum_{k=1}^{m}f\big(z_{t}^{(2)}\big)\tag{11}
-$$
-here
-$$
-z_{t}^{(2)}=z_{t}^{(2)}\big(x^{(k)}\big)=\bigg(\sum_{s=1}^{s_{1}}W_{t,s}^{(1)}x_{s}^{(k)}\bigg)+b_{t}^{(1)}\tag{12}
-$$
-according to (11) and (12), we can get the following two points:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;when $l\neq 1$, $\frac{\partial S(W,b)}{\partial W_{i,j}^{(l)}}=0$, $\frac{\partial S(W,b)}{\partial b_{i}^{(l)}}=0$.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;$\frac{\partial S(W,b)}{\partial W_{i,j}^{(l)}}=\frac{\partial\sum_{t=1}^{s_{2}}KL(\rho\Vert\hat{\rho}_{t})}{\partial W_{i,j}^{(l)}}=\frac{\partial KL(\rho\Vert\hat{\rho}_{i})}{\partial W_{i,j}^{(l)}}$; $\frac{\partial S(W,b)}{\partial b_{i}^{(l)}}=\frac{\partial\sum_{t=1}^{s_{2}}KL(\rho\Vert\hat{\rho}_{t})}{\partial b_{i}^{(l)}}=\frac{\partial KL(\rho\Vert\hat{\rho}_{i})}{\partial b_{i}^{(l)}}$.&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;According to the above two points, we have
-$$\begin{aligned}
-\frac{\partial S(W,b)}{\partial W_{i,j}^{(1)}} &amp;amp;=\frac{\partial}{\partial W_{i,j}^{(1)}}\big[\rho\ast\log\frac{\rho}{\hat{\rho}_{i}}+(1-\rho)\ast\log\frac{1-\rho}{1-\hat{\rho}_{i}}\big]\newline
-&amp;amp;= \frac{\partial}{\partial W_{i,j}^{(1)}}\big\{\rho(\log\rho-\log\hat{\rho}_{i})+(1-\rho)[\log(1-\rho)-\log(1-\hat{\rho}_{i})]\big\}\newline
-&amp;amp;=\rho\big(0-\frac{1}{\hat{\rho}_{i}}\frac{\partial\hat{\rho}_{i}}{\partial W_{i,j}^{(1)}}\big)+(1-\rho)\big(0+\frac{1}{1-\hat{\rho}_{i}}\frac{\partial\hat{\rho}_{i}}{\partial W_{i,j}^{(1)}}\big)\quad (\rho\textrm{ is constant})\newline
-&amp;amp;=\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)\frac{\partial\hat{\rho}_{i}}{\partial W_{i,j}^{(1)}}
-\end{aligned}
-$$
-Samely, we have
-$$
-\frac{\partial S(W,b)}{\partial b_{i}^{(1)}}=\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)\frac{\partial\hat{\rho}_{i}}{\partial b_{i}^{(1)}}
-$$
-Then, we need to compute $\frac{\partial\hat{\rho}_{i}}{\partial W_{i,j}^{(1)}}$ and $\frac{\partial\hat{\rho}_{i}}{\partial b_{i}^{(1)}}$, according to (11), we have
-$$
-\begin{aligned}
-\frac{\partial\hat{\rho}_{i}}{\partial W_{i,j}^{(1)}} &amp;amp;=\frac{1}{m}\sum_{k=1}^{m}f&amp;rsquo;\big(z_{i}^{(2)}\big)\cdot\frac{\partial z_{i}^{(2)}}{\partial W_{i,j}^{(1)}}\newline
-&amp;amp;=\frac{1}{m}\sum_{k=1}^{m}f&amp;rsquo;\big(z_{i}^{(2)}\big)\cdot x_{j}^{(k)}\quad (\textrm{according to (12), we have }\frac{\partial z_{i}^{(2)}}{\partial W_{i,j}^{(1)}}=x_{j}^{(k)})
-\end{aligned}
-$$
-Samely, we have
-$$
-\begin{aligned}
-\frac{\partial\hat{\rho}_{i}}{\partial b_{i}^{(1)}} &amp;amp;=\frac{1}{m}\sum_{k=1}^{m}f&amp;rsquo;\big(z_{i}^{(2)}\big)\cdot\frac{\partial z_{i}^{(2)}}{\partial b_{i}^{(1)}}\newline
-&amp;amp;=\frac{1}{m}\sum_{k=1}^{m}f&amp;rsquo;\big(z_{i}^{(2)}\big)\quad (\textrm{according to (12), we have }\frac{\partial z_{i}^{(2)}}{\partial b_{i}^{(1)}}=1)
-\end{aligned}
-$$
-In summary, we can obtain
-$$\begin{cases}
-\frac{\partial S(W,b)}{\partial W_{i,j}^{(1)}} &amp;amp;=\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)\cdot\frac{1}{m}\sum_{k=1}^{m}f&amp;rsquo;\big(z_{i}^{(2)}\big)\cdot x_{j}^{(k)}\newline
-\frac{\partial S(W,b)}{\partial b_{i}^{(1)}}&amp;amp;=\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)\cdot\frac{1}{m}\sum_{k=1}^{m}f&amp;rsquo;\big(z_{i}^{(2)}\big)
-\end{cases}\tag{13}
-$$
-In &lt;a href=&#34;https://isaacchanghau.github.io/2017/08/17/Backpropagation-Algorithm/&#34; target=&#34;_blank&#34;&gt;Backpropagation Algorithm&lt;/a&gt;, we already obtain that
-$$\begin{cases}
-\frac{\partial J(W,b)}{\partial W_{i,j}^{(1)}}&amp;amp;=\big[\frac{1}{m}\sum_{k=1}^{m}a_{j}^{(1)}\delta_{i}^{(2)}\big]+\lambda W_{i,j}^{(1)}\newline
-\frac{\partial J(W,b)}{\partial b_{i}^{(1)}}&amp;amp;=\frac{1}{m}\sum_{k=1}^{m}\delta_{i}^{(2)}
-\end{cases}\tag{14}
-$$
-Thus, put (13), (14) into (9), we will get
-$$\begin{cases}
-\frac{\partial J_{sparse}(W,b)}{\partial W_{i,j}^{(l)}} &amp;amp;=\big[\frac{1}{m}\sum_{k=1}^{m}a_{j}^{(1)}\delta_{i}^{(2)}\big]+\lambda W_{i,j}^{(1)}+\beta\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)\cdot\frac{1}{m}\sum_{k=1}^{m}f&amp;rsquo;\big(z_{i}^{(2)}\big)\cdot x_{j}^{(k)}\newline
-\frac{\partial J_{sparse}(W,b)}{\partial b_{i}^{(l)}} &amp;amp;=\frac{1}{m}\sum_{k=1}^{m}\delta_{i}^{(2)}+\beta\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)\cdot\frac{1}{m}\sum_{k=1}^{m}f&amp;rsquo;\big(z_{i}^{(2)}\big)
-\end{cases}\tag{15}
-$$
-Note that $a_{j}^{(1)}$, $\delta_{i}^{(2)}$ and $z_{i}^{(2)}$ are related to $x^{(k)}$ (or $y^{(k)}$), particularly, we have $a_{j}^{(1)}=x_{j}^{(k)}$. After simplify (15), we get
-$$\begin{cases}
-\frac{\partial J_{sparse}(W,b)}{\partial W_{i,j}^{(l)}} &amp;amp;=\frac{1}{m}\sum_{k=1}^{m}\bigg\{a_{j}^{(1)}\big[\delta_{i}^{(2)}+\beta\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)f&amp;rsquo;\big(z_{i}^{(2)}\big)\big]\bigg\}+\lambda W_{i,j}^{(1)}\newline
-\frac{\partial J_{sparse}(W,b)}{\partial b_{i}^{(l)}} &amp;amp;=\frac{1}{m}\sum_{k=1}^{m}\big[\delta_{i}^{(2)}+\beta\big(-\frac{\rho}{\hat{\rho}_{i}}+\frac{1-\rho}{1-\hat{\rho}_{i}}\big)f&amp;rsquo;\big(z_{i}^{(2)}\big)\big]
-\end{cases}$$
-Now, we obtain how to change (6) to (7).&lt;/p&gt;
-
-&lt;p&gt;One subtlety is that you’ll need to know $\hat{\rho}_{i}$ to compute this term. Thus, you’ll need to compute a forward pass on all the training examples first to compute the average activations on the training set, before computing backpropagation on any example. If your training set is small enough to fit comfortably in computer memory (this will be the case for the programming assignment), you can compute forward passes on all your examples and keep the resulting activations in memory and compute the $\hat{\rho}_{i}$s. Then you can use your precomputed activations to perform backpropagation on all your examples. &lt;strong&gt;If your data is too large to fit in memory, you may have to scan through your examples computing a forward pass on each to accumulate (sum up) the activations and compute $\hat{\rho}_{i}$&lt;/strong&gt; (discarding the result of each forward pass after you have taken its activations $a_{i}^{(2)}$ into account for computing $\hat{\rho}_{i}$). Then after having computed $\hat{\rho}_{i}$, you’d have to redo the forward pass for each example so that you can do backpropagation on that example. &lt;strong&gt;In this latter case, you would end up computing a forward pass twice on each example in your training set, making it computationally less efficient&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;The full derivation showing that the algorithm above results in gradient descent is beyond the scope of these notes. But if you implement the autoencoder using backpropagation modified this way, you will be performing gradient descent exactly on the objective $J_{sparse}(W,b)$. Using the derivative checking method, you will be able to verify this for yourself as well.&lt;/p&gt;
-
-&lt;p&gt;Below is the &lt;strong&gt;summary of notation&lt;/strong&gt;
-&lt;style&gt;
-table th:first-of-type {
-    width: 70px;
-}
-&lt;/style&gt;&lt;/p&gt;
-
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;Expression&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;Explanation&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$x$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Input features for a training example, $x\in\mathbb{R}^{n}$.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$y$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Output/target values. Here, $y$ can be vector valued. In the case of an autoencoder, $y = x$.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$(x^{(i)},y^{(i)})$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;The $i$-th training example.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$h_{W,b}(x)$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Output of our hypothesis on input $x$, using parameters $W$, $b$. This should be a vector of the same dimension as the target value $y$.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$W_{i,j}^{(l)}$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;The parameter associated with the connection between unit $j$ in layer $l$, and unit $i$ in layer $l+1$.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$b_{i}^{(l)}$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;The bias term associated with unit $i$ in layer $l+1$. Can also be thought of as the parameter associated with the connection between the bias unit in layer $l$ and unit $i$ in layer $l+1$.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$\theta$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Our parameter vector. It is useful to think of this as the result of taking the parameters $W$, $b$ and “unrolling” them into a long column vector.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$a_{i}^{(l)}$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Activation (output) of unit $i$ in layer $l$ of the network. In addition, since layer $L_{1}$ is the input layer, we also have $a_{i}^{(1)}=x_{i}$.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$f(\cdot)$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;The activation function. Throughout these notes, we used $f(z)=tanh(z)$.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$z_{i}^{(l)}$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Total weighted sum of inputs to unit $i$ in layer $l$. Thus, $a_{i}^{(l)}=f\big(z_{i}^{(l)}\big)$&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$\alpha$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Learning rate parameter.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$s_{l}$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Number of units in layer $l$ (not counting the bias unit).&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$n_{l}$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Number layers in the network. Layer $L_{1}$ is usually the input layer, and layer $L_{n_{l}}$ the output layer.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$\lambda$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Weight decay parameter.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$\hat{x}$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;For an autoencoder, its output; i.e., its reconstruction of the input $x$. Same meaning as $h_{W,b}(x)$.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$\rho$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Sparsity parameter, which specifies our desired level of sparsity.&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$\hat{\rho}_{i}$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;The average activation of hidden unit $i$ (in the sparse autoencoder).&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;$\beta$&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Weight of the sparsity penalty term (in the sparse autoencoder objective).&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
 </description>
     </item>
     

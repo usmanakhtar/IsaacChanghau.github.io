@@ -13,6 +13,18 @@
     
     
     <item>
+      <title>Variational Autoencoders Explained</title>
+      <link>https://isaacchanghau.github.io/post/vae_explained/</link>
+      <pubDate>Fri, 27 Jul 2018 14:20:36 +0800</pubDate>
+      
+      <guid>https://isaacchanghau.github.io/post/vae_explained/</guid>
+      <description>Note: This blog article is borrowed from kevin frans blog · Variational Autoencoders Explained.
+In my previous post about generative adversarial networks, I went over a simple method to training a network that could generate realistic-looking images.
+However, there were a couple of downsides to using a plain GAN.
+First, the images are generated off some arbitrary noise. If you wanted to generate a picture with specific features, there&amp;rsquo;s no way of determining which initial noise values would produce that picture, other than searching over the entire distribution.</description>
+    </item>
+    
+    <item>
       <title>Introduction of TensorFlow Dataset API</title>
       <link>https://isaacchanghau.github.io/post/tensorflow_dataset_api/</link>
       <pubDate>Wed, 21 Feb 2018 00:00:00 +0800</pubDate>
